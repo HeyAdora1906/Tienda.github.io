@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Tienda Amazon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amazon-orange: #FF9900;
+      --amazon-dark: #131921;
+      --amazon-blue: #232F3E;
+      --text-dark: #0F1111;
+      --text-gray: #565959;
+      --bg-light: #f3f4f6;
+      --white: #ffffff;
+      --border: #e5e7eb;
+      --green: #007600;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header {
+      background: var(--amazon-dark);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--amazon-orange);
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: white;
+      color: var(--text-dark);
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+
+    .search-box input:focus {
+      box-shadow: 0 0 0 3px rgba(255,153,0,0.3);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-gray);
+      font-size: 1rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--amazon-blue) 0%, var(--amazon-dark) 100%);
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Categorías */
+    .categories {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cat-btn {
+      padding: 0.5rem 1.25rem;
+      border: 2px solid var(--border);
+      background: white;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-gray);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .cat-btn:hover {
+      border-color: var(--amazon-orange);
+      color: var(--amazon-orange);
+    }
+
+    .cat-btn.active {
+      background: var(--amazon-orange);
+      border-color: var(--amazon-orange);
+      color: white;
+    }
+
+    /* Grid de productos */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Tarjeta de producto */
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      padding: 1.5rem;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 240px;
+    }
+
+    .product-image-wrap img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image-wrap img {
+      transform: scale(1.05);
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--amazon-orange);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.green {
+      background: var(--green);
+    }
+
+    .badge.red {
+      background: #B12704;
+    }
+
+    .product-info {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      color: var(--amazon-orange);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price .old {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      text-decoration: line-through;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stars {
+      color: var(--amazon-orange);
+      font-size: 0.9rem;
+    }
+
+    .rating-count {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+    }
+
+    .amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--amazon-orange);
+      color: white;
+      font-weight: 600;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      margin-top: auto;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .amazon-btn:hover {
+      background: #e88a00;
+      transform: scale(1.02);
+    }
+
+    /* Sin resultados */
+    .no-results {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-gray);
+    }
+
+    .no-results h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--amazon-dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .footer a {
+      color: var(--amazon-orange);
+      text-decoration: none;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .product-card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .product-image-wrap {
+        min-height: 180px;
+        padding: 1rem;
+      }
+
+      .product-image-wrap img {
+        max-height: 150px;
+      }
+
+      .header-inner {
+        flex-direction: column;
+      }
+
+      .search-box {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        🛒 Mi Tienda <span>Amazon</span>
+      </div>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar productos...">
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Los Mejores Productos</h1>
+    <p>Descubre productos seleccionados con los mejores precios de Amazon</p>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <div class="categories" id="categories"></div>
+
+  <!-- PRODUCTOS -->
+  <div class="container">
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="no-results" id="noResults" style="display:none;">
+      <h3>😕 No se encontraron productos</h3>
+      <p>Intenta con otra búsqueda o categoría</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Mi Tienda Amazon — Productos seleccionados con ❤️</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem;">
+      Como Asociado de Amazon, obtengo ingresos por las compras que califican.
+    </p>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    //  AGREGA TUS PRODUCTOS AQUÍ
+    //  Solo copia y pega un bloque y cambia los datos
+    // ═══════════════════════════════════════════════════════════════
+    const productos = [
+      {
+        titulo: "Auriculares Inalámbricos Bluetooth",
+        precio: "$29.99",
+        precioAnterior: "$45.00",
+        imagen: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO1",
+        categoria: "Tecnología",
+        rating: 4.5,
+        reviews: 1234,
+        badge: "Oferta",
+        badgeColor: "red"
+      },
+      {
+        titulo: "Reloj Inteligente Deportivo",
+        precio: "$49.99",
+        precioAnterior: "$79.99",
+        imagen: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO2",
+        categoria: "Tecnología",
+        rating: 4.3,
+        reviews: 856,
+        badge: "Más Vendido",
+        badgeColor: ""
+      },
+      {
+        titulo: "Set de Sartenes Antiadherentes",
+        precio: "$39.99",
+        precioAnterior: "",
+        imagen: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO3",
+        categoria: "Hogar",
+        rating: 4.7,
+        reviews: 2341,
+        badge: "",
+        badgeColor: ""
+      },
+      {
+        titulo: "Lámpara LED de Escritorio",
+        precio: "$24.99",
+        precioAnterior: "$34.99",
+        imagen: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO4",
+        categoria: "Hogar",
+        rating: 4.6,
+        reviews: 567,
+        badge: "Oferta",
+        badgeColor: "red"
+      },
+      {
+        titulo: "Mancuernas Ajustables 20kg",
+        precio: "$59.99",
+        precioAnterior: "",
+        imagen: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO5",
+        categoria: "Deportes",
+        rating: 4.8,
+        reviews: 1890,
+        badge: "Top",
+        badgeColor: "green"
+      },
+      {
+        titulo: "Botella de Agua Térmica 1L",
+        precio: "$18.99",
+        precioAnterior: "$25.00",
+        imagen: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO6",
+        categoria: "Deportes",
+        rating: 4.4,
+        reviews: 3421,
+        badge: "",
+        badgeColor: ""
+      },
+      {
+        titulo: "Cámara de Seguridad WiFi",
+        precio: "$35.99",
+        precioAnterior: "$55.00",
+        imagen: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO7",
+        categoria: "Tecnología",
+        rating: 4.2,
+        reviews: 678,
+        badge: "Oferta",
+        badgeColor: "red"
+      },
+      {
+        titulo: "Almohada Ortopédica de Memory Foam",
+        precio: "$32.99",
+        precioAnterior: "",
+        imagen: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EJEMPLO8",
+        categoria: "Hogar",
+        rating: 4.6,
+        reviews: 4567,
+        badge: "Más Vendido",
+        badgeColor: ""
+      }
+    ];
+
+    // ═══════════════════════════════════════════════════════════════
+    //  NO TOCAR NADA DE AQUÍ PARA ABAJO (a menos que sepas)
+    // ═══════════════════════════════════════════════════════════════
+
+    let categoriaActiva = 'Todas';
+    let busqueda = '';
+
+    // Extraer categorías únicas
+    const categorias = ['Todas', ...new Set(productos.map(p => p.categoria))];
+
+    function renderStars(rating) {
+      const full = Math.floor(rating);
+      const half = rating % 1 >= 0.5;
+      let html = '';
+      for (let i = 0; i < full; i++) html += '★';
+      if (half) html += '½';
+      for (let i = full + (half ? 1 : 0); i < 5; i++) html += '☆';
+      return html;
+    }
+
+    function renderCategorias() {
+      const container = document.getElementById('categories');
+      container.innerHTML = categorias.map(cat =>
+        `<button class="cat-btn ${cat === categoriaActiva ? 'active' : ''}" onclick="filtrarCategoria('${cat}')">${cat}</button>`
+      ).join('');
+    }
+
+    function filtrarCategoria(cat) {
+      categoriaActiva = cat;
+      renderCategorias();
+      renderProductos();
+    }
+
+    function renderProductos() {
+      const grid = document.getElementById('productsGrid');
+      const noResults = document.getElementById('noResults');
+
+      const filtrados = productos.filter(p => {
+        const matchCat = categoriaActiva === 'Todas' || p.categoria === categoriaActiva;
+        const matchSearch = !busqueda ||
+          p.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
+          p.categoria.toLowerCase().includes(busqueda.toLowerCase());
+        return matchCat && matchSearch;
+      });
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = '';
+        noResults.style.display = 'block';
+        return;
+      }
+
+      noResults.style.display = 'none';
+
+      grid.innerHTML = filtrados.map((p, i) => {
+        const badgeHtml = p.badge ? `<span class="badge ${p.badgeColor}">${p.badge}</span>` : '';
+        const oldPriceHtml = p.precioAnterior ? `<span class="old">${p.precioAnterior}</span>` : '';
+        const reviewsHtml = p.reviews ? `<span class="rating-count">(${p.reviews.toLocaleString()})</span>` : '';
+
+        return `
+          <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.05}s">
+            <div class="product-image-wrap">
+              ${badgeHtml}
+              <img src="${p.imagen}" alt="${p.titulo}" loading="lazy">
+            </div>
+            <div class="product-info">
+              <div class="product-category">${p.categoria}</div>
+              <div class="product-title">${p.titulo}</div>
+              <div class="product-price">${p.precio} ${oldPriceHtml}</div>
+              <div class="product-rating">
+                <span class="stars">${renderStars(p.rating)}</span>
+                ${reviewsHtml}
+              </div>
+              <span class="amazon-btn">
+                🛒 Ver en Amazon
+              </span>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Buscador
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      busqueda = e.target.value.trim();
+      renderProductos();
+    });
+
+    // Inicializar
+    renderCategorias();
+    renderProductos();
+  </script>
+
+</body>
+</html>
