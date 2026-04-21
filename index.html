@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Tienda Amazon</title>
+  <title>My Amazon Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -119,7 +119,7 @@
       margin: 0 auto;
     }
 
-    /* Categorías */
+    /* Categories */
     .categories {
       max-width: 1400px;
       margin: 0 auto;
@@ -154,7 +154,7 @@
       color: white;
     }
 
-    /* Grid de productos */
+    /* Product Grid */
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -167,7 +167,7 @@
       gap: 1.5rem;
     }
 
-    /* Tarjeta de producto */
+    /* Product Card */
     .product-card {
       background: white;
       border-radius: 16px;
@@ -315,7 +315,7 @@
       transform: scale(1.02);
     }
 
-    /* Sin resultados */
+    /* No Results */
     .no-results {
       text-align: center;
       padding: 4rem 1rem;
@@ -343,7 +343,7 @@
       text-decoration: none;
     }
 
-    /* Animaciones */
+    /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -402,151 +402,152 @@
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        🛒 Mi Tienda <span>Amazon</span>
+        🛒 My <span>Amazon</span> Store
       </div>
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Buscar productos...">
+        <input type="text" id="searchInput" placeholder="Search products...">
       </div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Los Mejores Productos</h1>
-    <p>Descubre productos seleccionados con los mejores precios de Amazon</p>
+    <h1>The Best Products</h1>
+    <p>Discover handpicked products with the best prices on Amazon</p>
   </section>
 
-  <!-- CATEGORÍAS -->
+  <!-- CATEGORIES -->
   <div class="categories" id="categories"></div>
 
-  <!-- PRODUCTOS -->
+  <!-- PRODUCTS -->
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
-      <h3>😕 No se encontraron productos</h3>
-      <p>Intenta con otra búsqueda o categoría</p>
+      <h3>😕 No products found</h3>
+      <p>Try another search or category</p>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>Mi Tienda Amazon — Productos seleccionados con ❤️</p>
+    <p>My Amazon Store — Handpicked products with ❤️</p>
     <p style="margin-top:0.5rem; font-size:0.75rem;">
-      Como Asociado de Amazon, obtengo ingresos por las compras que califican.
+      As an Amazon Associate, I earn from qualifying purchases.
     </p>
   </footer>
 
   <script>
     // ═══════════════════════════════════════════════════════════════
-    //  AGREGA TUS PRODUCTOS AQUÍ
-    //  Solo copia y pega un bloque y cambia los datos
+    //  ADD YOUR PRODUCTS HERE
+    //  Just copy and paste a block and change the data
     // ═══════════════════════════════════════════════════════════════
-    const productos = [
+    const products = [
       {
-        titulo: "Banderas The Icon Eau de Toilette",
-        precio: "$63.00",
-        imagen: "https://m.media-amazon.com/images/I/71XPjiSpNmL._SX522_.jpg",
+        title: "Banderas The Icon Eau de Toilette",
+        price: "$63.00",
+        oldPrice: "",
+        image: "https://m.media-amazon.com/images/I/71XPjiSpNmL._SX522_.jpg",
         link: "https://amzn.to/41RX9i2",
-        categoria: "Tecnología",
+        category: "Technology",
         rating: 4.4,
         reviews: 983,
       },
       {
-        titulo: "Reloj Inteligente Deportivo",
-        precio: "$49.99",
-        precioAnterior: "$79.99",
-        imagen: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO2",
-        categoria: "Tecnología",
+        title: "Sports Smartwatch",
+        price: "$49.99",
+        oldPrice: "$79.99",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE2",
+        category: "Technology",
         rating: 4.3,
         reviews: 856,
-        badge: "Más Vendido",
+        badge: "Best Seller",
         badgeColor: ""
       },
       {
-        titulo: "Set de Sartenes Antiadherentes",
-        precio: "$39.99",
-        precioAnterior: "",
-        imagen: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO3",
-        categoria: "Hogar",
+        title: "Non-stick Frying Pan Set",
+        price: "$39.99",
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE3",
+        category: "Home",
         rating: 4.7,
         reviews: 2341,
         badge: "",
         badgeColor: ""
       },
       {
-        titulo: "Lámpara LED de Escritorio",
-        precio: "$24.99",
-        precioAnterior: "$34.99",
-        imagen: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO4",
-        categoria: "Hogar",
+        title: "LED Desk Lamp",
+        price: "$24.99",
+        oldPrice: "$34.99",
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE4",
+        category: "Home",
         rating: 4.6,
         reviews: 567,
-        badge: "Oferta",
+        badge: "Sale",
         badgeColor: "red"
       },
       {
-        titulo: "Mancuernas Ajustables 20kg",
-        precio: "$59.99",
-        precioAnterior: "",
-        imagen: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO5",
-        categoria: "Deportes",
+        title: "Adjustable Dumbbells 20kg",
+        price: "$59.99",
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE5",
+        category: "Sports",
         rating: 4.8,
         reviews: 1890,
         badge: "Top",
         badgeColor: "green"
       },
       {
-        titulo: "Botella de Agua Térmica 1L",
-        precio: "$18.99",
-        precioAnterior: "$25.00",
-        imagen: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO6",
-        categoria: "Deportes",
+        title: "Insulated Water Bottle 1L",
+        price: "$18.99",
+        oldPrice: "$25.00",
+        image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE6",
+        category: "Sports",
         rating: 4.4,
         reviews: 3421,
         badge: "",
         badgeColor: ""
       },
       {
-        titulo: "Cámara de Seguridad WiFi",
-        precio: "$35.99",
-        precioAnterior: "$55.00",
-        imagen: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO7",
-        categoria: "Tecnología",
+        title: "WiFi Security Camera",
+        price: "$35.99",
+        oldPrice: "$55.00",
+        image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE7",
+        category: "Technology",
         rating: 4.2,
         reviews: 678,
-        badge: "Oferta",
+        badge: "Sale",
         badgeColor: "red"
       },
       {
-        titulo: "Almohada Ortopédica de Memory Foam",
-        precio: "$32.99",
-        precioAnterior: "",
-        imagen: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EJEMPLO8",
-        categoria: "Hogar",
+        title: "Orthopedic Memory Foam Pillow",
+        price: "$32.99",
+        oldPrice: "",
+        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?w=400&h=400&fit=crop",
+        link: "https://www.amazon.com/dp/EXAMPLE8",
+        category: "Home",
         rating: 4.6,
         reviews: 4567,
-        badge: "Más Vendido",
+        badge: "Best Seller",
         badgeColor: ""
       }
     ];
 
     // ═══════════════════════════════════════════════════════════════
-    //  NO TOCAR NADA DE AQUÍ PARA ABAJO (a menos que sepas)
+    //  DO NOT TOUCH ANYTHING BELOW THIS LINE (unless you know what you are doing)
     // ═══════════════════════════════════════════════════════════════
 
-    let categoriaActiva = 'Todas';
-    let busqueda = '';
+    let activeCategory = 'All';
+    let searchQuery = '';
 
-    // Extraer categorías únicas
-    const categorias = ['Todas', ...new Set(productos.map(p => p.categoria))];
+    // Extract unique categories
+    const uniqueCategories = ['All', ...new Set(products.map(p => p.category))];
 
     function renderStars(rating) {
       const full = Math.floor(rating);
@@ -558,32 +559,32 @@
       return html;
     }
 
-    function renderCategorias() {
+    function renderCategories() {
       const container = document.getElementById('categories');
-      container.innerHTML = categorias.map(cat =>
-        `<button class="cat-btn ${cat === categoriaActiva ? 'active' : ''}" onclick="filtrarCategoria('${cat}')">${cat}</button>`
+      container.innerHTML = uniqueCategories.map(cat =>
+        `<button class="cat-btn ${cat === activeCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`
       ).join('');
     }
 
-    function filtrarCategoria(cat) {
-      categoriaActiva = cat;
-      renderCategorias();
-      renderProductos();
+    function filterCategory(cat) {
+      activeCategory = cat;
+      renderCategories();
+      renderProducts();
     }
 
-    function renderProductos() {
+    function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const noResults = document.getElementById('noResults');
 
-      const filtrados = productos.filter(p => {
-        const matchCat = categoriaActiva === 'Todas' || p.categoria === categoriaActiva;
-        const matchSearch = !busqueda ||
-          p.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
-          p.categoria.toLowerCase().includes(busqueda.toLowerCase());
+      const filtered = products.filter(p => {
+        const matchCat = activeCategory === 'All' || p.category === activeCategory;
+        const matchSearch = !searchQuery ||
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.category.toLowerCase().includes(searchQuery.toLowerCase());
         return matchCat && matchSearch;
       });
 
-      if (filtrados.length === 0) {
+      if (filtered.length === 0) {
         grid.innerHTML = '';
         noResults.style.display = 'block';
         return;
@@ -591,27 +592,27 @@
 
       noResults.style.display = 'none';
 
-      grid.innerHTML = filtrados.map((p, i) => {
+      grid.innerHTML = filtered.map((p, i) => {
         const badgeHtml = p.badge ? `<span class="badge ${p.badgeColor}">${p.badge}</span>` : '';
-        const oldPriceHtml = p.precioAnterior ? `<span class="old">${p.precioAnterior}</span>` : '';
+        const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
         const reviewsHtml = p.reviews ? `<span class="rating-count">(${p.reviews.toLocaleString()})</span>` : '';
 
         return `
           <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.05}s">
             <div class="product-image-wrap">
               ${badgeHtml}
-              <img src="${p.imagen}" alt="${p.titulo}" loading="lazy">
+              <img src="${p.image}" alt="${p.title}" loading="lazy">
             </div>
             <div class="product-info">
-              <div class="product-category">${p.categoria}</div>
-              <div class="product-title">${p.titulo}</div>
-              <div class="product-price">${p.precio} ${oldPriceHtml}</div>
+              <div class="product-category">${p.category}</div>
+              <div class="product-title">${p.title}</div>
+              <div class="product-price">${p.price} ${oldPriceHtml}</div>
               <div class="product-rating">
                 <span class="stars">${renderStars(p.rating)}</span>
                 ${reviewsHtml}
               </div>
               <span class="amazon-btn">
-                🛒 Ver en Amazon
+                🛒 View on Amazon
               </span>
             </div>
           </a>
@@ -619,15 +620,15 @@
       }).join('');
     }
 
-    // Buscador
+    // Search bar
     document.getElementById('searchInput').addEventListener('input', (e) => {
-      busqueda = e.target.value.trim();
-      renderProductos();
+      searchQuery = e.target.value.trim();
+      renderProducts();
     });
 
-    // Inicializar
-    renderCategorias();
-    renderProductos();
+    // Initialize
+    renderCategories();
+    renderProducts();
   </script>
 
 </body>
