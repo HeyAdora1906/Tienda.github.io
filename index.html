@@ -119,11 +119,11 @@
       margin: 0 auto;
     }
 
-    /* Categories */
+    /* Categories & Filters */
     .categories {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem 0.5rem;
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
@@ -152,6 +152,40 @@
       background: var(--amazon-orange);
       border-color: var(--amazon-orange);
       color: white;
+    }
+
+    .filters-bar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.5rem 1.5rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-select {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: white;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+
+    .brand-select:focus {
+      border-color: var(--amazon-orange);
+    }
+
+    .filter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-gray);
     }
 
     /* Product Grid */
@@ -423,13 +457,19 @@
 
   <!-- CATEGORIES -->
   <div class="categories" id="categories"></div>
+  
+  <!-- BRAND FILTER -->
+  <div class="filters-bar">
+    <span class="filter-label">Filter by Brand:</span>
+    <select id="brandSelect" class="brand-select"></select>
+  </div>
 
   <!-- PRODUCTS -->
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
       <h3>😕 No products found</h3>
-      <p>Try another search or category</p>
+      <p>Try another search, category, or brand</p>
     </div>
   </div>
 
@@ -443,17 +483,16 @@
 
   <script>
     // ═══════════════════════════════════════════════════════════════
-    //  ADD YOUR PRODUCTS HERE
-    //  Just copy and paste a block and change the data
+    //  PRODUCTS DATA
     // ═══════════════════════════════════════════════════════════════
     const products = [
       {
         title: "Christian Dior Sauvage Eau De Toilette",
         price: "$125.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/51E-YrSTwtL._SL1000_.jpg",
         link: "https://amzn.to/4sObZkw",
         category: "Perfume & Fragrance",
+        brand: "Christian Dior",
         rating: 4.5,
         reviews: "34K",
         badge: "Best Seller",
@@ -462,169 +501,306 @@
       {
         title: "Armani Beauty – Acqua di Giò Profondo – Parfum",
         price: "$182.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/81B9fqPhglL._SL1500_.jpg",
         link: "https://amzn.to/4u0Mn4S",
         category: "Perfume & Fragrance",
+        brand: "Armani",
         rating: 4.6,
         reviews: 435,
-        badge: "",
-        badgeColor: ""
       },
       {
         title: "Armani Beauty – Acqua di Giò Profondo – Parfum",
         price: "$160.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/61z43+frfFL._SL1500_.jpg",
         link: "https://amzn.to/4tqgGSF",
         category: "Perfume & Fragrance",
+        brand: "Armani",
         rating: 4.2,
         reviews: 435,
-        badge: "",
-        badgeColor: ""
       },
       {
         title: "Armani Beauty - Acqua di Giò - Eau de Toilette",
         price: "$130.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/61Fq2eOsmbL._SL1500_.jpg",
         link: "https://amzn.to/42mv02H",
         category: "Perfume & Fragrance",
+        brand: "Armani",
         rating: 4.7,
         reviews: "24K",
-        badge: "",
-        badgeColor: ""
       },
       {
         title: "RALPH LAUREN FRAGRANCES - Polo Black - Eau de Toilette",
         price: "$160.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/61-UcWA3T3L._SL1500_.jpg",
         link: "https://amzn.to/4tXYUpN",
         category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
         rating: 4.7,
         reviews: "5K",
-        badge: "",
-        badgeColor: ""
       },
       {
         title: "Rabanne Phantom Parfum for Men",
         price: "$172.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/71rzDam+HPL._SL1500_.jpg",
         link: "https://amzn.to/4sTPDyn",
         category: "Perfume & Fragrance",
+        brand: "Rabanne",
         rating: 4.8,
-        reviews: "989",
+        reviews: "989K",
         badge: "Top",
         badgeColor: "green"
       },
       {
         title: "Banderas The Icon Eau de Toilette",
         price: "$63.00",
-        oldPrice: "",
         image: "https://m.media-amazon.com/images/I/71XPjiSpNmL._SX522_.jpg",
         link: "https://amzn.to/41RX9i2",
         category: "Perfume & Fragrance",
+        brand: "Banderas",
         rating: 4.4,
         reviews: 983,
-        badge: "",
-        badgeColor: ""
       },
       {
-        title: "Sports Smartwatch",
-        price: "$49.99",
-        oldPrice: "$79.99",
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE2",
-        category: "Technology",
-        rating: 4.3,
-        reviews: 856,
-        badge: "",
-        badgeColor: ""
-      },
-      {
-        title: "Non-stick Frying Pan Set",
-        price: "$39.99",
-        oldPrice: "",
-        image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE3",
-        category: "Home",
-        rating: 4.7,
-        reviews: 2341,
-        badge: "",
-        badgeColor: ""
-      },
-      {
-        title: "LED Desk Lamp",
-        price: "$24.99",
-        oldPrice: "$34.99",
-        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE4",
-        category: "Home",
-        rating: 4.6,
-        reviews: 567,
-        badge: "Sale",
-        badgeColor: "red"
-      },
-      {
-        title: "Adjustable Dumbbells 20kg",
-        price: "$59.99",
-        oldPrice: "",
-        image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE5",
-        category: "Sports",
+        title: "Rabanne Phantom Eau de Parfum for Men",
+        price: "$117.00",
+        image: "https://m.media-amazon.com/images/I/81T7l0T2IRL._SL1500_.jpg",
+        link: "https://amzn.to/4sTGANz",
+        category: "Perfume & Fragrance",
+        brand: "Rabanne",
         rating: 4.8,
-        reviews: 1890,
-        badge: "",
-        badgeColor: ""
+        reviews: "326",
       },
       {
-        title: "Insulated Water Bottle 1L",
-        price: "$18.99",
-        oldPrice: "$25.00",
-        image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE6",
-        category: "Sports",
-        rating: 4.4,
-        reviews: 3421,
-        badge: "",
-        badgeColor: ""
+        title: "Rabanne Invictus Eau de Toilette",
+        price: "$177.00",
+        image: "https://m.media-amazon.com/images/I/811Bfjyjs8L._SL1500_.jpg",
+        link: "https://amzn.to/42mPKay",
+        category: "Perfume & Fragrance",
+        brand: "Rabanne",
+        rating: 4.7,
+        reviews: "18K",
       },
       {
-        title: "WiFi Security Camera",
-        price: "$35.99",
-        oldPrice: "$55.00",
-        image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE7",
-        category: "Technology",
-        rating: 4.2,
-        reviews: 678,
-        badge: "Sale",
-        badgeColor: "red"
-      },
-      {
-        title: "Orthopedic Memory Foam Pillow",
-        price: "$32.99",
-        oldPrice: "",
-        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?w=400&h=400&fit=crop",
-        link: "https://www.amazon.com/dp/EXAMPLE8",
-        category: "Home",
+        title: "Rabanne Invictus Victory Elixir Parfum",
+        price: "$138.00",
+        image: "https://m.media-amazon.com/images/I/71+fRwtpqFL._SL1500_.jpg",
+        link: "https://amzn.to/4u6VDEX",
+        category: "Perfume & Fragrance",
+        brand: "Rabanne",
         rating: 4.6,
-        reviews: 4567,
-        badge: "",
-        badgeColor: ""
+        reviews: "1.3K",
+      },
+      {
+        title: "Rabanne 1 Million Elixir Parfum Intense",
+        price: "$224.00",
+        image: "https://m.media-amazon.com/images/I/81x8FRj-oML._SL1500_.jpg",
+        link: "https://amzn.to/4mHJG5Y",
+        category: "Perfume & Fragrance",
+        brand: "Rabanne",
+        rating: 4.7,
+        reviews: "2.4K",
+      },
+      {
+        title: "RALPH LAUREN FRAGRANCES Polo - Eau de Toilette",
+        price: "$116.00",
+        image: "https://m.media-amazon.com/images/I/61Dzn5cVncL._SL1500_.jpg",
+        link: "https://amzn.to/4cHvIMM",
+        category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
+        rating: 4.6,
+        reviews: "2K",
+      },
+      {
+        title: "RALPH LAUREN FRAGRANCES - Polo Red - Eau de Toilette",
+        price: "$116.00",
+        image: "https://m.media-amazon.com/images/I/91JxiIzKCEL._SL1500_.jpg",
+        link: "https://amzn.to/4txm1I4",
+        category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
+        rating: 4.7,
+        reviews: "5.3K",
+      },
+      {
+        title: "RALPH LAUREN FRAGRANCES - Ralph's Club - Eau de Parfum",
+        price: "$130.00",
+        image: "https://m.media-amazon.com/images/I/81Az2mC-s+L._SL1500_.jpg",
+        link: "https://amzn.to/4txm72o",
+        category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
+        rating: 4.7,
+        reviews: "1.5K",
+      },
+      {
+        title: "RALPH LAUREN FRAGRANCES - Polo Blue - Eau de Toilette",
+        price: "$116.00",
+        image: "https://m.media-amazon.com/images/I/71RCcYqSwfL._SL1500_.jpg",
+        link: "https://amzn.to/48dnlaC",
+        category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
+        rating: 4.7,
+        reviews: "11.3K",
+      },
+      {
+        title: "RALPH LAUREN FRAGRANCES - Polo Sport - Eau De Toilette",
+        price: "$85.00",
+        image: "https://m.media-amazon.com/images/I/81FXO04WQfL._SL1500_.jpg",
+        link: "https://amzn.to/41SBxSH",
+        category: "Perfume & Fragrance",
+        brand: "Ralph Lauren",
+        rating: 4.6,
+        reviews: "5.7K",
+      },
+      {
+        title: "Hugo Boss Hugo Man Eau de Toilette – Fresh Aromatic Cologne",
+        price: "$102.00",
+        image: "https://m.media-amazon.com/images/I/81q3li+8zDL._SL1500_.jpg",
+        link: "https://amzn.to/3QVxId1",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.6,
+        reviews: "9.9K",
+      },
+      {
+        title: "Calvin Klein Eternity Eau de Toilette – Fougère Men's Cologne",
+        price: "$113.00",
+        image: "https://m.media-amazon.com/images/I/91vHZAF0nML._SL1500_.jpg",
+        link: "https://amzn.to/4cwf82g",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.6,
+        reviews: "17.1K",
+      },
+      {
+        title: "Odyssey Mandarinsky (Mandarin Sky) – Eau de Parfum ",
+        price: "$43.00",
+        image: "https://m.media-amazon.com/images/I/51ecNhUmgeL._SL1000_.jpg",
+        link: "https://amzn.to/4u8jdBg",
+        category: "Perfume & Fragrance",
+        brand: "Odyssey",
+        rating: 4.7,
+        reviews: "10.3K",
+      },
+      {
+        title: "AZZARO – The Most Wanted – Parfum",
+        price: "$145.00",
+        image: "https://m.media-amazon.com/images/I/9106IPS0AZL._SL1500_.jpg",
+        link: "https://amzn.to/4u969eV",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.6,
+        reviews: "9.7K",
+      },
+      {
+        title: "NAUTICA – Voyage – Eau de Toilette",
+        price: "$17.59",
+        image: "https://m.media-amazon.com/images/I/81zT9nt6ZuL._SL1500_.jpg",
+        link: "https://amzn.to/3QE2rLz",
+        category: "Perfume & Fragrance",
+        brand: "Nautica",
+        rating: 4.6,
+        reviews: "148.6K",
+      },
+      {
+        title: "ISSEY MIYAKE – L’Eau d’Issey Pour Homme – Eau de Toilette ",
+        price: "$130.00",
+        image: "https://m.media-amazon.com/images/I/71Ia8Ru4-rL._SL1500_.jpg",
+        link: "https://amzn.to/4dXCznI",
+        category: "Perfume & Fragrance",
+        brand: "Issey Miyake",
+        rating: 4.7,
+        reviews: "19.2K",
+      },
+      {
+        title: "HUGO BOSS – The Scent – Eau de Toilette ",
+        price: "$127.00",
+        image: "https://m.media-amazon.com/images/I/81gSlapRdGL._SL1500_.jpg",
+        link: "https://amzn.to/493mtFD",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.6,
+        reviews: "6.3K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled – Eau de Toilette ",
+        price: "$127.00",
+        image: "https://m.media-amazon.com/images/I/81sDpjQtzQL._SL1500_.jpg",
+        link: "https://amzn.to/4tmwcPy",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.6,
+        reviews: "18.2K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled Infinite – Eau de Parfum ",
+        price: "$139.00",
+        image: "https://m.media-amazon.com/images/I/61hgdiBPCJL._SL1500_.jpg",
+        link: "https://amzn.to/4t08hVm",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.5,
+        reviews: "2.5K",
+      },
+      {
+        title: "HUGO BOSS – Selection – Eau de Toilette",
+        price: "$84.00",
+        image: "https://m.media-amazon.com/images/I/910sgxfVdBL._SL1500_.jpg",
+        link: "https://amzn.to/48Mg29U",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.5,
+        reviews: "4.4K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled Elixir – Parfum",
+        price: "$158.00",
+        image: "https://m.media-amazon.com/images/I/81uQSpoDJ5L._SL1500_.jpg",
+        link: "https://amzn.to/41OSxt6",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.4,
+        reviews: "2.7K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled Night – Eau de Toilette",
+        price: "$127.00",
+        image: "https://m.media-amazon.com/images/I/71fxv5ZODLL._SL1500_.jpg",
+        link: "https://amzn.to/4cteMLm",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.6,
+        reviews: "27K",
+      },
+      {
+        title: "HUGO BOSS – Selection – Eau de Toilette",
+        price: "$84.00",
+        image: "https://m.media-amazon.com/images/I/816erVRM14L._SL1500_.jpg",
+        link: "https://amzn.to/4cVDLa9",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.5,
+        reviews: "3.5K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled – Eau de Toilette ",
+        price: "$30.00",
+        image: "https://m.media-amazon.com/images/I/51gwm+jeVsL._SL1500_.jpg",
+        link: "https://amzn.to/4d49LIf",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.3,
+        reviews: "4.6K",
       }
     ];
 
     // ═══════════════════════════════════════════════════════════════
-    //  DO NOT TOUCH ANYTHING BELOW THIS LINE (unless you know what you are doing)
+    //  SCRIPT LOGIC
     // ═══════════════════════════════════════════════════════════════
 
     let activeCategory = 'All';
+    let activeBrand = 'All';
     let searchQuery = '';
 
-    // Hardcoded categories to always show, plus any new ones you add to products later
+    // Hardcoded categories to always show
     const baseCategories = [
       "Perfume & Fragrance", 
       "Clothes Women", 
@@ -635,7 +811,6 @@
       "Make up"
     ];
 
-    // Extract unique categories (Combines your hardcoded list with existing product categories)
     const uniqueCategories = ['All', ...new Set([...baseCategories, ...products.map(p => p.category)])];
 
     function renderStars(rating) {
@@ -655,11 +830,27 @@
       ).join('');
     }
 
+    function renderBrands() {
+      const brandSelect = document.getElementById('brandSelect');
+      // Get unique brands and sort them alphabetically
+      const uniqueBrands = ['All', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
+      
+      brandSelect.innerHTML = uniqueBrands.map(brand => 
+        `<option value="${brand}">${brand === 'All' ? 'All Brands' : brand}</option>`
+      ).join('');
+    }
+
     function filterCategory(cat) {
       activeCategory = cat;
       renderCategories();
       renderProducts();
     }
+
+    // Brand Selection Event
+    document.getElementById('brandSelect').addEventListener('change', (e) => {
+      activeBrand = e.target.value;
+      renderProducts();
+    });
 
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
@@ -667,10 +858,13 @@
 
       const filtered = products.filter(p => {
         const matchCat = activeCategory === 'All' || p.category === activeCategory;
+        const matchBrand = activeBrand === 'All' || p.brand === activeBrand;
         const matchSearch = !searchQuery ||
           p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchCat && matchSearch;
+          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (p.brand && p.brand.toLowerCase().includes(searchQuery.toLowerCase()));
+          
+        return matchCat && matchBrand && matchSearch;
       });
 
       if (filtered.length === 0) {
@@ -685,7 +879,6 @@
         const badgeHtml = p.badge ? `<span class="badge ${p.badgeColor}">${p.badge}</span>` : '';
         const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
         
-        // Formats reviews correctly whether you use a number (e.g. 435) or a string (e.g. "34K")
         const reviewText = typeof p.reviews === 'number' ? p.reviews.toLocaleString() : p.reviews;
         const reviewsHtml = p.reviews ? `<span class="rating-count">(${reviewText})</span>` : '';
 
@@ -696,7 +889,7 @@
               <img src="${p.image}" alt="${p.title}" loading="lazy">
             </div>
             <div class="product-info">
-              <div class="product-category">${p.category}</div>
+              <div class="product-category">${p.brand ? p.brand : p.category}</div>
               <div class="product-title">${p.title}</div>
               <div class="product-price">${p.price} ${oldPriceHtml}</div>
               <div class="product-rating">
@@ -720,6 +913,7 @@
 
     // Initialize
     renderCategories();
+    renderBrands();
     renderProducts();
   </script>
 
