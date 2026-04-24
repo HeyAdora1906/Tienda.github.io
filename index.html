@@ -33,6 +33,96 @@
       color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow: hidden; /* Prevent scrolling until region is selected */
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SPLASH SCREEN (REGION SELECTOR)
+       ═══════════════════════════════════════════════════════════════ */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(17, 17, 17, 0.98);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      backdrop-filter: blur(10px);
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .splash-content {
+      background: var(--primary-light);
+      padding: 3rem 2rem;
+      border: 1px solid var(--accent-gold);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .splash-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-gold);
+    }
+
+    .splash-subtitle {
+      font-size: 1rem;
+      color: #aaaaaa;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .region-btn {
+      background: transparent;
+      border: 1px solid #444;
+      color: var(--white);
+      padding: 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .region-btn:hover {
+      border-color: var(--accent-gold);
+      background: rgba(193, 154, 107, 0.1);
+    }
+
+    .splash-note {
+      font-size: 0.8rem;
+      color: #888;
+      line-height: 1.4;
+      border-top: 1px solid #333;
+      padding-top: 1.5rem;
+    }
+
+    /* Top Alert Banner */
+    .region-banner {
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: none; /* Hidden by default */
     }
 
     /* Header */
@@ -103,6 +193,7 @@
       padding: 4rem 0;
       color: var(--white);
       overflow: hidden;
+      display: none; /* Controlled by JS based on region */
     }
 
     .section-title {
@@ -136,12 +227,11 @@
       scroll-snap-type: x mandatory;
       gap: 1.5rem;
       padding-bottom: 1.5rem;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;
     }
 
     .carousel-track::-webkit-scrollbar {
-      display: none; /* Chrome, Safari and Opera */
+      display: none;
     }
 
     .carousel-track .product-card {
@@ -184,7 +274,7 @@
       .carousel-btn.next { right: 5px; }
     }
     @media (max-width: 768px) {
-      .carousel-btn { display: none; } /* Hide buttons on mobile, rely on swipe */
+      .carousel-btn { display: none; }
       .carousel-track .product-card { min-width: 260px; max-width: 260px; }
     }
 
@@ -194,6 +284,7 @@
       padding: 2rem 1.5rem;
       border-bottom: 1px solid var(--border-color);
       margin-bottom: 2rem;
+      display: none; /* Controlled by JS based on region */
     }
 
     .categories {
@@ -487,7 +578,7 @@
       border-color: var(--white);
     }
 
-    /* No Results */
+    /* No Results / Coming Soon */
     .no-results {
       text-align: center;
       padding: 5rem 1rem;
@@ -499,6 +590,12 @@
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       color: var(--text-main);
+    }
+
+    .no-results p {
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
     /* Footer & Socials */
@@ -554,6 +651,54 @@
       fill: currentColor;
     }
 
+    /* Region Change Button */
+    .change-region-btn {
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      margin: 1.5rem 0;
+    }
+
+    .change-region-btn:hover {
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+    }
+
+    /* Designer Credit */
+    .designer-credit {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #777;
+    }
+
+    .designer-credit a {
+      color: var(--accent-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .designer-credit svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
     /* Animations */
     @keyframes fadeInUp {
       from {
@@ -585,10 +730,38 @@
       .brands-row {
         justify-content: flex-start;
       }
+      .region-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- SPLASH SCREEN: REGION SELECTOR -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <h2 class="splash-title">Welcome to MyStore</h2>
+      <p class="splash-subtitle">Please select your shipping destination</p>
+      
+      <div class="region-grid">
+        <button class="region-btn" onclick="enterStore('US')">🇺🇸 United States</button>
+        <button class="region-btn" onclick="enterStore('CA')">🇨🇦 Canada</button>
+        <button class="region-btn" onclick="enterStore('EU')">🇬🇧 United Kingdom</button>
+        <button class="region-btn" onclick="enterStore('EU')">🇪🇸 Spain</button>
+        <button class="region-btn" onclick="enterStore('EU')">🇮🇹 Italy</button>
+        <button class="region-btn" onclick="enterStore('EU')">🇫🇷 France</button>
+      </div>
+
+      <p class="splash-note">
+        <strong>Important:</strong> Store availability depends on your region. <br>
+        Shoppers from Canada can use US links, but prices are displayed in USD.
+      </p>
+    </div>
+  </div>
+
+  <!-- REGION ALERT BANNER -->
+  <div id="regionBanner" class="region-banner"></div>
 
   <!-- HEADER -->
   <header class="header">
@@ -605,8 +778,8 @@
     <p>Discover our handpicked selection of premium fragrances and elegant products.</p>
   </section>
 
-  <!-- BEST SELLERS CAROUSEL SECTION -->
-  <section class="best-sellers-section">
+  <!-- BEST SELLERS CAROUSEL SECTION (Controlled by JS) -->
+  <section class="best-sellers-section" id="bestSellersSection">
     <h2 class="section-title">Top 10 Highly Recommended</h2>
     <p class="section-subtitle">Our most loved and reviewed fragrances by customers worldwide</p>
     
@@ -617,8 +790,8 @@
     </div>
   </section>
 
-  <!-- CONTROLS (Categories + Brands + Sort) -->
-  <div class="controls-container">
+  <!-- CONTROLS (Categories + Brands + Sort) (Controlled by JS) -->
+  <div class="controls-container" id="controlsContainer">
     
     <!-- Categories -->
     <div class="categories" id="categories"></div>
@@ -646,8 +819,7 @@
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
-      <h3>No Products Found</h3>
-      <p>Try adjusting your brand or category filters.</p>
+      <!-- Dynamic Content injected via JS -->
     </div>
   </div>
 
@@ -673,16 +845,103 @@
       </a>
     </div>
 
+    <!-- Change Region Button -->
+    <button class="change-region-btn" onclick="showSplashScreen()">🌍 Change Shipping Destination</button>
+
     <p style="font-size:0.8rem;">
       As an Amazon Associate, we earn from qualifying purchases.
     </p>
+
+    <!-- Web Designer Credit -->
+    <div class="designer-credit">
+      Web Design by 
+      <a href="https://www.instagram.com/alcast1906?igsh=MTU5eXg5M2F3dW45cA%3D%3D&utm_source=qr" target="_blank" aria-label="Designer Instagram">
+        <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+        alcast1906
+      </a>
+    </div>
   </footer>
 
   <script>
     // ═══════════════════════════════════════════════════════════════
+    //  GLOBAL STATE
+    // ═══════════════════════════════════════════════════════════════
+    let activeCategory = 'All';
+    let activeBrand = 'All';
+    let activeSort = 'default';
+    let userRegion = 'US'; 
+
+    // ═══════════════════════════════════════════════════════════════
+    //  SPLASH SCREEN LOGIC
+    // ═══════════════════════════════════════════════════════════════
+    
+    function showSplashScreen() {
+      const splash = document.getElementById('splashScreen');
+      splash.style.visibility = 'visible';
+      splash.style.opacity = '1';
+      document.body.style.overflow = 'hidden'; // Stop scrolling
+    }
+
+    function enterStore(region) {
+      userRegion = region;
+      
+      // Hide Splash Screen
+      const splash = document.getElementById('splashScreen');
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.style.visibility = 'hidden';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+      }, 500);
+
+      // Handle Region Banners & Content Rendering
+      const banner = document.getElementById('regionBanner');
+      const bestSellersSection = document.getElementById('bestSellersSection');
+      const controlsContainer = document.getElementById('controlsContainer');
+      const noResults = document.getElementById('noResults');
+
+      if (region === 'CA') {
+        banner.innerHTML = "🇨🇦 <strong>Canadian Shoppers:</strong> The links provided redirect to the US store. Please note all prices shown are in USD.";
+        banner.style.display = 'block';
+        
+        bestSellersSection.style.display = 'block';
+        controlsContainer.style.display = 'block';
+        noResults.style.display = 'none';
+
+        renderBestSellers();
+        renderProducts();
+      } 
+      else if (region === 'EU') {
+        // EU: No products available yet. Hide grids and show coming soon state.
+        banner.innerHTML = "🌍 <strong>European Shoppers:</strong> Our localized catalog is coming soon.";
+        banner.style.display = 'block';
+
+        bestSellersSection.style.display = 'none';
+        controlsContainer.style.display = 'none';
+        
+        document.getElementById('productsGrid').innerHTML = ''; // Clear out products
+        noResults.style.display = 'block';
+        noResults.innerHTML = `
+          <h3>Collection Coming Soon</h3>
+          <p>We are currently curating the best luxury fragrances available in your local Amazon store. Please check back soon!</p>
+        `;
+      } 
+      else {
+        // USA: Default Behavior
+        banner.style.display = 'none';
+        
+        bestSellersSection.style.display = 'block';
+        controlsContainer.style.display = 'block';
+        noResults.style.display = 'none';
+
+        renderBestSellers();
+        renderProducts();
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
     //  PRODUCTS DATA 
     // ═══════════════════════════════════════════════════════════════
-    const products = [
+    const products =[
       {
         title: "Sauvage Eau De Toilette",
         price: "$125.00",
@@ -1149,12 +1408,8 @@
     //  SCRIPT LOGIC
     // ═══════════════════════════════════════════════════════════════
 
-    let activeCategory = 'All';
-    let activeBrand = 'All';
-    let activeSort = 'default';
-
     // Categories
-    const baseCategories = ["For Men", "For Women", "UNISEX"];
+    const baseCategories =["For Men", "For Women", "UNISEX"];
     const uniqueCategories = ['All', ...baseCategories];
 
     // Helper function to render star icons
@@ -1255,7 +1510,7 @@
     // Render Brands as Pills
     function renderBrands() {
       const brandContainer = document.getElementById('brandPills');
-      const uniqueBrands = ['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
+      const uniqueBrands =['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
       brandContainer.innerHTML = uniqueBrands.map(brand => {
         const val = brand === 'All Brands' ? 'All' : brand;
@@ -1306,6 +1561,10 @@
       if (filtered.length === 0) {
         grid.innerHTML = '';
         noResults.style.display = 'block';
+        noResults.innerHTML = `
+          <h3>No Products Found</h3>
+          <p>Try adjusting your brand or category filters.</p>
+        `;
         return;
       }
 
@@ -1313,11 +1572,9 @@
       grid.innerHTML = filtered.map((p, i) => createProductCard(p, i, false)).join('');
     }
 
-    // Initialize Page
-    renderBestSellers();
+    // Initialize Page Controls
     renderCategories();
     renderBrands();
-    renderProducts();
   </script>
 
 </body>
