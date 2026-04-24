@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyStore - Luxury Fragrances & Products</title>
+  <title>MyStore - Luxury Fragrances</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -39,11 +39,12 @@
     .header {
       background: var(--primary-dark);
       color: var(--white);
-      padding: 1.25rem 0;
+      padding: 1.5rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
       border-bottom: 3px solid var(--accent-gold);
+      text-align: center;
     }
 
     .header-inner {
@@ -52,19 +53,14 @@
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      justify-content: center;
     }
 
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     .logo a {
@@ -75,43 +71,6 @@
 
     .logo a:hover {
       color: var(--accent-gold);
-    }
-
-    .search-box {
-      flex: 1;
-      max-width: 600px;
-      position: relative;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 0.85rem 1rem 0.85rem 3rem;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--white);
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .search-box input::placeholder {
-      color: #999;
-    }
-
-    .search-box input:focus {
-      background: var(--white);
-      color: var(--text-main);
-      border-color: var(--accent-gold);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 1.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #999;
-      font-size: 1rem;
     }
 
     /* Hero Section */
@@ -138,17 +97,108 @@
       font-weight: 300;
     }
 
+    /* Best Sellers Carousel Section */
+    .best-sellers-section {
+      background: var(--primary-dark);
+      padding: 4rem 0;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--accent-gold);
+      padding: 0 1.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #aaaaaa;
+      font-weight: 300;
+      margin-bottom: 3rem;
+      font-size: 1rem;
+      padding: 0 1.5rem;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
+    }
+
+    .carousel-track .product-card {
+      min-width: 300px;
+      max-width: 300px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: var(--accent-gold);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent-gold-hover);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn.prev { left: -10px; }
+    .carousel-btn.next { right: -10px; }
+
+    @media (max-width: 1440px) {
+      .carousel-btn.prev { left: 5px; }
+      .carousel-btn.next { right: 5px; }
+    }
+    @media (max-width: 768px) {
+      .carousel-btn { display: none; } /* Hide buttons on mobile, rely on swipe */
+      .carousel-track .product-card { min-width: 260px; max-width: 260px; }
+    }
+
     /* Controls: Categories & Filters */
     .controls-container {
       background: var(--white);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-sm);
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
       margin-bottom: 2rem;
     }
 
     .categories {
       max-width: 1400px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 2rem;
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
@@ -156,17 +206,17 @@
     }
 
     .cat-btn {
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.8rem;
       border: 1px solid var(--border-color);
       background: var(--white);
       border-radius: 4px;
       cursor: pointer;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-muted);
       transition: all 0.3s ease;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     .cat-btn:hover {
@@ -180,30 +230,66 @@
       color: var(--white);
     }
 
-    .filters-bar {
+    /* Elegant Brand Pills */
+    .brands-wrapper {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+    }
+
+    .brands-label {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .brands-row {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .brand-pill {
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .brand-pill:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .brand-pill.active {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--white);
+    }
+
+    /* Sort Control */
+    .sort-wrapper {
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      padding-top: 1.5rem;
+      gap: 1rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--border-color);
-    }
-
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .filter-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .elegant-select {
@@ -216,7 +302,7 @@
       appearance: none;
       cursor: pointer;
       font-family: inherit;
-      min-width: 200px;
+      min-width: 220px;
       transition: border-color 0.3s;
     }
 
@@ -249,7 +335,13 @@
       flex-direction: column;
       height: 100%;
       text-decoration: none;
-      color: inherit;
+      color: var(--text-main);
+    }
+
+    .best-sellers-section .product-card {
+      background: var(--primary-light);
+      border-color: #333;
+      color: var(--white);
     }
 
     .product-card:hover {
@@ -267,6 +359,10 @@
       min-height: 280px;
       background: var(--white);
       border-bottom: 1px solid var(--border-color);
+    }
+
+    .best-sellers-section .product-image-wrap {
+      border-bottom-color: #333;
     }
 
     .product-image-wrap img {
@@ -295,6 +391,7 @@
 
     .badge.gold {
       background: var(--accent-gold);
+      color: var(--white);
     }
 
     .product-info {
@@ -306,7 +403,7 @@
 
     .product-category {
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: var(--accent-gold);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -315,10 +412,9 @@
 
     .product-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.4;
+      line-height: 1.3;
       margin-bottom: 0.75rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -329,16 +425,11 @@
     .product-price {
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--primary-dark);
       margin-bottom: 0.75rem;
     }
 
-    .product-price .old {
-      font-size: 0.9rem;
-      color: #999;
-      text-decoration: line-through;
-      font-weight: 400;
-      margin-left: 0.5rem;
+    .best-sellers-section .product-price {
+      color: var(--white);
     }
 
     .product-rating {
@@ -359,6 +450,10 @@
       color: var(--text-muted);
     }
 
+    .best-sellers-section .rating-count {
+      color: #aaaaaa;
+    }
+
     .amazon-btn {
       display: inline-flex;
       align-items: center;
@@ -376,9 +471,20 @@
       border: 1px solid var(--primary-dark);
     }
 
+    .best-sellers-section .amazon-btn {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
     .product-card:hover .amazon-btn {
       background: var(--accent-gold);
       border-color: var(--accent-gold);
+    }
+
+    .best-sellers-section .product-card:hover .amazon-btn {
+      background: var(--white);
+      color: var(--primary-dark);
+      border-color: var(--white);
     }
 
     /* No Results */
@@ -395,13 +501,14 @@
       color: var(--text-main);
     }
 
-    /* Footer */
+    /* Footer & Socials */
     .footer {
       background: var(--primary-dark);
-      color: #999;
+      color: #aaaaaa;
       text-align: center;
-      padding: 3rem 1rem;
-      font-size: 0.85rem;
+      padding: 4rem 1rem 2rem 1rem;
+      font-size: 0.9rem;
+      border-top: 3px solid var(--accent-gold);
     }
 
     .footer a {
@@ -413,6 +520,38 @@
     
     .footer a:hover {
       color: var(--accent-gold);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      transform: translateY(-3px);
+    }
+
+    .social-icons svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
     /* Animations */
@@ -440,15 +579,11 @@
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 1.25rem;
       }
-      .filters-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
       .elegant-select {
         width: 100%;
       }
-      .search-box {
-        max-width: 100%;
+      .brands-row {
+        justify-content: flex-start;
       }
     }
   </style>
@@ -461,10 +596,6 @@
       <div class="logo">
         <a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a>
       </div>
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search for luxury fragrances...">
-      </div>
     </div>
   </header>
 
@@ -474,532 +605,540 @@
     <p>Discover our handpicked selection of premium fragrances and elegant products.</p>
   </section>
 
-  <!-- CONTROLS (Categories + Filters) -->
+  <!-- BEST SELLERS CAROUSEL SECTION -->
+  <section class="best-sellers-section">
+    <h2 class="section-title">Top 10 Highly Recommended</h2>
+    <p class="section-subtitle">Our most loved and reviewed fragrances by customers worldwide</p>
+    
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scrollCarousel('left')">❮</button>
+      <div class="carousel-track" id="bestSellersTrack"></div>
+      <button class="carousel-btn next" onclick="scrollCarousel('right')">❯</button>
+    </div>
+  </section>
+
+  <!-- CONTROLS (Categories + Brands + Sort) -->
   <div class="controls-container">
+    
+    <!-- Categories -->
     <div class="categories" id="categories"></div>
     
-    <div class="filters-bar">
-      <!-- Brand Filter -->
-      <div class="filter-group">
-        <span class="filter-label">Brand:</span>
-        <select id="brandSelect" class="elegant-select"></select>
-      </div>
-
-      <!-- Sort Filter -->
-      <div class="filter-group">
-        <span class="filter-label">Sort By:</span>
-        <select id="sortSelect" class="elegant-select">
-          <option value="default">Featured</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-          <option value="reviews">Most Reviewed</option>
-        </select>
-      </div>
+    <!-- Redesigned Brand Pills -->
+    <div class="brands-wrapper">
+      <span class="brands-label">Filter by Design House</span>
+      <div class="brands-row" id="brandPills"></div>
     </div>
+    
+    <!-- Sort Filter -->
+    <div class="sort-wrapper">
+      <span class="brands-label" style="margin-bottom:0;">Sort By:</span>
+      <select id="sortSelect" class="elegant-select">
+        <option value="default">Featured Collection</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="reviews">Most Reviewed</option>
+      </select>
+    </div>
+
   </div>
 
-  <!-- PRODUCTS -->
+  <!-- ALL PRODUCTS GRID -->
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
       <h3>No Products Found</h3>
-      <p>Try adjusting your filters or search query.</p>
+      <p>Try adjusting your brand or category filters.</p>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER & SOCIALS -->
   <footer class="footer">
-    <p><a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a> — Curated with elegance.</p>
-    <p style="margin-top:0.5rem; font-size:0.75rem;">
+    <div class="logo" style="margin-bottom: 1rem; font-size: 1.5rem;">
+      <a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a>
+    </div>
+    
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <!-- TikTok -->
+      <a href="#" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="#" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+      </a>
+      <!-- Pinterest (With Provided Link) -->
+      <a href="https://pin.it/2cZXfuQWb" target="_blank" aria-label="Pinterest">
+        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256c0 105.57 65.41 195.12 159.27 236.42-2.15-19.53-4.08-49.56.85-70.83 4.45-19.22 28.71-121.73 28.71-121.73s-7.34-14.67-7.34-36.38c0-34.05 19.74-59.45 44.33-59.45 20.9 0 30.98 15.69 30.98 34.52 0 21.01-13.38 52.42-20.28 81.56-5.78 24.38 12.24 44.25 36.32 44.25 43.6 0 77.22-45.98 77.22-112.44 0-58.84-42.27-100-102.58-100-69.69 0-110.58 52.27-110.58 106.18 0 21.08 8.11 43.69 18.23 55.95 2 2.45 2.29 4.54 1.54 7.42-2.35 9.07-7.62 31.02-8.68 35.3-1.4 5.62-4.63 6.78-10.42 4.08-38.93-18.06-63.29-74.83-63.29-120.35 0-97.94 71.18-187.89 205.1-187.89 107.59 0 191.13 76.67 191.13 179.13 0 106.9-67.33 192.93-160.91 192.93-31.41 0-60.91-16.33-71.01-35.61 0 0-15.54 59.26-19.3 73.71-7.01 26.96-25.96 60.75-38.74 81.33 30.73 9.4 63.53 14.54 97.43 14.54 136.97 0 248-111.03 248-248S384.97 8 248 8z"/></svg>
+      </a>
+    </div>
+
+    <p style="font-size:0.8rem;">
       As an Amazon Associate, we earn from qualifying purchases.
     </p>
   </footer>
 
   <script>
     // ═══════════════════════════════════════════════════════════════
-    //  PRODUCTS DATA
+    //  PRODUCTS DATA 
     // ═══════════════════════════════════════════════════════════════
     const products = [
       {
-        title: "Christian Dior Sauvage Eau De Toilette",
+        title: "Sauvage Eau De Toilette",
         price: "$125.00",
         image: "https://m.media-amazon.com/images/I/51E-YrSTwtL._SL1000_.jpg",
         link: "https://amzn.to/4sObZkw",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Christian Dior",
         rating: 4.5,
         reviews: "34K",
-        badge: "Best Seller",
       },
       {
-        title: "Armani Beauty – Acqua di Giò Profondo – Parfum",
+        title: "Acqua di Giò Profondo – Parfum",
         price: "$182.00",
         image: "https://m.media-amazon.com/images/I/81B9fqPhglL._SL1500_.jpg",
         link: "https://amzn.to/4u0Mn4S",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Armani",
         rating: 4.6,
         reviews: 435,
       },
       {
-        title: "Armani Beauty – Acqua di Giò Profondo – Parfum",
+        title: "Acqua di Giò Profondo – Parfum",
         price: "$160.00",
         image: "https://m.media-amazon.com/images/I/61z43+frfFL._SL1500_.jpg",
         link: "https://amzn.to/4tqgGSF",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Armani",
         rating: 4.2,
         reviews: 435,
       },
       {
-        title: "Armani Beauty - Acqua di Giò - Eau de Toilette",
+        title: "Acqua di Giò - Eau de Toilette",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/61Fq2eOsmbL._SL1500_.jpg",
         link: "https://amzn.to/42mv02H",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Armani",
         rating: 4.7,
         reviews: "24K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES - Polo Black - Eau de Toilette",
+        title: "Polo Black - Eau de Toilette",
         price: "$160.00",
         image: "https://m.media-amazon.com/images/I/61-UcWA3T3L._SL1500_.jpg",
         link: "https://amzn.to/4tXYUpN",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.7,
         reviews: "5K",
       },
       {
-        title: "Rabanne Phantom Parfum for Men",
+        title: "Phantom Parfum for Men",
         price: "$172.00",
         image: "https://m.media-amazon.com/images/I/71rzDam+HPL._SL1500_.jpg",
         link: "https://amzn.to/4sTPDyn",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Rabanne",
         rating: 4.8,
-        reviews: "989",
-        badge: "Top Rated",
-        badgeColor: "gold"
+        reviews: 989,
       },
       {
-        title: "Banderas The Icon Eau de Toilette",
+        title: "The Icon Eau de Toilette",
         price: "$63.00",
         image: "https://m.media-amazon.com/images/I/71XPjiSpNmL._SX522_.jpg",
         link: "https://amzn.to/41RX9i2",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Banderas",
         rating: 4.4,
         reviews: 983,
       },
       {
-        title: "Rabanne Phantom Eau de Parfum for Men",
+        title: "Phantom Eau de Parfum for Men",
         price: "$117.00",
         image: "https://m.media-amazon.com/images/I/81T7l0T2IRL._SL1500_.jpg",
         link: "https://amzn.to/4sTGANz",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Rabanne",
         rating: 4.8,
         reviews: "326",
       },
       {
-        title: "Rabanne Invictus Eau de Toilette",
+        title: "Invictus Eau de Toilette",
         price: "$177.00",
         image: "https://m.media-amazon.com/images/I/811Bfjyjs8L._SL1500_.jpg",
         link: "https://amzn.to/42mPKay",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Rabanne",
         rating: 4.7,
         reviews: "18K",
       },
       {
-        title: "Rabanne Invictus Victory Elixir Parfum",
+        title: "Invictus Victory Elixir Parfum",
         price: "$138.00",
         image: "https://m.media-amazon.com/images/I/71+fRwtpqFL._SL1500_.jpg",
         link: "https://amzn.to/4u6VDEX",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Rabanne",
         rating: 4.6,
         reviews: "1.3K",
       },
       {
-        title: "Rabanne 1 Million Elixir Parfum Intense",
+        title: "1 Million Elixir Parfum Intense",
         price: "$224.00",
         image: "https://m.media-amazon.com/images/I/81x8FRj-oML._SL1500_.jpg",
         link: "https://amzn.to/4mHJG5Y",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Rabanne",
         rating: 4.7,
         reviews: "2.4K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES Polo - Eau de Toilette",
+        title: "Polo - Eau de Toilette",
         price: "$116.00",
         image: "https://m.media-amazon.com/images/I/61Dzn5cVncL._SL1500_.jpg",
         link: "https://amzn.to/4cHvIMM",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.6,
         reviews: "2K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES - Polo Red - Eau de Toilette",
+        title: "Polo Red - Eau de Toilette",
         price: "$116.00",
         image: "https://m.media-amazon.com/images/I/91JxiIzKCEL._SL1500_.jpg",
         link: "https://amzn.to/4txm1I4",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.7,
         reviews: "5.3K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES - Ralph's Club - Eau de Parfum",
+        title: "Ralph's Club - Eau de Parfum",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/81Az2mC-s+L._SL1500_.jpg",
         link: "https://amzn.to/4txm72o",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.7,
         reviews: "1.5K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES - Polo Blue - Eau de Toilette",
+        title: "Polo Blue - Eau de Toilette",
         price: "$116.00",
         image: "https://m.media-amazon.com/images/I/71RCcYqSwfL._SL1500_.jpg",
         link: "https://amzn.to/48dnlaC",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.7,
         reviews: "11.3K",
       },
       {
-        title: "RALPH LAUREN FRAGRANCES - Polo Sport - Eau De Toilette",
+        title: "Polo Sport - Eau De Toilette",
         price: "$85.00",
         image: "https://m.media-amazon.com/images/I/81FXO04WQfL._SL1500_.jpg",
         link: "https://amzn.to/41SBxSH",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Ralph Lauren",
         rating: 4.6,
         reviews: "5.7K",
       },
       {
-        title: "Hugo Boss Hugo Man Eau de Toilette – Fresh Aromatic Cologne",
+        title: "Hugo Man Eau de Toilette – Fresh Aromatic Cologne",
         price: "$102.00",
         image: "https://m.media-amazon.com/images/I/81q3li+8zDL._SL1500_.jpg",
         link: "https://amzn.to/3QVxId1",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.6,
         reviews: "9.9K",
       },
       {
-        title: "Calvin Klein Eternity Eau de Toilette – Fougère Men's Cologne",
+        title: "Eternity Eau de Toilette – Fougère Men's Cologne",
         price: "$113.00",
         image: "https://m.media-amazon.com/images/I/91vHZAF0nML._SL1500_.jpg",
         link: "https://amzn.to/4cwf82g",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Calvin Klein",
         rating: 4.6,
         reviews: "17.1K",
       },
       {
-        title: "Odyssey Mandarinsky (Mandarin Sky) – Eau de Parfum",
+        title: "Mandarinsky (Mandarin Sky) – Eau de Parfum",
         price: "$43.00",
         image: "https://m.media-amazon.com/images/I/51ecNhUmgeL._SL1000_.jpg",
         link: "https://amzn.to/4u8jdBg",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Odyssey",
         rating: 4.7,
         reviews: "10.3K",
       },
       {
-        title: "AZZARO – The Most Wanted – Parfum",
+        title: "The Most Wanted – Parfum",
         price: "$145.00",
         image: "https://m.media-amazon.com/images/I/9106IPS0AZL._SL1500_.jpg",
         link: "https://amzn.to/4u969eV",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.6,
         reviews: "9.7K",
       },
       {
-        title: "NAUTICA – Voyage – Eau de Toilette",
+        title: "Voyage – Eau de Toilette",
         price: "$17.59",
         image: "https://m.media-amazon.com/images/I/81zT9nt6ZuL._SL1500_.jpg",
         link: "https://amzn.to/3QE2rLz",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Nautica",
         rating: 4.6,
         reviews: "148.6K",
       },
       {
-        title: "ISSEY MIYAKE – L’Eau d’Issey Pour Homme – Eau de Toilette",
+        title: "L’Eau d’Issey Pour Homme – Eau de Toilette",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/71Ia8Ru4-rL._SL1500_.jpg",
         link: "https://amzn.to/4dXCznI",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Issey Miyake",
         rating: 4.7,
         reviews: "19.2K",
       },
       {
-        title: "HUGO BOSS – The Scent – Eau de Toilette",
+        title: "The Scent – Eau de Toilette",
         price: "$127.00",
         image: "https://m.media-amazon.com/images/I/81gSlapRdGL._SL1500_.jpg",
         link: "https://amzn.to/493mtFD",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.6,
         reviews: "6.3K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled – Eau de Toilette",
+        title: "Boss Bottled – Eau de Toilette",
         price: "$127.00",
         image: "https://m.media-amazon.com/images/I/81sDpjQtzQL._SL1500_.jpg",
         link: "https://amzn.to/4tmwcPy",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.6,
         reviews: "18.2K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled Infinite – Eau de Parfum",
+        title: "Boss Bottled Infinite – Eau de Parfum",
         price: "$139.00",
         image: "https://m.media-amazon.com/images/I/61hgdiBPCJL._SL1500_.jpg",
         link: "https://amzn.to/4t08hVm",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.5,
         reviews: "2.5K",
       },
       {
-        title: "HUGO BOSS – Selection – Eau de Toilette",
+        title: "Selection – Eau de Toilette",
         price: "$84.00",
         image: "https://m.media-amazon.com/images/I/910sgxfVdBL._SL1500_.jpg",
         link: "https://amzn.to/48Mg29U",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.5,
         reviews: "4.4K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled Elixir – Parfum",
+        title: "Boss Bottled Elixir – Parfum",
         price: "$158.00",
         image: "https://m.media-amazon.com/images/I/81uQSpoDJ5L._SL1500_.jpg",
         link: "https://amzn.to/41OSxt6",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.4,
         reviews: "2.7K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled Night – Eau de Toilette",
+        title: "Boss Bottled Night – Eau de Toilette",
         price: "$127.00",
         image: "https://m.media-amazon.com/images/I/71fxv5ZODLL._SL1500_.jpg",
         link: "https://amzn.to/4cteMLm",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.6,
         reviews: "27K",
       },
       {
-        title: "HUGO BOSS – Selection – Eau de Toilette",
-        price: "$84.00",
-        image: "https://m.media-amazon.com/images/I/816erVRM14L._SL1500_.jpg",
-        link: "https://amzn.to/4cVDLa9",
-        category: "Perfume & Fragrance",
-        brand: "Hugo Boss",
-        rating: 4.5,
-        reviews: "3.5K",
-      },
-      {
-        title: "HUGO BOSS – Boss Bottled – Eau de Toilette",
+        title: "Boss Bottled – Eau de Toilette (Travel Size)",
         price: "$30.00",
         image: "https://m.media-amazon.com/images/I/51gwm+jeVsL._SL1500_.jpg",
         link: "https://amzn.to/4d49LIf",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.3,
         reviews: "4.6K",
       },
-      // --- NEWLY ADDED PRODUCTS ---
       {
-        title: "LACOSTE – Essential – Eau de Toilette",
+        title: "Essential – Eau de Toilette",
         price: "$87.00",
         image: "https://m.media-amazon.com/images/I/91hZ8entmrL._SL1500_.jpg",
         link: "https://amzn.to/4mS6251",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Lacoste",
         rating: 4.7,
         reviews: "5.9K",
       },
       {
-        title: "LACOSTE – L.12.12 Noir – Eau de Toilette",
+        title: "L.12.12 Noir – Eau de Toilette",
         price: "$96.00",
         image: "https://m.media-amazon.com/images/I/81NtIVGuCVL._SL1500_.jpg",
         link: "https://amzn.to/42rEtWu",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Lacoste",
         rating: 4.6,
         reviews: "1.4K",
       },
       {
-        title: "LACOSTE – L.12.12 Blanc – Eau de Toilette",
+        title: "L.12.12 Blanc – Eau de Toilette",
         price: "$126.00",
         image: "https://m.media-amazon.com/images/I/81KaHrrH+jL._SL1500_.jpg",
         link: "https://amzn.to/4987kmt",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Lacoste",
-        rating: 4.7,
-        reviews: "5.5K",
+        rating: 0,
+        reviews: "-",
       },
       {
-        title: "VICTORIA’S SECRET – VS Him Platinum – Eau de Parfum",
+        title: "VS Him Platinum – Eau de Parfum",
         price: "$79.95",
         image: "https://m.media-amazon.com/images/I/71XwiF+tmoL._SL1500_.jpg",
         link: "https://amzn.to/4d5tdoQ",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Victoria's Secret",
         rating: 4.7,
         reviews: "2.1K",
       },
       {
-        title: "CALVIN KLEIN – CK One – Eau de Toilette",
+        title: "CK One – Eau de Toilette",
         price: "$96.00",
         image: "https://m.media-amazon.com/images/I/71Vmxjf+8OL._SL1500_.jpg",
         link: "https://amzn.to/4vOKA4T",
-        category: "Perfume & Fragrance",
+        category: "UNISEX",
         brand: "Calvin Klein",
         rating: 4.7,
         reviews: "9.5K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled Absolu – Parfum Intense",
+        title: "Boss Bottled Absolu – Parfum Intense",
         price: "$158.00",
         image: "https://m.media-amazon.com/images/I/81tpKIzIOeL._SL1500_.jpg",
         link: "https://amzn.to/3QuMuHJ",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Hugo Boss",
         rating: 4.6,
         reviews: "1.8K",
       },
       {
-        title: "AZZARO – The Most Wanted – Eau de Parfum Intense",
+        title: "The Most Wanted – Eau de Parfum Intense",
         price: "$135.00",
         image: "https://m.media-amazon.com/images/I/71+1dLBBmxL._SL1500_.jpg",
         link: "https://amzn.to/4e7ktzN",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.6,
         reviews: "12.8K",
       },
       {
-        title: "AZZARO – Chrome – Eau de Toilette",
+        title: "Chrome – Eau de Toilette",
         price: "$110.00",
         image: "https://m.media-amazon.com/images/I/71Os1EW6DkL._SL1500_.jpg",
         link: "https://amzn.to/4sQfBCR",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.6,
         reviews: "12.2K",
       },
       {
-        title: "AZZARO – Wanted – Eau de Parfum",
+        title: "Wanted – Eau de Parfum",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/91XerFnkBCL._SL1500_.jpg",
         link: "https://amzn.to/3QtkkwK",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.6,
         reviews: "1.4K",
       },
       {
-        title: "AZZARO – Pour Homme – Eau de Toilette",
+        title: "Pour Homme – Eau de Toilette",
         price: "$128.57",
         image: "https://m.media-amazon.com/images/I/81qCc7tukaL._SL1500_.jpg",
         link: "https://amzn.to/4u5jcOd",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.4,
         reviews: "3.1K",
       },
       {
-        title: "AZZARO – Chrome – Eau de Parfum",
+        title: "Chrome – Eau de Parfum",
         price: "$120.00",
         image: "https://m.media-amazon.com/images/I/81WqkN9pC4L._SL1500_.jpg",
         link: "https://amzn.to/4cK0qVs",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Azzaro",
         rating: 4.6,
         reviews: "1.1K",
       },
       {
-        title: "CALVIN KLEIN – Eternity Aqua – Eau de Toilette",
+        title: "Eternity Aqua – Eau de Toilette",
         price: "$113.00",
         image: "https://m.media-amazon.com/images/I/71EX5QXrj3L._SL1500_.jpg",
         link: "https://amzn.to/4cPyMqn",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Calvin Klein",
         rating: 4.6,
         reviews: "1.2K",
       },
       {
-        title: "CALVIN KLEIN – Obsession for Men – Eau de Toilette",
+        title: "Obsession for Men – Eau de Toilette",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/61uu6En9PcL._SL1500_.jpg",
         link: "https://amzn.to/4uc9j1u",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Calvin Klein",
         rating: 4.7,
         reviews: "1.7K",
       },
       {
-        title: "ARMANI BEAUTY – Stronger With You Intensely – Eau de Parfum",
+        title: "Stronger With You Intensely – Eau de Parfum",
         price: "$110.50",
         image: "https://m.media-amazon.com/images/I/7154fxHDaML._SL1500_.jpg",
         link: "https://amzn.to/4cuGwPD",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Armani",
         rating: 4.7,
         reviews: "1.7K",
       },
       {
-        title: "CALVIN KLEIN – Eternity – Eau de Parfum",
+        title: "Eternity – Eau de Parfum",
         price: "$119.00",
         image: "https://m.media-amazon.com/images/I/91kcZfoFM6L._SL1500_.jpg",
         link: "https://amzn.to/3QwczGj",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Calvin Klein",
         rating: 4.5,
         reviews: "2K",
       },
       {
-        title: "CALVIN KLEIN – Eternity Aqua – Eau de Toilette (Alternate)",
-        price: "$113.00",
-        image: "https://m.media-amazon.com/images/I/411y-DJM6ML.jpg",
-        link: "https://amzn.to/3OrK8c2",
-        category: "Perfume & Fragrance",
-        brand: "Calvin Klein",
-        rating: 4.6,
-        reviews: "1.2K",
-      },
-      {
-        title: "CALVIN KLEIN – Defy – Eau de Toilette",
+        title: "Defy – Eau de Toilette",
         price: "$117.00",
         image: "https://m.media-amazon.com/images/I/81MYSJbFF3L._SL1500_.jpg",
         link: "https://amzn.to/4mPh1vG",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Calvin Klein",
         rating: 4.7,
         reviews: "1.3K",
       },
       {
-        title: "CLINIQUE – Happy For Men – Eau de Toilette",
+        title: "Happy For Men – Eau de Toilette",
         price: "$100.00",
         image: "https://m.media-amazon.com/images/I/71Ei3Pv-PCL._SL1500_.jpg",
         link: "https://amzn.to/48GuuR1",
-        category: "Perfume & Fragrance",
+        category: "For Men",
         brand: "Clinique",
         rating: 4.7,
         reviews: "6.4K",
@@ -1013,20 +1152,10 @@
     let activeCategory = 'All';
     let activeBrand = 'All';
     let activeSort = 'default';
-    let searchQuery = '';
 
-    // Empty template categories
-    const baseCategories = [
-      "Perfume & Fragrance", 
-      "Clothes Women", 
-      "Clothes Men", 
-      "Toys", 
-      "Beauty", 
-      "Skincare", 
-      "Make up"
-    ];
-
-    const uniqueCategories = ['All', ...new Set([...baseCategories, ...products.map(p => p.category)])];
+    // Categories
+    const baseCategories = ["For Men", "For Women", "UNISEX"];
+    const uniqueCategories = ['All', ...baseCategories];
 
     // Helper function to render star icons
     function renderStars(rating) {
@@ -1040,13 +1169,13 @@
       return html;
     }
 
-    // Helper to turn price string (e.g. "$125.00") into a real number (125.00)
+    // Parse Price
     function parsePrice(priceStr) {
       if (!priceStr) return 0;
       return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
     }
 
-    // Helper to turn review string (e.g. "34K", "148.6K", "435") into a real number
+    // Parse Reviews
     function parseReviews(reviewStr) {
       if (!reviewStr || reviewStr === "-") return 0;
       let str = String(reviewStr).toUpperCase();
@@ -1059,6 +1188,63 @@
       return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
     }
 
+    // Generates a single product card HTML
+    function createProductCard(p, i, isBestSeller = false) {
+      // Special badge for best sellers
+      let badgeHtml = '';
+      if (isBestSeller) {
+        badgeHtml = `<span class="badge gold">#${i + 1} Best Seller</span>`;
+      }
+
+      const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
+      const reviewText = typeof p.reviews === 'number' ? p.reviews.toLocaleString() : p.reviews;
+      const reviewsHtml = (p.reviews && p.reviews !== "-") ? `<span class="rating-count">(${reviewText})</span>` : '';
+
+      return `
+        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.05}s">
+          <div class="product-image-wrap">
+            ${badgeHtml}
+            <img src="${p.image}" alt="${p.title}" loading="lazy">
+          </div>
+          <div class="product-info">
+            <div class="product-category">${p.brand}</div>
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">${p.price} ${oldPriceHtml}</div>
+            <div class="product-rating">
+              <span class="stars">${renderStars(p.rating)}</span>
+              ${reviewsHtml}
+            </div>
+            <span class="amazon-btn">
+              Shop Now
+            </span>
+          </div>
+        </a>
+      `;
+    }
+
+    // Carousel Scroll Logic
+    function scrollCarousel(direction) {
+      const track = document.getElementById('bestSellersTrack');
+      const scrollAmount = 320; // Approximately card width + gap
+      if (direction === 'left') {
+        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+
+    // Render Best Sellers (Top 10 most reviewed)
+    function renderBestSellers() {
+      const bestSellersGrid = document.getElementById('bestSellersTrack');
+      // Copy array and sort by reviews descending
+      const sortedByReviews = [...products].sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
+      // Take top 10
+      const topProducts = sortedByReviews.slice(0, 10);
+
+      bestSellersGrid.innerHTML = topProducts.map((p, i) => createProductCard(p, i, true)).join('');
+    }
+
+    // Render Categories
     function renderCategories() {
       const container = document.getElementById('categories');
       container.innerHTML = uniqueCategories.map(cat =>
@@ -1066,13 +1252,16 @@
       ).join('');
     }
 
+    // Render Brands as Pills
     function renderBrands() {
-      const brandSelect = document.getElementById('brandSelect');
-      const uniqueBrands = ['All', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
+      const brandContainer = document.getElementById('brandPills');
+      const uniqueBrands = ['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
-      brandSelect.innerHTML = uniqueBrands.map(brand => 
-        `<option value="${brand}">${brand === 'All' ? 'All Brands' : brand}</option>`
-      ).join('');
+      brandContainer.innerHTML = uniqueBrands.map(brand => {
+        const val = brand === 'All Brands' ? 'All' : brand;
+        const isActive = activeBrand === val ? 'active' : '';
+        return `<button class="brand-pill ${isActive}" onclick="filterBrand('${val}')">${brand}</button>`;
+      }).join('');
     }
 
     function filterCategory(cat) {
@@ -1081,22 +1270,18 @@
       renderProducts();
     }
 
-    // Event Listeners for Filters
-    document.getElementById('brandSelect').addEventListener('change', (e) => {
-      activeBrand = e.target.value;
+    function filterBrand(brand) {
+      activeBrand = brand;
+      renderBrands();
       renderProducts();
-    });
+    }
 
     document.getElementById('sortSelect').addEventListener('change', (e) => {
       activeSort = e.target.value;
       renderProducts();
     });
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      searchQuery = e.target.value.trim();
-      renderProducts();
-    });
-
+    // Render Main Product Grid
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const noResults = document.getElementById('noResults');
@@ -1105,12 +1290,7 @@
       let filtered = products.filter(p => {
         const matchCat = activeCategory === 'All' || p.category === activeCategory;
         const matchBrand = activeBrand === 'All' || p.brand === activeBrand;
-        const matchSearch = !searchQuery ||
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (p.brand && p.brand.toLowerCase().includes(searchQuery.toLowerCase()));
-          
-        return matchCat && matchBrand && matchSearch;
+        return matchCat && matchBrand;
       });
 
       // 2. SORT
@@ -1130,39 +1310,11 @@
       }
 
       noResults.style.display = 'none';
-
-      grid.innerHTML = filtered.map((p, i) => {
-        const badgeClass = p.badgeColor ? `badge ${p.badgeColor}` : 'badge';
-        const badgeHtml = p.badge ? `<span class="${badgeClass}">${p.badge}</span>` : '';
-        const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
-        
-        const reviewText = typeof p.reviews === 'number' ? p.reviews.toLocaleString() : p.reviews;
-        const reviewsHtml = (p.reviews && p.reviews !== "-") ? `<span class="rating-count">(${reviewText})</span>` : '';
-
-        return `
-          <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.03}s">
-            <div class="product-image-wrap">
-              ${badgeHtml}
-              <img src="${p.image}" alt="${p.title}" loading="lazy">
-            </div>
-            <div class="product-info">
-              <div class="product-category">${p.brand ? p.brand : p.category}</div>
-              <div class="product-title">${p.title}</div>
-              <div class="product-price">${p.price} ${oldPriceHtml}</div>
-              <div class="product-rating">
-                <span class="stars">${renderStars(p.rating)}</span>
-                ${reviewsHtml}
-              </div>
-              <span class="amazon-btn">
-                View on Amazon
-              </span>
-            </div>
-          </a>
-        `;
-      }).join('');
+      grid.innerHTML = filtered.map((p, i) => createProductCard(p, i, false)).join('');
     }
 
     // Initialize Page
+    renderBestSellers();
     renderCategories();
     renderBrands();
     renderProducts();
