@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyStore - Amazon Products</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>MyStore - Luxury Fragrances & Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --amazon-orange: #FF9900;
-      --amazon-dark: #131921;
-      --amazon-blue: #232F3E;
-      --text-dark: #0F1111;
-      --text-gray: #565959;
-      --bg-light: #f3f4f6;
+      /* Elegant Color Palette */
+      --primary-dark: #111111;
+      --primary-light: #222222;
+      --accent-gold: #C19A6B;
+      --accent-gold-hover: #A67C52;
+      --bg-color: #F8F9FA;
       --white: #ffffff;
-      --border: #e5e7eb;
-      --green: #007600;
-      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --text-main: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --border-color: #E2E2E2;
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.03);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
     }
 
     * {
@@ -27,21 +28,22 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.5;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Header */
     .header {
-      background: var(--amazon-dark);
-      color: white;
-      padding: 1rem 0;
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 1.25rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-bottom: 3px solid var(--accent-gold);
     }
 
     .header-inner {
@@ -52,162 +54,195 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      letter-spacing: 0.5px;
     }
 
-    .logo span {
-      color: var(--amazon-orange);
+    .logo a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .logo a:hover {
+      color: var(--accent-gold);
     }
 
     .search-box {
       flex: 1;
-      max-width: 500px;
+      max-width: 600px;
       position: relative;
     }
 
     .search-box input {
       width: 100%;
-      padding: 0.75rem 1rem 0.75rem 2.75rem;
-      border: none;
-      border-radius: 8px;
+      padding: 0.85rem 1rem 0.85rem 3rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
       font-size: 0.95rem;
-      background: white;
-      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
       outline: none;
-      transition: box-shadow 0.2s;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input::placeholder {
+      color: #999;
     }
 
     .search-box input:focus {
-      box-shadow: 0 0 0 3px rgba(255,153,0,0.3);
+      background: var(--white);
+      color: var(--text-main);
+      border-color: var(--accent-gold);
     }
 
     .search-icon {
       position: absolute;
-      left: 1rem;
+      left: 1.2rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-gray);
+      color: #999;
       font-size: 1rem;
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, var(--amazon-blue) 0%, var(--amazon-dark) 100%);
-      color: white;
-      padding: 3rem 1.5rem;
+      background: var(--white);
+      padding: 4rem 1.5rem;
       text-align: center;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .hero h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.75rem;
     }
 
     .hero p {
       font-size: 1.1rem;
-      opacity: 0.9;
+      color: var(--text-muted);
       max-width: 600px;
       margin: 0 auto;
+      font-weight: 300;
     }
 
-    /* Categories & Filters */
+    /* Controls: Categories & Filters */
+    .controls-container {
+      background: var(--white);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
     .categories {
       max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem 0.5rem;
+      margin: 0 auto 1.5rem;
       display: flex;
-      gap: 0.5rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .cat-btn {
-      padding: 0.5rem 1.25rem;
-      border: 2px solid var(--border);
-      background: white;
-      border-radius: 9999px;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border-color);
+      background: var(--white);
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      color: var(--text-gray);
-      transition: all 0.2s;
-      font-family: inherit;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .cat-btn:hover {
-      border-color: var(--amazon-orange);
-      color: var(--amazon-orange);
+      border-color: var(--primary-dark);
+      color: var(--primary-dark);
     }
 
     .cat-btn.active {
-      background: var(--amazon-orange);
-      border-color: var(--amazon-orange);
-      color: white;
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: var(--white);
     }
 
     .filters-bar {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0.5rem 1.5rem 1.5rem;
       display: flex;
       justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .filter-group {
+      display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
-    .brand-select {
-      padding: 0.5rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      background: white;
-      cursor: pointer;
-      outline: none;
-      font-family: inherit;
-      font-weight: 500;
-      transition: border-color 0.2s;
-    }
-
-    .brand-select:focus {
-      border-color: var(--amazon-orange);
-    }
-
     .filter-label {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--text-gray);
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .elegant-select {
+      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1rem center;
+      appearance: none;
+      cursor: pointer;
+      font-family: inherit;
+      min-width: 200px;
+      transition: border-color 0.3s;
+    }
+
+    .elegant-select:focus {
+      border-color: var(--accent-gold);
+      outline: none;
     }
 
     /* Product Grid */
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 1.5rem 3rem;
+      padding: 0 1.5rem 4rem;
     }
 
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     /* Product Card */
     .product-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      transition: all 0.4s ease;
       cursor: pointer;
       position: relative;
       display: flex;
@@ -218,55 +253,52 @@
     }
 
     .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-gold);
     }
 
     .product-image-wrap {
       position: relative;
-      padding: 1.5rem;
-      background: #fafafa;
+      padding: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 240px;
+      min-height: 280px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .product-image-wrap img {
       max-width: 100%;
-      max-height: 200px;
+      max-height: 220px;
       object-fit: contain;
-      transition: transform 0.3s;
+      transition: transform 0.5s ease;
     }
 
     .product-card:hover .product-image-wrap img {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      background: var(--amazon-orange);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.3rem 0.7rem;
-      border-radius: 6px;
+      top: 15px;
+      left: 15px;
+      background: var(--primary-dark);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
-    .badge.green {
-      background: var(--green);
-    }
-
-    .badge.red {
-      background: #B12704;
+    .badge.gold {
+      background: var(--accent-gold);
     }
 
     .product-info {
-      padding: 1.25rem;
+      padding: 1.5rem;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -274,19 +306,20 @@
 
     .product-category {
       font-size: 0.75rem;
-      color: var(--amazon-orange);
+      color: var(--text-muted);
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.4rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
     }
 
     .product-title {
-      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
       font-weight: 600;
-      color: var(--text-dark);
+      color: var(--text-main);
       line-height: 1.4;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -294,98 +327,99 @@
     }
 
     .product-price {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.75rem;
     }
 
     .product-price .old {
       font-size: 0.9rem;
-      color: var(--text-gray);
+      color: #999;
       text-decoration: line-through;
-      font-weight: 500;
+      font-weight: 400;
       margin-left: 0.5rem;
     }
 
     .product-rating {
       display: flex;
       align-items: center;
-      gap: 0.3rem;
-      margin-bottom: 0.75rem;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
     }
 
     .stars {
-      color: var(--amazon-orange);
-      font-size: 0.9rem;
+      color: var(--accent-gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
     }
 
     .rating-count {
       font-size: 0.8rem;
-      color: var(--text-gray);
+      color: var(--text-muted);
     }
 
     .amazon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      background: var(--amazon-orange);
-      color: white;
-      font-weight: 600;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
+      background: var(--primary-dark);
+      color: var(--white);
+      font-weight: 500;
+      padding: 0.85rem 1rem;
       text-decoration: none;
       font-size: 0.9rem;
-      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
       margin-top: auto;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      border: 1px solid var(--primary-dark);
     }
 
-    .amazon-btn:hover {
-      background: #e88a00;
-      transform: scale(1.02);
+    .product-card:hover .amazon-btn {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
     }
 
     /* No Results */
     .no-results {
       text-align: center;
-      padding: 4rem 1rem;
-      color: var(--text-gray);
+      padding: 5rem 1rem;
+      color: var(--text-muted);
     }
 
     .no-results h3 {
-      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
       margin-bottom: 0.5rem;
-      color: var(--text-dark);
+      color: var(--text-main);
     }
 
     /* Footer */
     .footer {
-      background: var(--amazon-dark);
-      color: white;
+      background: var(--primary-dark);
+      color: #999;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       font-size: 0.85rem;
-      opacity: 0.8;
     }
 
     .footer a {
-      color: var(--amazon-orange);
+      color: var(--white);
       text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
     }
     
     .footer a:hover {
-      text-decoration: underline;
+      color: var(--accent-gold);
     }
 
     /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
       }
       to {
         opacity: 1;
@@ -394,42 +428,27 @@
     }
 
     .product-card {
-      animation: fadeInUp 0.5s ease forwards;
+      animation: fadeInUp 0.6s ease backwards;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
       .hero h1 {
-        font-size: 1.6rem;
+        font-size: 2rem;
       }
-
       .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.25rem;
       }
-
-      .product-image-wrap {
-        min-height: 180px;
-        padding: 1rem;
-      }
-
-      .product-image-wrap img {
-        max-height: 150px;
-      }
-
-      .header-inner {
+      .filters-bar {
         flex-direction: column;
+        align-items: stretch;
       }
-
-      .search-box {
-        max-width: 100%;
+      .elegant-select {
         width: 100%;
       }
-    }
-
-    @media (max-width: 480px) {
-      .products-grid {
-        grid-template-columns: 1fr;
+      .search-box {
+        max-width: 100%;
       }
     }
   </style>
@@ -440,44 +459,59 @@
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        🛒 <a href="https://heyadora1906.github.io/Tienda.github.io/" style="color: inherit; text-decoration: none;">MyStore</a>
+        <a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a>
       </div>
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search products...">
+        <input type="text" id="searchInput" placeholder="Search for luxury fragrances...">
       </div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>The Best Products</h1>
-    <p>Discover handpicked products with the best prices on Amazon</p>
+    <h1>Luxury Collection</h1>
+    <p>Discover our handpicked selection of premium fragrances and elegant products.</p>
   </section>
 
-  <!-- CATEGORIES -->
-  <div class="categories" id="categories"></div>
-  
-  <!-- BRAND FILTER -->
-  <div class="filters-bar">
-    <span class="filter-label">Filter by Brand:</span>
-    <select id="brandSelect" class="brand-select"></select>
+  <!-- CONTROLS (Categories + Filters) -->
+  <div class="controls-container">
+    <div class="categories" id="categories"></div>
+    
+    <div class="filters-bar">
+      <!-- Brand Filter -->
+      <div class="filter-group">
+        <span class="filter-label">Brand:</span>
+        <select id="brandSelect" class="elegant-select"></select>
+      </div>
+
+      <!-- Sort Filter -->
+      <div class="filter-group">
+        <span class="filter-label">Sort By:</span>
+        <select id="sortSelect" class="elegant-select">
+          <option value="default">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="reviews">Most Reviewed</option>
+        </select>
+      </div>
+    </div>
   </div>
 
   <!-- PRODUCTS -->
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
-      <h3>😕 No products found</h3>
-      <p>Try another search, category, or brand</p>
+      <h3>No Products Found</h3>
+      <p>Try adjusting your filters or search query.</p>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p><a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a> — Handpicked products with ❤️</p>
+    <p><a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a> — Curated with elegance.</p>
     <p style="margin-top:0.5rem; font-size:0.75rem;">
-      As an Amazon Associate, I earn from qualifying purchases.
+      As an Amazon Associate, we earn from qualifying purchases.
     </p>
   </footer>
 
@@ -496,7 +530,6 @@
         rating: 4.5,
         reviews: "34K",
         badge: "Best Seller",
-        badgeColor: ""
       },
       {
         title: "Armani Beauty – Acqua di Giò Profondo – Parfum",
@@ -547,8 +580,8 @@
         brand: "Rabanne",
         rating: 4.8,
         reviews: "989K",
-        badge: "Top",
-        badgeColor: "green"
+        badge: "Top Rated",
+        badgeColor: "gold"
       },
       {
         title: "Banderas The Icon Eau de Toilette",
@@ -671,7 +704,7 @@
         reviews: "17.1K",
       },
       {
-        title: "Odyssey Mandarinsky (Mandarin Sky) – Eau de Parfum ",
+        title: "Odyssey Mandarinsky (Mandarin Sky) – Eau de Parfum",
         price: "$43.00",
         image: "https://m.media-amazon.com/images/I/51ecNhUmgeL._SL1000_.jpg",
         link: "https://amzn.to/4u8jdBg",
@@ -701,7 +734,7 @@
         reviews: "148.6K",
       },
       {
-        title: "ISSEY MIYAKE – L’Eau d’Issey Pour Homme – Eau de Toilette ",
+        title: "ISSEY MIYAKE – L’Eau d’Issey Pour Homme – Eau de Toilette",
         price: "$130.00",
         image: "https://m.media-amazon.com/images/I/71Ia8Ru4-rL._SL1500_.jpg",
         link: "https://amzn.to/4dXCznI",
@@ -711,7 +744,7 @@
         reviews: "19.2K",
       },
       {
-        title: "HUGO BOSS – The Scent – Eau de Toilette ",
+        title: "HUGO BOSS – The Scent – Eau de Toilette",
         price: "$127.00",
         image: "https://m.media-amazon.com/images/I/81gSlapRdGL._SL1500_.jpg",
         link: "https://amzn.to/493mtFD",
@@ -721,7 +754,7 @@
         reviews: "6.3K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled – Eau de Toilette ",
+        title: "HUGO BOSS – Boss Bottled – Eau de Toilette",
         price: "$127.00",
         image: "https://m.media-amazon.com/images/I/81sDpjQtzQL._SL1500_.jpg",
         link: "https://amzn.to/4tmwcPy",
@@ -731,7 +764,7 @@
         reviews: "18.2K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled Infinite – Eau de Parfum ",
+        title: "HUGO BOSS – Boss Bottled Infinite – Eau de Parfum",
         price: "$139.00",
         image: "https://m.media-amazon.com/images/I/61hgdiBPCJL._SL1500_.jpg",
         link: "https://amzn.to/4t08hVm",
@@ -781,7 +814,7 @@
         reviews: "3.5K",
       },
       {
-        title: "HUGO BOSS – Boss Bottled – Eau de Toilette ",
+        title: "HUGO BOSS – Boss Bottled – Eau de Toilette",
         price: "$30.00",
         image: "https://m.media-amazon.com/images/I/51gwm+jeVsL._SL1500_.jpg",
         link: "https://amzn.to/4d49LIf",
@@ -789,6 +822,187 @@
         brand: "Hugo Boss",
         rating: 4.3,
         reviews: "4.6K",
+      },
+      // --- NEWLY ADDED PRODUCTS ---
+      {
+        title: "LACOSTE – Essential – Eau de Toilette",
+        price: "$87.00",
+        image: "https://m.media-amazon.com/images/I/91hZ8entmrL._SL1500_.jpg",
+        link: "https://amzn.to/4mS6251",
+        category: "Perfume & Fragrance",
+        brand: "Lacoste",
+        rating: 4.7,
+        reviews: "5.9K",
+      },
+      {
+        title: "LACOSTE – L.12.12 Noir – Eau de Toilette",
+        price: "$96.00",
+        image: "https://m.media-amazon.com/images/I/81NtIVGuCVL._SL1500_.jpg",
+        link: "https://amzn.to/42rEtWu",
+        category: "Perfume & Fragrance",
+        brand: "Lacoste",
+        rating: 4.6,
+        reviews: "1.4K",
+      },
+      {
+        title: "LACOSTE – L.12.12 Blanc – Eau de Toilette",
+        price: "$126.00",
+        image: "https://m.media-amazon.com/images/I/81KaHrrH+jL._SL1500_.jpg",
+        link: "https://amzn.to/4987kmt",
+        category: "Perfume & Fragrance",
+        brand: "Lacoste",
+        rating: 0,
+        reviews: "-",
+      },
+      {
+        title: "VICTORIA’S SECRET – VS Him Platinum – Eau de Parfum",
+        price: "$79.95",
+        image: "https://m.media-amazon.com/images/I/71XwiF+tmoL._SL1500_.jpg",
+        link: "https://amzn.to/4d5tdoQ",
+        category: "Perfume & Fragrance",
+        brand: "Victoria's Secret",
+        rating: 4.7,
+        reviews: "2.1K",
+      },
+      {
+        title: "CALVIN KLEIN – CK One – Eau de Toilette",
+        price: "$96.00",
+        image: "https://m.media-amazon.com/images/I/71Vmxjf+8OL._SL1500_.jpg",
+        link: "https://amzn.to/4vOKA4T",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.7,
+        reviews: "9.5K",
+      },
+      {
+        title: "HUGO BOSS – Boss Bottled Absolu – Parfum Intense",
+        price: "$158.00",
+        image: "https://m.media-amazon.com/images/I/81tpKIzIOeL._SL1500_.jpg",
+        link: "https://amzn.to/3QuMuHJ",
+        category: "Perfume & Fragrance",
+        brand: "Hugo Boss",
+        rating: 4.6,
+        reviews: "1.8K",
+      },
+      {
+        title: "AZZARO – The Most Wanted – Eau de Parfum Intense",
+        price: "$135.00",
+        image: "https://m.media-amazon.com/images/I/71+1dLBBmxL._SL1500_.jpg",
+        link: "https://amzn.to/4e7ktzN",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.6,
+        reviews: "12.8K",
+      },
+      {
+        title: "AZZARO – Chrome – Eau de Toilette",
+        price: "$110.00",
+        image: "https://m.media-amazon.com/images/I/71Os1EW6DkL._SL1500_.jpg",
+        link: "https://amzn.to/4sQfBCR",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.6,
+        reviews: "12.2K",
+      },
+      {
+        title: "AZZARO – Wanted – Eau de Parfum",
+        price: "$130.00",
+        image: "https://m.media-amazon.com/images/I/91XerFnkBCL._SL1500_.jpg",
+        link: "https://amzn.to/3QtkkwK",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.6,
+        reviews: "1.4K",
+      },
+      {
+        title: "AZZARO – Pour Homme – Eau de Toilette",
+        price: "$128.57",
+        image: "https://m.media-amazon.com/images/I/81qCc7tukaL._SL1500_.jpg",
+        link: "https://amzn.to/4u5jcOd",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.4,
+        reviews: "3.1K",
+      },
+      {
+        title: "AZZARO – Chrome – Eau de Parfum",
+        price: "$120.00",
+        image: "https://m.media-amazon.com/images/I/81WqkN9pC4L._SL1500_.jpg",
+        link: "https://amzn.to/4cK0qVs",
+        category: "Perfume & Fragrance",
+        brand: "Azzaro",
+        rating: 4.6,
+        reviews: "1.1K",
+      },
+      {
+        title: "CALVIN KLEIN – Eternity Aqua – Eau de Toilette",
+        price: "$113.00",
+        image: "https://m.media-amazon.com/images/I/71EX5QXrj3L._SL1500_.jpg",
+        link: "https://amzn.to/4cPyMqn",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.6,
+        reviews: "1.2K",
+      },
+      {
+        title: "CALVIN KLEIN – Obsession for Men – Eau de Toilette",
+        price: "$130.00",
+        image: "https://m.media-amazon.com/images/I/61uu6En9PcL._SL1500_.jpg",
+        link: "https://amzn.to/4uc9j1u",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.7,
+        reviews: "1.7K",
+      },
+      {
+        title: "ARMANI BEAUTY – Stronger With You Intensely – Eau de Parfum",
+        price: "$110.50",
+        image: "https://m.media-amazon.com/images/I/7154fxHDaML._SL1500_.jpg",
+        link: "https://amzn.to/4cuGwPD",
+        category: "Perfume & Fragrance",
+        brand: "Armani",
+        rating: 4.7,
+        reviews: "1.7K",
+      },
+      {
+        title: "CALVIN KLEIN – Eternity – Eau de Parfum",
+        price: "$119.00",
+        image: "https://m.media-amazon.com/images/I/91kcZfoFM6L._SL1500_.jpg",
+        link: "https://amzn.to/3QwczGj",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.5,
+        reviews: "2K",
+      },
+      {
+        title: "CALVIN KLEIN – Eternity Aqua – Eau de Toilette (Alternate)",
+        price: "$113.00",
+        image: "https://m.media-amazon.com/images/I/411y-DJM6ML.jpg",
+        link: "https://amzn.to/3OrK8c2",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.6,
+        reviews: "1.2K",
+      },
+      {
+        title: "CALVIN KLEIN – Defy – Eau de Toilette",
+        price: "$117.00",
+        image: "https://m.media-amazon.com/images/I/81MYSJbFF3L._SL1500_.jpg",
+        link: "https://amzn.to/4mPh1vG",
+        category: "Perfume & Fragrance",
+        brand: "Calvin Klein",
+        rating: 4.7,
+        reviews: "1.3K",
+      },
+      {
+        title: "CLINIQUE – Happy For Men – Eau de Toilette",
+        price: "$100.00",
+        image: "https://m.media-amazon.com/images/I/71Ei3Pv-PCL._SL1500_.jpg",
+        link: "https://amzn.to/48GuuR1",
+        category: "Perfume & Fragrance",
+        brand: "Clinique",
+        rating: 4.7,
+        reviews: "6.4K",
       }
     ];
 
@@ -798,9 +1012,10 @@
 
     let activeCategory = 'All';
     let activeBrand = 'All';
+    let activeSort = 'default';
     let searchQuery = '';
 
-    // Hardcoded categories to always show
+    // Empty template categories
     const baseCategories = [
       "Perfume & Fragrance", 
       "Clothes Women", 
@@ -813,7 +1028,9 @@
 
     const uniqueCategories = ['All', ...new Set([...baseCategories, ...products.map(p => p.category)])];
 
+    // Helper function to render star icons
     function renderStars(rating) {
+      if (!rating || rating === 0) return '☆☆☆☆☆';
       const full = Math.floor(rating);
       const half = rating % 1 >= 0.5;
       let html = '';
@@ -821,6 +1038,25 @@
       if (half) html += '½';
       for (let i = full + (half ? 1 : 0); i < 5; i++) html += '☆';
       return html;
+    }
+
+    // Helper to turn price string (e.g. "$125.00") into a real number (125.00)
+    function parsePrice(priceStr) {
+      if (!priceStr) return 0;
+      return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+    }
+
+    // Helper to turn review string (e.g. "34K", "148.6K", "435") into a real number
+    function parseReviews(reviewStr) {
+      if (!reviewStr || reviewStr === "-") return 0;
+      let str = String(reviewStr).toUpperCase();
+      if (str.includes('K')) {
+        return parseFloat(str.replace('K', '')) * 1000;
+      }
+      if (str.includes('M')) {
+        return parseFloat(str.replace('M', '')) * 1000000;
+      }
+      return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
     }
 
     function renderCategories() {
@@ -832,7 +1068,6 @@
 
     function renderBrands() {
       const brandSelect = document.getElementById('brandSelect');
-      // Get unique brands and sort them alphabetically
       const uniqueBrands = ['All', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
       brandSelect.innerHTML = uniqueBrands.map(brand => 
@@ -846,9 +1081,19 @@
       renderProducts();
     }
 
-    // Brand Selection Event
+    // Event Listeners for Filters
     document.getElementById('brandSelect').addEventListener('change', (e) => {
       activeBrand = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', (e) => {
+      activeSort = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
       renderProducts();
     });
 
@@ -856,7 +1101,8 @@
       const grid = document.getElementById('productsGrid');
       const noResults = document.getElementById('noResults');
 
-      const filtered = products.filter(p => {
+      // 1. FILTER
+      let filtered = products.filter(p => {
         const matchCat = activeCategory === 'All' || p.category === activeCategory;
         const matchBrand = activeBrand === 'All' || p.brand === activeBrand;
         const matchSearch = !searchQuery ||
@@ -867,6 +1113,16 @@
         return matchCat && matchBrand && matchSearch;
       });
 
+      // 2. SORT
+      if (activeSort === 'price-low') {
+        filtered.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+      } else if (activeSort === 'price-high') {
+        filtered.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+      } else if (activeSort === 'reviews') {
+        filtered.sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
+      }
+
+      // 3. RENDER
       if (filtered.length === 0) {
         grid.innerHTML = '';
         noResults.style.display = 'block';
@@ -876,14 +1132,15 @@
       noResults.style.display = 'none';
 
       grid.innerHTML = filtered.map((p, i) => {
-        const badgeHtml = p.badge ? `<span class="badge ${p.badgeColor}">${p.badge}</span>` : '';
+        const badgeClass = p.badgeColor ? `badge ${p.badgeColor}` : 'badge';
+        const badgeHtml = p.badge ? `<span class="${badgeClass}">${p.badge}</span>` : '';
         const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
         
         const reviewText = typeof p.reviews === 'number' ? p.reviews.toLocaleString() : p.reviews;
-        const reviewsHtml = p.reviews ? `<span class="rating-count">(${reviewText})</span>` : '';
+        const reviewsHtml = (p.reviews && p.reviews !== "-") ? `<span class="rating-count">(${reviewText})</span>` : '';
 
         return `
-          <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.05}s">
+          <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="product-card" style="animation-delay:${i * 0.03}s">
             <div class="product-image-wrap">
               ${badgeHtml}
               <img src="${p.image}" alt="${p.title}" loading="lazy">
@@ -897,7 +1154,7 @@
                 ${reviewsHtml}
               </div>
               <span class="amazon-btn">
-                🛒 View on Amazon
+                View on Amazon
               </span>
             </div>
           </a>
@@ -905,13 +1162,7 @@
       }).join('');
     }
 
-    // Search bar
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      searchQuery = e.target.value.trim();
-      renderProducts();
-    });
-
-    // Initialize
+    // Initialize Page
     renderCategories();
     renderBrands();
     renderProducts();
