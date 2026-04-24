@@ -33,7 +33,7 @@
       color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow: hidden; /* Prevent scrolling until region is selected */
+      overflow: hidden; 
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -91,7 +91,8 @@
       border: 1px solid #444;
       color: var(--white);
       padding: 1rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       font-family: inherit;
       cursor: pointer;
       display: flex;
@@ -99,6 +100,8 @@
       justify-content: center;
       gap: 0.5rem;
       transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .region-btn:hover {
@@ -122,7 +125,7 @@
       padding: 0.6rem 1rem;
       font-size: 0.85rem;
       font-weight: 600;
-      display: none; /* Hidden by default */
+      display: none; 
     }
 
     /* Header */
@@ -134,7 +137,6 @@
       top: 0;
       z-index: 100;
       border-bottom: 3px solid var(--accent-gold);
-      text-align: center;
     }
 
     .header-inner {
@@ -143,7 +145,8 @@
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 1.5rem;
     }
 
     .logo {
@@ -161,6 +164,52 @@
 
     .logo a:hover {
       color: var(--accent-gold);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Language Flags UI */
+    .lang-flags {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .flag-btn {
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0.5;
+    }
+
+    .flag-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .flag-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .flag-btn.active {
+      opacity: 1;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 8px rgba(193, 154, 107, 0.4);
     }
 
     /* Hero Section */
@@ -193,7 +242,7 @@
       padding: 4rem 0;
       color: var(--white);
       overflow: hidden;
-      display: none; /* Controlled by JS based on region */
+      display: none; 
     }
 
     .section-title {
@@ -276,6 +325,7 @@
     @media (max-width: 768px) {
       .carousel-btn { display: none; }
       .carousel-track .product-card { min-width: 260px; max-width: 260px; }
+      .header-inner { flex-direction: column; gap: 1rem; }
     }
 
     /* Controls: Categories & Filters */
@@ -284,7 +334,7 @@
       padding: 2rem 1.5rem;
       border-bottom: 1px solid var(--border-color);
       margin-bottom: 2rem;
-      display: none; /* Controlled by JS based on region */
+      display: none; 
     }
 
     .categories {
@@ -321,7 +371,6 @@
       color: var(--white);
     }
 
-    /* Elegant Brand Pills */
     .brands-wrapper {
       max-width: 1400px;
       margin: 0 auto 2rem;
@@ -371,7 +420,6 @@
       color: var(--white);
     }
 
-    /* Sort Control */
     .sort-wrapper {
       max-width: 1400px;
       margin: 0 auto;
@@ -741,19 +789,19 @@
   <!-- SPLASH SCREEN: REGION SELECTOR -->
   <div class="splash-screen" id="splashScreen">
     <div class="splash-content">
-      <h2 class="splash-title">Welcome to MyStore</h2>
-      <p class="splash-subtitle">Please select your shipping destination</p>
+      <h2 class="splash-title" data-i18n="splash_title">Welcome to MyStore</h2>
+      <p class="splash-subtitle" data-i18n="splash_subtitle">Please select your shipping destination</p>
       
       <div class="region-grid">
-        <button class="region-btn" onclick="enterStore('US')">🇺🇸 United States</button>
-        <button class="region-btn" onclick="enterStore('CA')">🇨🇦 Canada</button>
-        <button class="region-btn" onclick="enterStore('EU')">🇬🇧 United Kingdom</button>
-        <button class="region-btn" onclick="enterStore('EU')">🇪🇸 Spain</button>
-        <button class="region-btn" onclick="enterStore('EU')">🇮🇹 Italy</button>
-        <button class="region-btn" onclick="enterStore('EU')">🇫🇷 France</button>
+        <button class="region-btn" onclick="enterStore('US')">United States</button>
+        <button class="region-btn" onclick="enterStore('CA')">Canada</button>
+        <button class="region-btn" onclick="enterStore('UK')">United Kingdom</button>
+        <button class="region-btn" onclick="enterStore('ES')">Spain</button>
+        <button class="region-btn" onclick="enterStore('IT')">Italy</button>
+        <button class="region-btn" onclick="enterStore('FR')">France</button>
       </div>
 
-      <p class="splash-note">
+      <p class="splash-note" data-i18n="splash_note">
         <strong>Important:</strong> Store availability depends on your region. <br>
         Shoppers from Canada can use US links, but prices are displayed in USD.
       </p>
@@ -767,21 +815,25 @@
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        <a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a>
+        <a href="#" onclick="resetStore(event)">MyStore</a>
+      </div>
+      
+      <div class="header-controls">
+        <div id="langFlags" class="lang-flags" style="display:none;"></div>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Luxury Collection</h1>
-    <p>Discover our handpicked selection of premium fragrances and elegant products.</p>
+    <h1 data-i18n="hero_title">Luxury Collection</h1>
+    <p data-i18n="hero_sub">Discover our handpicked selection of premium fragrances and elegant products.</p>
   </section>
 
-  <!-- BEST SELLERS CAROUSEL SECTION (Controlled by JS) -->
+  <!-- BEST SELLERS CAROUSEL SECTION -->
   <section class="best-sellers-section" id="bestSellersSection">
-    <h2 class="section-title">Top 10 Highly Recommended</h2>
-    <p class="section-subtitle">Our most loved and reviewed fragrances by customers worldwide</p>
+    <h2 class="section-title" data-i18n="top5_title">Top 5 Highly Recommended</h2>
+    <p class="section-subtitle" data-i18n="top5_sub">Our most loved and reviewed fragrances by customers worldwide</p>
     
     <div class="carousel-wrapper">
       <button class="carousel-btn prev" onclick="scrollCarousel('left')">❮</button>
@@ -790,7 +842,7 @@
     </div>
   </section>
 
-  <!-- CONTROLS (Categories + Brands + Sort) (Controlled by JS) -->
+  <!-- CONTROLS (Categories + Brands + Sort) -->
   <div class="controls-container" id="controlsContainer">
     
     <!-- Categories -->
@@ -798,13 +850,13 @@
     
     <!-- Redesigned Brand Pills -->
     <div class="brands-wrapper">
-      <span class="brands-label">Filter by Design House</span>
+      <span class="brands-label" data-i18n="filter_brand">Filter by Design House</span>
       <div class="brands-row" id="brandPills"></div>
     </div>
     
     <!-- Sort Filter -->
     <div class="sort-wrapper">
-      <span class="brands-label" style="margin-bottom:0;">Sort By:</span>
+      <span class="brands-label" style="margin-bottom:0;" data-i18n="sort_by">Sort By:</span>
       <select id="sortSelect" class="elegant-select">
         <option value="default">Featured Collection</option>
         <option value="price-low">Price: Low to High</option>
@@ -826,7 +878,7 @@
   <!-- FOOTER & SOCIALS -->
   <footer class="footer">
     <div class="logo" style="margin-bottom: 1rem; font-size: 1.5rem;">
-      <a href="https://heyadora1906.github.io/Tienda.github.io/">MyStore</a>
+      <a href="#" onclick="resetStore(event)">MyStore</a>
     </div>
     
     <!-- Social Icons -->
@@ -839,22 +891,22 @@
       <a href="#" target="_blank" aria-label="Instagram">
         <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
       </a>
-      <!-- Pinterest (With Provided Link) -->
+      <!-- Pinterest -->
       <a href="https://pin.it/2cZXfuQWb" target="_blank" aria-label="Pinterest">
         <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256c0 105.57 65.41 195.12 159.27 236.42-2.15-19.53-4.08-49.56.85-70.83 4.45-19.22 28.71-121.73 28.71-121.73s-7.34-14.67-7.34-36.38c0-34.05 19.74-59.45 44.33-59.45 20.9 0 30.98 15.69 30.98 34.52 0 21.01-13.38 52.42-20.28 81.56-5.78 24.38 12.24 44.25 36.32 44.25 43.6 0 77.22-45.98 77.22-112.44 0-58.84-42.27-100-102.58-100-69.69 0-110.58 52.27-110.58 106.18 0 21.08 8.11 43.69 18.23 55.95 2 2.45 2.29 4.54 1.54 7.42-2.35 9.07-7.62 31.02-8.68 35.3-1.4 5.62-4.63 6.78-10.42 4.08-38.93-18.06-63.29-74.83-63.29-120.35 0-97.94 71.18-187.89 205.1-187.89 107.59 0 191.13 76.67 191.13 179.13 0 106.9-67.33 192.93-160.91 192.93-31.41 0-60.91-16.33-71.01-35.61 0 0-15.54 59.26-19.3 73.71-7.01 26.96-25.96 60.75-38.74 81.33 30.73 9.4 63.53 14.54 97.43 14.54 136.97 0 248-111.03 248-248S384.97 8 248 8z"/></svg>
       </a>
     </div>
 
     <!-- Change Region Button -->
-    <button class="change-region-btn" onclick="showSplashScreen()">🌍 Change Shipping Destination</button>
+    <button class="change-region-btn" onclick="showSplashScreen()" data-i18n="change_region">Change Shipping Destination</button>
 
-    <p style="font-size:0.8rem;">
+    <p style="font-size:0.8rem;" data-i18n="footer_text">
       As an Amazon Associate, we earn from qualifying purchases.
     </p>
 
     <!-- Web Designer Credit -->
     <div class="designer-credit">
-      Web Design by 
+      <span data-i18n="web_design">Web Design by</span>
       <a href="https://www.instagram.com/alcast1906?igsh=MTU5eXg5M2F3dW45cA%3D%3D&utm_source=qr" target="_blank" aria-label="Designer Instagram">
         <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
         alcast1906
@@ -864,77 +916,321 @@
 
   <script>
     // ═══════════════════════════════════════════════════════════════
-    //  GLOBAL STATE
+    //  GLOBAL STATE & TRANSLATIONS
     // ═══════════════════════════════════════════════════════════════
     let activeCategory = 'All';
     let activeBrand = 'All';
     let activeSort = 'default';
     let userRegion = 'US'; 
+    let currentLang = 'EN';
+
+    const translations = {
+      EN: {
+        splash_title: "Welcome to MyStore",
+        splash_subtitle: "Please select your shipping destination",
+        splash_note: "<strong>Important:</strong> Store availability depends on your region. <br>Shoppers from Canada can use US links, but prices are displayed in USD.",
+        hero_title: "Luxury Collection",
+        hero_sub: "Discover our handpicked selection of premium fragrances and elegant products.",
+        top5_title: "Top 5 Highly Recommended",
+        top5_sub: "Our most loved and reviewed fragrances by customers worldwide",
+        filter_brand: "Filter by Design House",
+        sort_by: "Sort By:",
+        sort_default: "Featured Collection",
+        sort_low: "Price: Low to High",
+        sort_high: "Price: High to Low",
+        sort_reviews: "Most Reviewed",
+        shop_now: "Shop Now",
+        coming_soon: "Coming Soon",
+        change_region: "Change Shipping Destination",
+        footer_text: "As an Amazon Associate, we earn from qualifying purchases.",
+        web_design: "Web Design by",
+        cat_all: "All",
+        cat_men: "For Men",
+        cat_women: "For Women",
+        cat_unisex: "UNISEX",
+        all_brands: "All Brands",
+        ca_banner: "<strong>Canadian Shoppers:</strong> The links provided redirect to the US store. Please note all prices shown are in USD.",
+        eu_banner: "<strong>European Shoppers:</strong> Our localized catalog is coming soon.",
+        eu_no_prod_title: "Collection Coming Soon",
+        eu_no_prod_sub: "We are currently curating the best luxury fragrances available in your local Amazon store. Please check back soon!",
+        no_prod_title: "No Products Found",
+        no_prod_sub: "Try adjusting your brand or category filters.",
+        best_seller_badge: "Best Seller"
+      },
+      ES: {
+        splash_title: "Bienvenido a MyStore",
+        splash_subtitle: "Por favor, seleccione su destino de envío",
+        splash_note: "<strong>Importante:</strong> La disponibilidad depende de su región. <br>Los compradores de Canadá pueden usar los enlaces de Estados Unidos, pero los precios están en USD.",
+        hero_title: "Colección de Lujo",
+        hero_sub: "Descubra nuestra selección de fragancias premium y productos elegantes.",
+        top5_title: "Top 5 Más Recomendados",
+        top5_sub: "Nuestras fragancias más valoradas por clientes de todo el mundo",
+        filter_brand: "Filtrar por Casa de Diseño",
+        sort_by: "Ordenar por:",
+        sort_default: "Colección Destacada",
+        sort_low: "Precio: Menor a Mayor",
+        sort_high: "Precio: Mayor a Menor",
+        sort_reviews: "Más Reseñas",
+        shop_now: "Comprar Ahora",
+        coming_soon: "Próximamente",
+        change_region: "Cambiar Destino de Envío",
+        footer_text: "Como Afiliado de Amazon, obtenemos ingresos por compras adscritas.",
+        web_design: "Diseño Web por",
+        cat_all: "Todos",
+        cat_men: "Para Hombre",
+        cat_women: "Para Mujer",
+        cat_unisex: "UNISEX",
+        all_brands: "Todas las Marcas",
+        ca_banner: "<strong>Compradores en Canadá:</strong> Los enlaces redirigen a la tienda de Estados Unidos. Todos los precios están en USD.",
+        eu_banner: "<strong>Compradores en Europa:</strong> Nuestro catálogo localizado estará disponible pronto.",
+        eu_no_prod_title: "Colección Próximamente",
+        eu_no_prod_sub: "Estamos seleccionando las mejores fragancias en su tienda local de Amazon. Vuelva pronto.",
+        no_prod_title: "No Se Encontraron Productos",
+        no_prod_sub: "Intente ajustar sus filtros de marca o categoría.",
+        best_seller_badge: "Más Vendido"
+      },
+      FR: {
+        splash_title: "Bienvenue sur MyStore",
+        splash_subtitle: "Veuillez sélectionner votre destination de livraison",
+        splash_note: "<strong>Important :</strong> La disponibilité dépend de votre région. <br>Les acheteurs canadiens peuvent utiliser les liens américains, mais les prix sont en USD.",
+        hero_title: "Collection de Luxe",
+        hero_sub: "Découvrez notre sélection de parfums premium et de produits élégants.",
+        top5_title: "Top 5 des Recommandations",
+        top5_sub: "Nos parfums les plus appréciés par les clients du monde entier",
+        filter_brand: "Filtrer par Maison",
+        sort_by: "Trier par :",
+        sort_default: "Collection Sélectionnée",
+        sort_low: "Prix : Croissant",
+        sort_high: "Prix : Décroissant",
+        sort_reviews: "Les Plus Évalués",
+        shop_now: "Acheter",
+        coming_soon: "Bientôt Disponible",
+        change_region: "Changer la Destination",
+        footer_text: "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats éligibles.",
+        web_design: "Création Web par",
+        cat_all: "Tous",
+        cat_men: "Pour Homme",
+        cat_women: "Pour Femme",
+        cat_unisex: "UNISEXE",
+        all_brands: "Toutes les Marques",
+        ca_banner: "<strong>Acheteurs Canadiens :</strong> Les liens redirigent vers la boutique américaine. Tous les prix sont en USD.",
+        eu_banner: "<strong>Acheteurs Européens :</strong> Notre catalogue localisé arrive bientôt.",
+        eu_no_prod_title: "Collection Bientôt Disponible",
+        eu_no_prod_sub: "Nous sélectionnons les meilleurs parfums pour votre boutique Amazon locale. Revenez bientôt !",
+        no_prod_title: "Aucun Produit Trouvé",
+        no_prod_sub: "Essayez d'ajuster vos filtres de marque ou de catégorie.",
+        best_seller_badge: "Meilleure Vente"
+      },
+      IT: {
+        splash_title: "Benvenuto su MyStore",
+        splash_subtitle: "Seleziona la tua destinazione di spedizione",
+        splash_note: "<strong>Importante:</strong> La disponibilità dipende dalla tua regione. <br>Gli acquirenti canadesi possono utilizzare i link USA, ma i prezzi sono in USD.",
+        hero_title: "Collezione di Lusso",
+        hero_sub: "Scopri la nostra selezione di profumi premium e prodotti eleganti.",
+        top5_title: "Top 5 Più Raccomandati",
+        top5_sub: "I nostri profumi più amati e recensiti dai clienti di tutto il mondo",
+        filter_brand: "Filtra per Casa",
+        sort_by: "Ordina per:",
+        sort_default: "In Evidenza",
+        sort_low: "Prezzo: Crescente",
+        sort_high: "Prezzo: Decrescente",
+        sort_reviews: "Più Recensiti",
+        shop_now: "Acquista Ora",
+        coming_soon: "Prossimamente",
+        change_region: "Cambia Destinazione",
+        footer_text: "In qualità di Affiliato Amazon, riceviamo un guadagno dagli acquisti idonei.",
+        web_design: "Web Design di",
+        cat_all: "Tutti",
+        cat_men: "Per Uomo",
+        cat_women: "Per Donna",
+        cat_unisex: "UNISEX",
+        all_brands: "Tutte le Marche",
+        ca_banner: "<strong>Acquirenti Canadesi:</strong> I link reindirizzano al negozio USA. Tutti i prezzi sono in USD.",
+        eu_banner: "<strong>Acquirenti Europei:</strong> Il nostro catalogo localizzato arriverà presto.",
+        eu_no_prod_title: "Collezione Prossimamente",
+        eu_no_prod_sub: "Stiamo selezionando i migliori profumi per il tuo negozio Amazon locale. Torna presto!",
+        no_prod_title: "Nessun Prodotto Trovato",
+        no_prod_sub: "Prova a modificare i filtri della marca o della categoria.",
+        best_seller_badge: "Bestseller"
+      }
+    };
+
+    function t(key) {
+      return translations[currentLang][key] || translations['EN'][key];
+    }
+
+    // This function simulates a page refresh for the user without reloading the document or 
+    // losing the region state (which would otherwise re-trigger the splash screen).
+    function resetStore(event) {
+      event.preventDefault();
+      
+      // Reset all filters to default
+      activeCategory = 'All';
+      activeBrand = 'All';
+      activeSort = 'default';
+      
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) sortSelect.value = 'default';
+      
+      // Re-render UI
+      renderCategories();
+      renderBrands();
+      
+      if (!['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+        renderProducts();
+      }
+      
+      // Scroll to the top of the page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      
+      // Update basic static text
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.innerHTML = t(key);
+      });
+
+      // Update Sort Select labels
+      const sortSelect = document.getElementById('sortSelect');
+      sortSelect.options[0].text = t('sort_default');
+      sortSelect.options[1].text = t('sort_low');
+      sortSelect.options[2].text = t('sort_high');
+      sortSelect.options[3].text = t('sort_reviews');
+
+      // Update Banner (if active)
+      const banner = document.getElementById('regionBanner');
+      if (userRegion === 'CA') {
+        banner.innerHTML = t('ca_banner');
+      } else if (['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+        banner.innerHTML = t('eu_banner');
+      }
+
+      // Re-render dynamic elements
+      renderCategories();
+      renderBrands();
+      if (['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+        showEuEmptyState();
+      } else {
+        renderBestSellers();
+        renderProducts();
+      }
+    }
 
     // ═══════════════════════════════════════════════════════════════
-    //  SPLASH SCREEN LOGIC
+    //  SPLASH SCREEN & FLAG LOGIC
     // ═══════════════════════════════════════════════════════════════
-    
     function showSplashScreen() {
       const splash = document.getElementById('splashScreen');
       splash.style.visibility = 'visible';
       splash.style.opacity = '1';
-      document.body.style.overflow = 'hidden'; // Stop scrolling
+      document.body.style.overflow = 'hidden'; 
+    }
+
+    function setupLanguageOptions(region) {
+      const langFlags = document.getElementById('langFlags');
+      langFlags.innerHTML = ''; 
+      
+      if (region === 'UK') {
+        // Just load English (UK) by default and optionally hide flags since it's only 1
+        langFlags.style.display = 'flex';
+        currentLang = 'EN';
+        const btn = document.createElement('button');
+        btn.className = 'flag-btn active';
+        btn.innerHTML = `<img src="https://flagcdn.com/w40/gb.png" alt="EN" title="English (UK)">`;
+        langFlags.appendChild(btn);
+      } else {
+        langFlags.style.display = 'flex';
+        
+        const options = [];
+        
+        // Push regions & corresponding flags. 
+        // Logic: USA store gets American flag, Europe gets UK flag. Spanish uses Spain flag everywhere.
+        if (region === 'US') {
+          options.push({val: 'EN', flag: 'us'});
+          options.push({val: 'ES', flag: 'es'});
+        } else if (region === 'CA') {
+          options.push({val: 'EN', flag: 'ca'}); // English logic for Canada
+          options.push({val: 'FR', flag: 'fr'});
+        } else if (region === 'FR') {
+          options.push({val: 'FR', flag: 'fr'});
+          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+        } else if (region === 'IT') {
+          options.push({val: 'IT', flag: 'it'});
+          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+        } else if (region === 'ES') {
+          options.push({val: 'ES', flag: 'es'}); // Spanish logic for Europe
+          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+        }
+
+        // Make sure currentLang matches available options, else reset
+        if (!options.find(o => o.val === currentLang)) {
+            currentLang = options[0].val;
+        }
+
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = `flag-btn ${opt.val === currentLang ? 'active' : ''}`;
+          btn.onclick = () => {
+            // Un-active all
+            document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
+            // Active current
+            btn.classList.add('active');
+            changeLanguage(opt.val);
+          };
+          btn.innerHTML = `<img src="https://flagcdn.com/w40/${opt.flag}.png" alt="${opt.val}" title="${opt.val}">`;
+          langFlags.appendChild(btn);
+        });
+      }
+      
+      changeLanguage(currentLang);
+    }
+
+    function showEuEmptyState() {
+      const noResults = document.getElementById('noResults');
+      document.getElementById('productsGrid').innerHTML = ''; 
+      noResults.style.display = 'block';
+      noResults.innerHTML = `
+        <h3>${t('eu_no_prod_title')}</h3>
+        <p>${t('eu_no_prod_sub')}</p>
+      `;
     }
 
     function enterStore(region) {
       userRegion = region;
       
-      // Hide Splash Screen
+      setupLanguageOptions(region);
+      
       const splash = document.getElementById('splashScreen');
       splash.style.opacity = '0';
       setTimeout(() => {
         splash.style.visibility = 'hidden';
-        document.body.style.overflow = 'auto'; // Restore scrolling
+        document.body.style.overflow = 'auto'; 
       }, 500);
 
-      // Handle Region Banners & Content Rendering
       const banner = document.getElementById('regionBanner');
       const bestSellersSection = document.getElementById('bestSellersSection');
       const controlsContainer = document.getElementById('controlsContainer');
       const noResults = document.getElementById('noResults');
 
       if (region === 'CA') {
-        banner.innerHTML = "🇨🇦 <strong>Canadian Shoppers:</strong> The links provided redirect to the US store. Please note all prices shown are in USD.";
         banner.style.display = 'block';
-        
         bestSellersSection.style.display = 'block';
         controlsContainer.style.display = 'block';
         noResults.style.display = 'none';
-
-        renderBestSellers();
-        renderProducts();
       } 
-      else if (region === 'EU') {
-        // EU: No products available yet. Hide grids and show coming soon state.
-        banner.innerHTML = "🌍 <strong>European Shoppers:</strong> Our localized catalog is coming soon.";
+      else if (['UK', 'ES', 'IT', 'FR'].includes(region)) {
         banner.style.display = 'block';
-
         bestSellersSection.style.display = 'none';
         controlsContainer.style.display = 'none';
-        
-        document.getElementById('productsGrid').innerHTML = ''; // Clear out products
-        noResults.style.display = 'block';
-        noResults.innerHTML = `
-          <h3>Collection Coming Soon</h3>
-          <p>We are currently curating the best luxury fragrances available in your local Amazon store. Please check back soon!</p>
-        `;
       } 
       else {
-        // USA: Default Behavior
         banner.style.display = 'none';
-        
         bestSellersSection.style.display = 'block';
         controlsContainer.style.display = 'block';
         noResults.style.display = 'none';
-
-        renderBestSellers();
-        renderProducts();
       }
     }
 
@@ -1259,8 +1555,8 @@
         link: "https://amzn.to/4987kmt",
         category: "For Men",
         brand: "Lacoste",
-        rating: 0,
-        reviews: "-",
+        rating: 4.7,
+        reviews: "5.5K",
       },
       {
         title: "VS Him Platinum – Eau de Parfum",
@@ -1408,11 +1704,9 @@
     //  SCRIPT LOGIC
     // ═══════════════════════════════════════════════════════════════
 
-    // Categories
     const baseCategories =["For Men", "For Women", "UNISEX"];
     const uniqueCategories = ['All', ...baseCategories];
 
-    // Helper function to render star icons
     function renderStars(rating) {
       if (!rating || rating === 0) return '☆☆☆☆☆';
       const full = Math.floor(rating);
@@ -1424,13 +1718,11 @@
       return html;
     }
 
-    // Parse Price
     function parsePrice(priceStr) {
       if (!priceStr) return 0;
       return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
     }
 
-    // Parse Reviews
     function parseReviews(reviewStr) {
       if (!reviewStr || reviewStr === "-") return 0;
       let str = String(reviewStr).toUpperCase();
@@ -1443,12 +1735,18 @@
       return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
     }
 
-    // Generates a single product card HTML
+    function getTranslatedCategory(internalCat) {
+      if (internalCat === 'All') return t('cat_all');
+      if (internalCat === 'For Men') return t('cat_men');
+      if (internalCat === 'For Women') return t('cat_women');
+      if (internalCat === 'UNISEX') return t('cat_unisex');
+      return internalCat;
+    }
+
     function createProductCard(p, i, isBestSeller = false) {
-      // Special badge for best sellers
       let badgeHtml = '';
       if (isBestSeller) {
-        badgeHtml = `<span class="badge gold">#${i + 1} Best Seller</span>`;
+        badgeHtml = `<span class="badge gold">#${i + 1} ${t('best_seller_badge')}</span>`;
       }
 
       const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
@@ -1470,17 +1768,16 @@
               ${reviewsHtml}
             </div>
             <span class="amazon-btn">
-              Shop Now
+              ${t('shop_now')}
             </span>
           </div>
         </a>
       `;
     }
 
-    // Carousel Scroll Logic
     function scrollCarousel(direction) {
       const track = document.getElementById('bestSellersTrack');
-      const scrollAmount = 320; // Approximately card width + gap
+      const scrollAmount = 320; 
       if (direction === 'left') {
         track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       } else {
@@ -1488,34 +1785,31 @@
       }
     }
 
-    // Render Best Sellers (Top 10 most reviewed)
     function renderBestSellers() {
       const bestSellersGrid = document.getElementById('bestSellersTrack');
-      // Copy array and sort by reviews descending
-      const sortedByReviews = [...products].sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
-      // Take top 10
-      const topProducts = sortedByReviews.slice(0, 10);
-
+      const sortedByReviews =[...products].sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
+      
+      // Top 5 configuration
+      const topProducts = sortedByReviews.slice(0, 5); 
       bestSellersGrid.innerHTML = topProducts.map((p, i) => createProductCard(p, i, true)).join('');
     }
 
-    // Render Categories
     function renderCategories() {
       const container = document.getElementById('categories');
       container.innerHTML = uniqueCategories.map(cat =>
-        `<button class="cat-btn ${cat === activeCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`
+        `<button class="cat-btn ${cat === activeCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${getTranslatedCategory(cat)}</button>`
       ).join('');
     }
 
-    // Render Brands as Pills
     function renderBrands() {
       const brandContainer = document.getElementById('brandPills');
       const uniqueBrands =['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
       brandContainer.innerHTML = uniqueBrands.map(brand => {
         const val = brand === 'All Brands' ? 'All' : brand;
+        const displayText = brand === 'All Brands' ? t('all_brands') : brand;
         const isActive = activeBrand === val ? 'active' : '';
-        return `<button class="brand-pill ${isActive}" onclick="filterBrand('${val}')">${brand}</button>`;
+        return `<button class="brand-pill ${isActive}" onclick="filterBrand('${val}')">${displayText}</button>`;
       }).join('');
     }
 
@@ -1536,19 +1830,16 @@
       renderProducts();
     });
 
-    // Render Main Product Grid
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const noResults = document.getElementById('noResults');
 
-      // 1. FILTER
       let filtered = products.filter(p => {
         const matchCat = activeCategory === 'All' || p.category === activeCategory;
         const matchBrand = activeBrand === 'All' || p.brand === activeBrand;
         return matchCat && matchBrand;
       });
 
-      // 2. SORT
       if (activeSort === 'price-low') {
         filtered.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
       } else if (activeSort === 'price-high') {
@@ -1557,13 +1848,12 @@
         filtered.sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
       }
 
-      // 3. RENDER
       if (filtered.length === 0) {
         grid.innerHTML = '';
         noResults.style.display = 'block';
         noResults.innerHTML = `
-          <h3>No Products Found</h3>
-          <p>Try adjusting your brand or category filters.</p>
+          <h3>${t('no_prod_title')}</h3>
+          <p>${t('no_prod_sub')}</p>
         `;
         return;
       }
@@ -1571,10 +1861,6 @@
       noResults.style.display = 'none';
       grid.innerHTML = filtered.map((p, i) => createProductCard(p, i, false)).join('');
     }
-
-    // Initialize Page Controls
-    renderCategories();
-    renderBrands();
   </script>
 
 </body>
