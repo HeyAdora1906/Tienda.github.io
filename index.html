@@ -1043,12 +1043,60 @@
       animation: fadeInUp 0.8s ease backwards;
     }
 
+    /* Ajustes específicos para móviles */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.5rem; }
-      .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 2rem 1.5rem;
+      
+      .container {
+        padding: 0 1rem 4rem;
       }
+      
+      /* Mostrar los perfumes en filas de dos */
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 0.75rem;
+      }
+      
+      .product-image-wrap {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        min-height: 180px; 
+      }
+      
+      .product-title {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+      
+      .product-price {
+        font-size: 1.1rem;
+      }
+      
+      .product-rating {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .stars {
+        font-size: 0.75rem;
+      }
+      
+      .amazon-btn {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
+      
+      .badge {
+        font-size: 0.5rem;
+        padding: 0.3rem 0.5rem;
+        letter-spacing: 1px;
+        top: 10px;
+        left: 10px;
+      }
+
       .sort-wrapper {
         flex-direction: column;
         align-items: stretch;
@@ -1057,6 +1105,10 @@
       .footer-nav { flex-direction: column; gap: 1rem; }
       .open-brands-btn { margin-bottom: 1.5rem; justify-content: center; }
       .guide-main-title { font-size: 2.2rem; }
+      
+      /* Ajustar botones de Tabs de guía para que quepan bien */
+      .guide-tabs { gap: 0.5rem; padding: 0 1rem; }
+      .guide-tab-btn { padding: 0.6rem 1rem; font-size: 0.65rem; }
     }
   </style>
 </head>
@@ -1094,7 +1146,7 @@
     
     <div class="sidebar-content">
       <!-- Search Input para filtrar marcas -->
-      <div class="sidebar-search">
+      <div class="sidebar-search" id="brandSearchContainer">
         <input type="text" id="brandSearch" data-i18n-placeholder="search_brands" placeholder="Search brands..." onkeyup="filterBrandsInSidebar()">
       </div>
       <!-- Contenedor donde se inyectan los botones de marcas -->
@@ -1527,7 +1579,7 @@
         shop_now: "Acquérir",
         coming_soon: "Bientôt Disponible",
         change_region: "Changer la Destination",
-        footer_text: "En tant que Partenaire Amazon, nous réalisations un bénéfice sur les achats éligibles.",
+        footer_text: "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats éligibles.",
         web_design: "Organisé et Conçu par",
         cat_all: "L'Archive Complète",
         cat_men: "Pour Homme",
@@ -2447,6 +2499,16 @@
 
     function renderBrands() {
       const sidebarBrandsContainer = document.getElementById('sidebarBrands');
+      const searchBox = document.getElementById('brandSearchContainer');
+      
+      if (['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+        sidebarBrandsContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem; padding: 1rem 0; text-align: center;">${t('coming_soon')}</p>`;
+        if (searchBox) searchBox.style.display = 'none';
+        return;
+      } else {
+        if (searchBox) searchBox.style.display = 'block';
+      }
+
       const uniqueBrands =['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
       sidebarBrandsContainer.innerHTML = uniqueBrands.map(brand => {
