@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyStore - Luxury Fragrances</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <title>MyStore Elite - Luxury Fragrances</title>
+  <!-- Google Fonts: Inter para texto, Noto Serif para encabezados elegantes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Elegant Color Palette */
-      --primary-dark: #111111;
-      --primary-light: #222222;
+      /* MvStore Elite Luxury Dark Palette */
+      --bg-color: #131313;
+      --surface: #1c1b1b;
+      --surface-hover: #2a2a2a;
+      --primary-dark: #0e0e0e;
       --accent-gold: #C19A6B;
-      --accent-gold-hover: #A67C52;
-      --bg-color: #F8F9FA;
+      --accent-gold-hover: #eabf8d;
+      --text-main: #e5e2e1;
+      --text-muted: #a0a1a1;
+      --border-color: #353534;
       --white: #ffffff;
-      --text-main: #1A1A1A;
-      --text-muted: #6B6B6B;
-      --border-color: #E2E2E2;
-      --shadow-sm: 0 2px 10px rgba(0,0,0,0.03);
-      --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+      --black: #000000;
+      
+      --shadow-sm: 0 4px 20px rgba(0,0,0,0.3);
+      --shadow-md: 0 10px 40px rgba(0,0,0,0.5);
     }
 
     * {
@@ -33,7 +37,11 @@
       color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow: hidden; 
+      overflow-x: hidden; 
+    }
+
+    h1, h2, h3, .font-serif {
+      font-family: 'Noto Serif', serif;
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -45,154 +53,343 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(17, 17, 17, 0.98);
+      background: rgba(19, 19, 19, 0.95);
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--white);
-      backdrop-filter: blur(10px);
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      color: var(--text-main);
+      backdrop-filter: blur(15px);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
     }
 
     .splash-content {
-      background: var(--primary-light);
-      padding: 3rem 2rem;
-      border: 1px solid var(--accent-gold);
+      background: var(--surface);
+      padding: 4rem 3rem;
+      border: 1px solid var(--border-color);
       text-align: center;
-      max-width: 600px;
+      max-width: 650px;
       width: 90%;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      box-shadow: var(--shadow-md);
     }
 
     .splash-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      color: var(--accent-gold);
+      color: var(--text-main);
+      font-weight: 600;
+      font-style: italic;
     }
 
     .splash-subtitle {
       font-size: 1rem;
-      color: #aaaaaa;
-      margin-bottom: 2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
       font-weight: 300;
+      letter-spacing: 1px;
     }
 
     .region-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .region-btn {
       background: transparent;
-      border: 1px solid #444;
-      color: var(--white);
-      padding: 1rem;
-      font-size: 0.95rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 1.2rem 1rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      font-family: inherit;
+      font-family: 'Inter', sans-serif;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-      letter-spacing: 0.5px;
+      transition: all 0.4s ease;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     .region-btn:hover {
       border-color: var(--accent-gold);
-      background: rgba(193, 154, 107, 0.1);
+      background: var(--accent-gold);
+      color: var(--black);
     }
 
     .splash-note {
       font-size: 0.8rem;
-      color: #888;
-      line-height: 1.4;
-      border-top: 1px solid #333;
-      padding-top: 1.5rem;
+      color: #666;
+      line-height: 1.6;
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
     }
 
-    /* Top Alert Banner */
     .region-banner {
       background: var(--accent-gold);
-      color: var(--primary-dark);
+      color: var(--black);
       text-align: center;
       padding: 0.6rem 1rem;
       font-size: 0.85rem;
       font-weight: 600;
+      letter-spacing: 0.5px;
       display: none; 
     }
 
-    /* Header */
-    .header {
+    /* ═══════════════════════════════════════════════════════════════
+       SIDEBAR MENU (BRANDS & REGION)
+       ═══════════════════════════════════════════════════════════════ */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -350px; 
+      width: 350px;
+      max-width: 85vw;
+      height: 100vh;
       background: var(--primary-dark);
+      z-index: 2000;
+      transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-title {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.4rem;
       color: var(--white);
+      font-style: italic;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.8rem;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--accent-gold);
+    }
+
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    .sidebar-content::-webkit-scrollbar { width: 4px; }
+    .sidebar-content::-webkit-scrollbar-track { background: var(--primary-dark); }
+    .sidebar-content::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+    .sidebar-search {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--white);
+      padding: 0.8rem 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .sidebar-search input:focus {
+      border-bottom-color: var(--accent-gold);
+    }
+
+    .sidebar-search input::placeholder {
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
+    .sidebar-brand-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sidebar-brand-btn:hover, .sidebar-brand-btn.active {
+      color: var(--accent-gold);
+      padding-left: 10px;
+    }
+
+    .sidebar-footer {
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .sidebar-region-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
+    }
+
+    .sidebar-region-btn:hover {
+      background: var(--accent-gold);
+      color: var(--black);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════════════════════ */
+    .header {
+      background: rgba(19, 19, 19, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-main);
       padding: 1.5rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 3px solid var(--accent-gold);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
     }
 
     .header-inner {
-      max-width: 1400px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .menu-toggle {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 5px;
+      transition: transform 0.3s;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover span {
+      background: var(--accent-gold);
+    }
+
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-family: 'Noto Serif', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.5px;
     }
 
     .logo a {
-      color: var(--white);
+      color: var(--text-main);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.4s ease;
     }
 
     .logo a:hover {
       color: var(--accent-gold);
     }
 
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* Language Flags UI */
     .lang-flags {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
     }
 
     .flag-btn {
       background: transparent;
-      border: 2px solid transparent;
+      border: 1px solid transparent;
       border-radius: 50%;
       cursor: pointer;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: all 0.3s ease;
-      opacity: 0.5;
+      transition: all 0.4s ease;
+      opacity: 0.4;
+      filter: grayscale(50%);
     }
 
     .flag-btn img {
@@ -203,29 +400,56 @@
 
     .flag-btn:hover {
       opacity: 1;
+      filter: grayscale(0%);
       transform: scale(1.1);
     }
 
     .flag-btn.active {
       opacity: 1;
+      filter: grayscale(0%);
       border-color: var(--accent-gold);
-      box-shadow: 0 0 8px rgba(193, 154, 107, 0.4);
+      box-shadow: 0 0 10px rgba(193, 154, 107, 0.3);
     }
 
-    /* Hero Section */
+    /* ═══════════════════════════════════════════════════════════════
+       HERO SECTION (Solid Black Background)
+       ═══════════════════════════════════════════════════════════════ */
     .hero {
-      background: var(--white);
-      padding: 4rem 1.5rem;
+      position: relative;
+      background: var(--black);
+      padding: 8rem 2rem;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 1.5rem;
+      display: block;
+      font-weight: 600;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 0.75rem;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      line-height: 1.1;
     }
 
     .hero p {
@@ -236,46 +460,77 @@
       font-weight: 300;
     }
 
-    /* Best Sellers Carousel Section */
-    .best-sellers-section {
-      background: var(--primary-dark);
-      padding: 4rem 0;
-      color: var(--white);
-      overflow: hidden;
+    /* ═══════════════════════════════════════════════════════════════
+       INDIVIDUAL BRAND HEADER
+       ═══════════════════════════════════════════════════════════════ */
+    .brand-header {
       display: none; 
+      background: var(--surface);
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .brand-header h2 {
+      font-size: 3.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .brand-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CAROUSELS (GENERAL & GUIDE)
+       ═══════════════════════════════════════════════════════════════ */
+    .best-sellers-section, .fragrance-guide {
+      background: var(--surface);
+      padding: 6rem 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .fragrance-guide {
+      background: var(--bg-color);
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       text-align: center;
-      margin-bottom: 0.5rem;
-      color: var(--accent-gold);
-      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+      padding: 0 2rem;
+      font-style: italic;
     }
 
     .section-subtitle {
       text-align: center;
-      color: #aaaaaa;
+      color: var(--text-muted);
       font-weight: 300;
       margin-bottom: 3rem;
-      font-size: 1rem;
-      padding: 0 1.5rem;
+      font-size: 1.1rem;
+      padding: 0 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .carousel-wrapper {
       position: relative;
-      max-width: 1400px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
 
     .carousel-track {
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      gap: 1.5rem;
-      padding-bottom: 1.5rem;
+      gap: 2rem;
+      padding-bottom: 2rem;
       scrollbar-width: none;
     }
 
@@ -292,157 +547,178 @@
 
     .carousel-btn {
       position: absolute;
-      top: 45%;
+      top: 40%;
       transform: translateY(-50%);
-      background: var(--accent-gold);
-      color: var(--white);
-      border: none;
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
       border-radius: 50%;
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       cursor: pointer;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: background 0.3s, transform 0.2s;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.4s ease;
     }
 
     .carousel-btn:hover {
-      background: var(--accent-gold-hover);
-      transform: translateY(-50%) scale(1.05);
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--black);
     }
 
-    .carousel-btn.prev { left: -10px; }
-    .carousel-btn.next { right: -10px; }
+    .carousel-btn.prev { left: -15px; }
+    .carousel-btn.next { right: -15px; }
 
-    @media (max-width: 1440px) {
-      .carousel-btn.prev { left: 5px; }
-      .carousel-btn.next { right: 5px; }
+    /* Estilos del Contenedor de la Guía y sus Tabs */
+    .guide-main-title {
+      font-size: 2.8rem;
+      text-align: center;
+      color: var(--white);
+      margin: 0 0 1rem;
+      font-style: italic;
+      padding: 0 2rem;
     }
-    @media (max-width: 768px) {
-      .carousel-btn { display: none; }
-      .carousel-track .product-card { min-width: 260px; max-width: 260px; }
-      .header-inner { flex-direction: column; gap: 1rem; }
+    
+    .guide-main-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent-gold);
+      margin: 0 auto 2rem;
     }
 
-    /* Controls: Categories & Filters */
+    /* Tabs para las guías */
+    .guide-tabs {
+      max-width: 1280px;
+      margin: 0 auto 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+
+    .guide-tab-btn {
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      border-radius: 0;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .guide-tab-btn:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    .guide-tab-btn.active {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .guide-content-section {
+      display: none;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .guide-content-section.active {
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CONTROLS (Categories + Sort)
+       ═══════════════════════════════════════════════════════════════ */
     .controls-container {
-      background: var(--white);
-      padding: 2rem 1.5rem;
-      border-bottom: 1px solid var(--border-color);
-      margin-bottom: 2rem;
+      background: var(--bg-color);
+      padding: 4rem 2rem 2rem;
       display: none; 
     }
 
     .categories {
-      max-width: 1400px;
-      margin: 0 auto 2rem;
+      max-width: 1280px;
+      margin: 0 auto 3rem;
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .cat-btn {
-      padding: 0.6rem 1.8rem;
+      padding: 0.8rem 2rem;
       border: 1px solid var(--border-color);
-      background: var(--white);
-      border-radius: 4px;
+      background: transparent;
+      border-radius: 0;
       cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 500;
       color: var(--text-muted);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
     }
 
     .cat-btn:hover {
-      border-color: var(--primary-dark);
-      color: var(--primary-dark);
+      border-color: var(--text-main);
+      color: var(--text-main);
     }
 
     .cat-btn.active {
-      background: var(--primary-dark);
-      border-color: var(--primary-dark);
-      color: var(--white);
-    }
-
-    .brands-wrapper {
-      max-width: 1400px;
-      margin: 0 auto 2rem;
-    }
-
-    .brands-label {
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .brands-row {
-      display: flex;
-      gap: 0.75rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .brand-pill {
-      padding: 0.5rem 1.2rem;
-      border: 1px solid var(--border-color);
-      background: transparent;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-main);
-      transition: all 0.3s ease;
-      white-space: nowrap;
-    }
-
-    .brand-pill:hover {
       border-color: var(--accent-gold);
       color: var(--accent-gold);
     }
 
-    .brand-pill.active {
-      background: var(--accent-gold);
-      border-color: var(--accent-gold);
-      color: var(--white);
-    }
-
     .sort-wrapper {
-      max-width: 1400px;
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      padding-top: 1rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--border-color);
     }
 
+    .open-brands-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+    }
+    
+    .open-brands-btn:hover {
+      color: var(--accent-gold);
+    }
+
     .elegant-select {
-      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      padding: 0.8rem 2.5rem 0.8rem 1.5rem;
       border: 1px solid var(--border-color);
       border-radius: 0;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-main);
-      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1rem center;
+      background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C19A6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1.2rem center;
       appearance: none;
       cursor: pointer;
       font-family: inherit;
-      min-width: 220px;
-      transition: border-color 0.3s;
+      min-width: 250px;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .elegant-select:focus {
@@ -450,24 +726,24 @@
       outline: none;
     }
 
-    /* Product Grid */
+    /* ═══════════════════════════════════════════════════════════════
+       PRODUCTS GRID & PAGINATION
+       ═══════════════════════════════════════════════════════════════ */
     .container {
-      max-width: 1400px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 1.5rem 4rem;
+      padding: 0 2rem 6rem;
     }
 
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
+      gap: 3rem 2rem;
     }
 
-    /* Product Card */
     .product-card {
-      background: var(--white);
-      border: 1px solid var(--border-color);
-      transition: all 0.4s ease;
+      background: transparent;
+      transition: transform 0.5s ease;
       cursor: pointer;
       position: relative;
       display: flex;
@@ -477,97 +753,98 @@
       color: var(--text-main);
     }
 
-    .best-sellers-section .product-card {
-      background: var(--primary-light);
-      border-color: #333;
-      color: var(--white);
-    }
-
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--accent-gold);
+      transform: translateY(-8px);
     }
 
     .product-image-wrap {
       position: relative;
-      padding: 2rem;
+      background: #ffffff; 
+      aspect-ratio: 4/5;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 280px;
-      background: var(--white);
-      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      padding: 2rem;
     }
 
-    .best-sellers-section .product-image-wrap {
-      border-bottom-color: #333;
+    .product-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.05) 100%);
+      pointer-events: none;
     }
 
     .product-image-wrap img {
       max-width: 100%;
-      max-height: 220px;
+      max-height: 100%;
       object-fit: contain;
-      transition: transform 0.5s ease;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .product-card:hover .product-image-wrap img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .badge {
       position: absolute;
       top: 15px;
       left: 15px;
-      background: var(--primary-dark);
+      background: var(--black);
       color: var(--white);
       font-size: 0.65rem;
       font-weight: 600;
       padding: 0.4rem 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      z-index: 2;
     }
 
     .badge.gold {
       background: var(--accent-gold);
-      color: var(--white);
+      color: var(--black);
     }
 
     .product-info {
-      padding: 1.5rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
     .product-category {
-      font-size: 0.75rem;
-      color: var(--accent-gold);
+      font-size: 0.65rem;
+      color: var(--text-muted);
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       margin-bottom: 0.5rem;
     }
 
     .product-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-family: 'Noto Serif', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
       line-height: 1.3;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+    
+    .product-card:hover .product-title {
+      color: var(--accent-gold);
     }
 
     .product-price {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .best-sellers-section .product-price {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
       color: var(--white);
     }
 
@@ -575,92 +852,136 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .stars {
       color: var(--accent-gold);
-      font-size: 1rem;
+      font-size: 0.9rem;
       letter-spacing: 2px;
     }
 
     .rating-count {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-    }
-
-    .best-sellers-section .rating-count {
-      color: #aaaaaa;
     }
 
     .amazon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--primary-dark);
-      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
       font-weight: 500;
-      padding: 0.85rem 1rem;
+      padding: 1rem;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      transition: all 0.5s ease;
       margin-top: auto;
-      border: 1px solid var(--primary-dark);
-    }
-
-    .best-sellers-section .amazon-btn {
-      background: var(--accent-gold);
-      border-color: var(--accent-gold);
     }
 
     .product-card:hover .amazon-btn {
       background: var(--accent-gold);
-      border-color: var(--accent-gold);
+      color: var(--black);
     }
 
-    .best-sellers-section .product-card:hover .amazon-btn {
-      background: var(--white);
-      color: var(--primary-dark);
-      border-color: var(--white);
-    }
-
-    /* No Results / Coming Soon */
     .no-results {
       text-align: center;
-      padding: 5rem 1rem;
+      padding: 6rem 2rem;
       color: var(--text-muted);
     }
 
     .no-results h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
+      font-family: 'Noto Serif', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+      font-style: italic;
+    }
+
+    /* Paginación */
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .pagination-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
       color: var(--text-main);
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
     }
 
-    .no-results p {
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.6;
+    .pagination-btn:hover:not(:disabled) {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
     }
 
-    /* Footer & Socials */
+    .pagination-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════ */
     .footer {
       background: var(--primary-dark);
-      color: #aaaaaa;
+      color: var(--text-muted);
+      padding: 5rem 2rem 3rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      padding: 4rem 1rem 2rem 1rem;
-      font-size: 0.9rem;
-      border-top: 3px solid var(--accent-gold);
+    }
+
+    .footer .logo {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .footer a {
-      color: var(--white);
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.4s ease;
     }
     
     .footer a:hover {
@@ -670,117 +991,72 @@
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .social-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--white);
-      transition: all 0.3s ease;
+      color: var(--text-muted);
+      transition: all 0.4s ease;
     }
 
     .social-icons a:hover {
-      background: var(--accent-gold);
-      border-color: var(--accent-gold);
+      color: var(--accent-gold);
       transform: translateY(-3px);
     }
 
     .social-icons svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: currentColor;
     }
 
-    /* Region Change Button */
-    .change-region-btn {
-      background: transparent;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      padding: 0.6rem 1.5rem;
-      border-radius: 50px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      margin: 1.5rem 0;
-    }
-
-    .change-region-btn:hover {
-      background: var(--accent-gold);
-      color: var(--primary-dark);
-    }
-
-    /* Designer Credit */
-    .designer-credit {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.75rem;
+    .footer-bottom {
+      width: 100%;
+      border-top: 1px solid rgba(193, 154, 107, 0.2);
+      padding-top: 2rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: #777;
+      gap: 1.5rem;
+    }
+
+    .designer-credit {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #666;
     }
 
     .designer-credit a {
       color: var(--accent-gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .designer-credit svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
+      font-weight: 600;
     }
 
     /* Animations */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .product-card {
-      animation: fadeInUp 0.6s ease backwards;
+      animation: fadeInUp 0.8s ease backwards;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
+      .hero h1 { font-size: 2.5rem; }
       .products-grid {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 1.25rem;
+        gap: 2rem 1.5rem;
       }
-      .elegant-select {
-        width: 100%;
+      .sort-wrapper {
+        flex-direction: column;
+        align-items: stretch;
       }
-      .brands-row {
-        justify-content: flex-start;
-      }
-      .region-grid {
-        grid-template-columns: 1fr;
-      }
+      .elegant-select { width: 100%; }
+      .footer-nav { flex-direction: column; gap: 1rem; }
+      .open-brands-btn { margin-bottom: 1.5rem; justify-content: center; }
+      .guide-main-title { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -789,7 +1065,7 @@
   <!-- SPLASH SCREEN: REGION SELECTOR -->
   <div class="splash-screen" id="splashScreen">
     <div class="splash-content">
-      <h2 class="splash-title" data-i18n="splash_title">Welcome to MyStore</h2>
+      <h2 class="splash-title" data-i18n="splash_title">Welcome to MyStore Elite</h2>
       <p class="splash-subtitle" data-i18n="splash_subtitle">Please select your shipping destination</p>
       
       <div class="region-grid">
@@ -808,14 +1084,45 @@
     </div>
   </div>
 
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title" data-i18n="filter_brand">Olfactive Houses</h2>
+      <button class="close-btn" onclick="toggleSidebar()">&times;</button>
+    </div>
+    
+    <div class="sidebar-content">
+      <!-- Search Input para filtrar marcas -->
+      <div class="sidebar-search">
+        <input type="text" id="brandSearch" data-i18n-placeholder="search_brands" placeholder="Search brands..." onkeyup="filterBrandsInSidebar()">
+      </div>
+      <!-- Contenedor donde se inyectan los botones de marcas -->
+      <div id="sidebarBrands"></div>
+    </div>
+    
+    <div class="sidebar-footer">
+      <button class="sidebar-region-btn" onclick="openRegionFromSidebar()" data-i18n="change_region">
+        Change Delivery Destination
+      </button>
+    </div>
+  </aside>
+
   <!-- REGION ALERT BANNER -->
   <div id="regionBanner" class="region-banner"></div>
 
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
-      <div class="logo">
-        <a href="#" onclick="resetStore(event)">MyStore</a>
+      <div class="header-left">
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="logo">
+          <a href="#" onclick="resetStore(event)">MyStore Elite</a>
+        </div>
       </div>
       
       <div class="header-controls">
@@ -824,44 +1131,133 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1 data-i18n="hero_title">Luxury Collection</h1>
-    <p data-i18n="hero_sub">Discover our handpicked selection of premium fragrances and elegant products.</p>
+  <!-- BRAND INDIVIDUAL HEADER (Hidden by Default) -->
+  <div class="brand-header" id="brandHeader">
+    <h2 id="bhName">Brand Name</h2>
+    <p id="bhDetails">Est. YYYY — Origin</p>
+  </div>
+
+  <!-- HERO SECTION (Solid Black Background) -->
+  <section class="hero" id="heroSection">
+    <div class="hero-content">
+      <span class="hero-tag">Collection Privée</span>
+      <h1 data-i18n="hero_title">Fragrance as a Second Skin.</h1>
+      <p data-i18n="hero_sub">Discover our handpicked selection of rare essences, distilled for the discerning individual.</p>
+    </div>
   </section>
 
   <!-- BEST SELLERS CAROUSEL SECTION -->
   <section class="best-sellers-section" id="bestSellersSection">
-    <h2 class="section-title" data-i18n="top5_title">Top 5 Highly Recommended</h2>
+    <h2 class="section-title" data-i18n="top5_title">The Signature Collection</h2>
     <p class="section-subtitle" data-i18n="top5_sub">Our most loved and reviewed fragrances by customers worldwide</p>
     
     <div class="carousel-wrapper">
-      <button class="carousel-btn prev" onclick="scrollCarousel('left')">❮</button>
+      <button class="carousel-btn prev" onclick="scrollCarousel('bestSellersTrack', 'left')">❮</button>
       <div class="carousel-track" id="bestSellersTrack"></div>
-      <button class="carousel-btn next" onclick="scrollCarousel('right')">❯</button>
+      <button class="carousel-btn next" onclick="scrollCarousel('bestSellersTrack', 'right')">❯</button>
     </div>
   </section>
 
-  <!-- CONTROLS (Categories + Brands + Sort) -->
+  <!-- FRAGRANCE GUIDE SECTION (With Tab Buttons) -->
+  <section class="fragrance-guide" id="fragranceGuide" style="display:none;">
+    
+    <!-- Group 1: Occasion & Setting -->
+    <h2 class="guide-main-title" data-i18n="guide_title_1">According to Occasion & Setting</h2>
+    <div class="guide-main-divider"></div>
+    
+    <div class="guide-tabs">
+      <button class="guide-tab-btn active" id="btn-work" onclick="switchOccasion('work')" data-i18n="guide_1_t1">Work / Daily</button>
+      <button class="guide-tab-btn" id="btn-night" onclick="switchOccasion('night')" data-i18n="guide_1_t2">Dates / Night</button>
+      <button class="guide-tab-btn" id="btn-gym" onclick="switchOccasion('gym')" data-i18n="guide_1_t3">Gym / Sports</button>
+      <button class="guide-tab-btn" id="btn-formal" onclick="switchOccasion('formal')" data-i18n="guide_1_t4">Formal Events</button>
+    </div>
+
+    <!-- Occasion Content Blocks -->
+    <div class="guide-content-section active" id="sec-work">
+      <p class="section-subtitle" data-i18n="guide_1_d1">Fresh, citrus, soft floral, or light woody scents are recommended. Eau de Toilette is ideal for being less intense.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-work', 'left')">❮</button>
+        <div class="carousel-track" id="track-work"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-work', 'right')">❯</button>
+      </div>
+    </div>
+
+    <div class="guide-content-section" id="sec-night">
+      <p class="section-subtitle" data-i18n="guide_1_d2">Intense, sweet, spicy, or seductive scents (vanilla, amber, strong woods) are preferred.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-night', 'left')">❮</button>
+        <div class="carousel-track" id="track-night"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-night', 'right')">❯</button>
+      </div>
+    </div>
+
+    <div class="guide-content-section" id="sec-gym">
+      <p class="section-subtitle" data-i18n="guide_1_d3">Fresh, citrus, or aquatic fragrances that are not overwhelming when sweating.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-gym', 'left')">❮</button>
+        <div class="carousel-track" id="track-gym"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-gym', 'right')">❯</button>
+      </div>
+    </div>
+
+    <div class="guide-content-section" id="sec-formal">
+      <p class="section-subtitle" data-i18n="guide_1_d4">Perfumes with greater longevity and character, often classified as Eau de Parfum.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-formal', 'left')">❮</button>
+        <div class="carousel-track" id="track-formal"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-formal', 'right')">❯</button>
+      </div>
+    </div>
+
+
+    <!-- Group 2: Climate & Temperature -->
+    <h2 class="guide-main-title" data-i18n="guide_title_2" style="margin-top: 4rem;">According to Climate & Temperature</h2>
+    <div class="guide-main-divider"></div>
+    
+    <div class="guide-tabs">
+      <button class="guide-tab-btn active" id="btn-warm" onclick="switchClimate('warm')" data-i18n="guide_2_t1">Warm / Summer</button>
+      <button class="guide-tab-btn" id="btn-cold" onclick="switchClimate('cold')" data-i18n="guide_2_t2">Cold / Winter</button>
+    </div>
+
+    <!-- Climate Content Blocks -->
+    <div class="guide-content-section active" id="sec-warm">
+      <p class="section-subtitle" data-i18n="guide_2_d1">Fresh, light, and citrus scents that refresh and do not overwhelm the senses.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-warm', 'left')">❮</button>
+        <div class="carousel-track" id="track-warm"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-warm', 'right')">❯</button>
+      </div>
+    </div>
+
+    <div class="guide-content-section" id="sec-cold">
+      <p class="section-subtitle" data-i18n="guide_2_d2">Warm, intense, woody, or sweet (oriental) fragrances that project better in cold air.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="scrollCarousel('track-cold', 'left')">❮</button>
+        <div class="carousel-track" id="track-cold"></div>
+        <button class="carousel-btn next" onclick="scrollCarousel('track-cold', 'right')">❯</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CONTROLS (Categories + Sort + Sidebar Trigger) -->
   <div class="controls-container" id="controlsContainer">
     
     <!-- Categories -->
     <div class="categories" id="categories"></div>
     
-    <!-- Redesigned Brand Pills -->
-    <div class="brands-wrapper">
-      <span class="brands-label" data-i18n="filter_brand">Filter by Design House</span>
-      <div class="brands-row" id="brandPills"></div>
-    </div>
-    
-    <!-- Sort Filter -->
+    <!-- Sort Filter & Sidebar Trigger -->
     <div class="sort-wrapper">
-      <span class="brands-label" style="margin-bottom:0;" data-i18n="sort_by">Sort By:</span>
+      <button class="open-brands-btn" onclick="toggleSidebar()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <span data-i18n="filter_brand">Olfactive Houses</span>
+      </button>
+
       <select id="sortSelect" class="elegant-select">
-        <option value="default">Featured Collection</option>
-        <option value="price-low">Price: Low to High</option>
-        <option value="price-high">Price: High to Low</option>
-        <option value="reviews">Most Reviewed</option>
+        <option value="default">The Archive (Featured)</option>
+        <option value="price-low">Price: Accessible to Rare</option>
+        <option value="price-high">Price: Rare to Accessible</option>
+        <option value="reviews">Most Celebrated</option>
       </select>
     </div>
 
@@ -870,47 +1266,58 @@
   <!-- ALL PRODUCTS GRID -->
   <div class="container">
     <div class="products-grid" id="productsGrid"></div>
+    
+    <!-- Pagination Controls -->
+    <div class="pagination-controls" id="paginationControls" style="display:none;">
+      <button class="pagination-btn" id="prevPageBtn" onclick="prevPage()" data-i18n="prev">Prev</button>
+      <span class="pagination-info" id="pageInfo">Page 1 of 1</span>
+      <button class="pagination-btn" id="nextPageBtn" onclick="nextPage()" data-i18n="next">Next</button>
+    </div>
+
     <div class="no-results" id="noResults" style="display:none;">
       <!-- Dynamic Content injected via JS -->
     </div>
   </div>
 
-  <!-- FOOTER & SOCIALS -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="logo" style="margin-bottom: 1rem; font-size: 1.5rem;">
-      <a href="#" onclick="resetStore(event)">MyStore</a>
-    </div>
-    
-    <!-- Social Icons -->
-    <div class="social-icons">
-      <!-- TikTok -->
-      <a href="#" target="_blank" aria-label="TikTok">
-        <svg viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
-      </a>
-      <!-- Instagram -->
-      <a href="#" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-      </a>
-      <!-- Pinterest -->
-      <a href="https://pin.it/2cZXfuQWb" target="_blank" aria-label="Pinterest">
-        <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256c0 105.57 65.41 195.12 159.27 236.42-2.15-19.53-4.08-49.56.85-70.83 4.45-19.22 28.71-121.73 28.71-121.73s-7.34-14.67-7.34-36.38c0-34.05 19.74-59.45 44.33-59.45 20.9 0 30.98 15.69 30.98 34.52 0 21.01-13.38 52.42-20.28 81.56-5.78 24.38 12.24 44.25 36.32 44.25 43.6 0 77.22-45.98 77.22-112.44 0-58.84-42.27-100-102.58-100-69.69 0-110.58 52.27-110.58 106.18 0 21.08 8.11 43.69 18.23 55.95 2 2.45 2.29 4.54 1.54 7.42-2.35 9.07-7.62 31.02-8.68 35.3-1.4 5.62-4.63 6.78-10.42 4.08-38.93-18.06-63.29-74.83-63.29-120.35 0-97.94 71.18-187.89 205.1-187.89 107.59 0 191.13 76.67 191.13 179.13 0 106.9-67.33 192.93-160.91 192.93-31.41 0-60.91-16.33-71.01-35.61 0 0-15.54 59.26-19.3 73.71-7.01 26.96-25.96 60.75-38.74 81.33 30.73 9.4 63.53 14.54 97.43 14.54 136.97 0 248-111.03 248-248S384.97 8 248 8z"/></svg>
-      </a>
-    </div>
+    <div class="footer-inner">
+      <div class="logo">
+        <a href="#" onclick="resetStore(event)">MyStore Elite</a>
+      </div>
+      
+      <div class="footer-nav">
+        <a href="#" onclick="resetStore(event)">The Vault</a>
+        <a href="#">Bespoke Policy</a>
+        <a href="#">Fragrance Care</a>
+        <a href="#">Global Boutiques</a>
+      </div>
 
-    <!-- Change Region Button -->
-    <button class="change-region-btn" onclick="showSplashScreen()" data-i18n="change_region">Change Shipping Destination</button>
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="#" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+        </a>
+        <a href="#" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+        </a>
+        <a href="https://pin.it/2cZXfuQWb" target="_blank" aria-label="Pinterest">
+          <svg viewBox="0 0 496 512"><path d="M248 8C111.03 8 0 119.03 0 256c0 105.57 65.41 195.12 159.27 236.42-2.15-19.53-4.08-49.56.85-70.83 4.45-19.22 28.71-121.73 28.71-121.73s-7.34-14.67-7.34-36.38c0-34.05 19.74-59.45 44.33-59.45 20.9 0 30.98 15.69 30.98 34.52 0 21.01-13.38 52.42-20.28 81.56-5.78 24.38 12.24 44.25 36.32 44.25 43.6 0 77.22-45.98 77.22-112.44 0-58.84-42.27-100-102.58-100-69.69 0-110.58 52.27-110.58 106.18 0 21.08 8.11 43.69 18.23 55.95 2 2.45 2.29 4.54 1.54 7.42-2.35 9.07-7.62 31.02-8.68 35.3-1.4 5.62-4.63 6.78-10.42 4.08-38.93-18.06-63.29-74.83-63.29-120.35 0-97.94 71.18-187.89 205.1-187.89 107.59 0 191.13 76.67 191.13 179.13 0 106.9-67.33 192.93-160.91 192.93-31.41 0-60.91-16.33-71.01-35.61 0 0-15.54 59.26-19.3 73.71-7.01 26.96-25.96 60.75-38.74 81.33 30.73 9.4 63.53 14.54 97.43 14.54 136.97 0 248-111.03 248-248S384.97 8 248 8z"/></svg>
+        </a>
+      </div>
 
-    <p style="font-size:0.8rem;" data-i18n="footer_text">
-      As an Amazon Associate, we earn from qualifying purchases.
-    </p>
-
-    <!-- Web Designer Credit -->
-    <div class="designer-credit">
-      <span data-i18n="web_design">Web Design by</span>
-      <a href="https://www.instagram.com/alcast1906?igsh=MTU5eXg5M2F3dW45cA%3D%3D&utm_source=qr" target="_blank" aria-label="Designer Instagram">
-        <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-        alcast1906
-      </a>
+      <div class="footer-bottom">
+        <p style="font-size:0.7rem; letter-spacing: 1px; text-transform: uppercase;" data-i18n="footer_text">
+          As an Amazon Associate, we earn from qualifying purchases.
+        </p>
+        <div class="designer-credit">
+          <span data-i18n="web_design">Curated & Designed by</span>
+          <a href="https://www.instagram.com/alcast1906?igsh=MTU5eXg5M2F3dW45cA%3D%3D&utm_source=qr" target="_blank" aria-label="Designer Instagram">alcast1906</a>
+        </div>
+        <p style="font-size:0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 1rem; color: #555;">
+          © 2024 MYSTORE ELITE. ALL RIGHTS RESERVED.
+        </p>
+      </div>
     </div>
   </footer>
 
@@ -924,134 +1331,289 @@
     let userRegion = 'US'; 
     let currentLang = 'EN';
 
+    // Para la paginación (6 items)
+    let currentPage = 1;
+    const itemsPerPage = 6;
+    let filteredProducts = [];
+
+    // Listas Top 5 para la Guía
+    const guideLists = {
+      work: [
+        "Acqua di Giò - Eau de Toilette", 
+        "Polo Blue - Eau de Toilette", 
+        "L.12.12 Blanc – Eau de Toilette", 
+        "Eternity Eau de Toilette – Fougère Men's Cologne", 
+        "L’Eau d’Issey Pour Homme – Eau de Toilette"
+      ],
+      night: [
+        "Stronger With You Intensely – Eau de Parfum", 
+        "1 Million Elixir Parfum Intense", 
+        "The Most Wanted – Parfum", 
+        "Invictus Victory Elixir Parfum", 
+        "The Scent – Eau de Toilette"
+      ],
+      gym: [
+        "Polo Sport - Eau De Toilette", 
+        "Invictus Eau de Toilette", 
+        "Essential – Eau de Toilette", 
+        "Chrome – Eau de Toilette", 
+        "Voyage – Eau de Toilette"
+      ],
+      formal: [
+        "Sauvage Eau De Toilette", 
+        "Ralph's Club - Eau de Parfum", 
+        "Boss Bottled Elixir – Parfum", 
+        "Polo - Eau de Toilette", 
+        "Eternity – Eau de Parfum"
+      ],
+      cold: [
+        "Stronger With You Intensely – Eau de Parfum", 
+        "1 Million Elixir Parfum Intense", 
+        "Invictus Victory Elixir Parfum", 
+        "The Most Wanted – Parfum", 
+        "Boss Bottled Elixir – Parfum"
+      ],
+      warm: [
+        "Acqua di Giò - Eau de Toilette", 
+        "Acqua di Giò Profondo – Parfum", 
+        "L’Eau d’Issey Pour Homme – Eau de Toilette", 
+        "Polo Blue - Eau de Toilette", 
+        "Voyage – Eau de Toilette"
+      ]
+    };
+
+    // Info de Marcas (Año y Origen)
+    const brandInfo = {
+      "Christian Dior": { year: 1946, origin: "France" },
+      "Armani": { year: 1975, origin: "Italy" },
+      "Ralph Lauren": { year: 1967, origin: "United States" },
+      "Rabanne": { year: 1966, origin: "France" },
+      "Banderas": { year: 1997, origin: "Spain" },
+      "Hugo Boss": { year: 1924, origin: "Germany" },
+      "Calvin Klein": { year: 1968, origin: "United States" },
+      "Odyssey": { year: 2015, origin: "UAE" },
+      "Azzaro": { year: 1967, origin: "France" },
+      "Nautica": { year: 1983, origin: "United States" },
+      "Issey Miyake": { year: 1970, origin: "Japan" },
+      "Lacoste": { year: 1933, origin: "France" },
+      "Victoria's Secret": { year: 1977, origin: "United States" },
+      "Clinique": { year: 1968, origin: "United States" }
+    };
+
     const translations = {
       EN: {
-        splash_title: "Welcome to MyStore",
+        splash_title: "Welcome to MyStore Elite",
         splash_subtitle: "Please select your shipping destination",
         splash_note: "<strong>Important:</strong> Store availability depends on your region. <br>Shoppers from Canada can use US links, but prices are displayed in USD.",
-        hero_title: "Luxury Collection",
-        hero_sub: "Discover our handpicked selection of premium fragrances and elegant products.",
-        top5_title: "Top 5 Highly Recommended",
+        hero_title: "Fragrance as a Second Skin.",
+        hero_sub: "Discover our handpicked selection of rare essences, distilled for the discerning individual.",
+        top5_title: "The Signature Collection",
         top5_sub: "Our most loved and reviewed fragrances by customers worldwide",
-        filter_brand: "Filter by Design House",
+        filter_brand: "Olfactive Houses",
+        search_brands: "Search brands...",
         sort_by: "Sort By:",
-        sort_default: "Featured Collection",
-        sort_low: "Price: Low to High",
-        sort_high: "Price: High to Low",
-        sort_reviews: "Most Reviewed",
-        shop_now: "Shop Now",
+        sort_default: "The Archive (Featured)",
+        sort_low: "Price: Accessible to Rare",
+        sort_high: "Price: Rare to Accessible",
+        sort_reviews: "Most Celebrated",
+        shop_now: "Acquire",
         coming_soon: "Coming Soon",
-        change_region: "Change Shipping Destination",
+        change_region: "Change Delivery Destination",
         footer_text: "As an Amazon Associate, we earn from qualifying purchases.",
-        web_design: "Web Design by",
-        cat_all: "All",
-        cat_men: "For Men",
-        cat_women: "For Women",
-        cat_unisex: "UNISEX",
-        all_brands: "All Brands",
+        web_design: "Curated & Designed by",
+        cat_all: "The Complete Archive",
+        cat_men: "Pour Homme",
+        cat_women: "Pour Femme",
+        cat_unisex: "Universal Scent",
+        all_brands: "All Maisons",
         ca_banner: "<strong>Canadian Shoppers:</strong> The links provided redirect to the US store. Please note all prices shown are in USD.",
         eu_banner: "<strong>European Shoppers:</strong> Our localized catalog is coming soon.",
         eu_no_prod_title: "Collection Coming Soon",
         eu_no_prod_sub: "We are currently curating the best luxury fragrances available in your local Amazon store. Please check back soon!",
-        no_prod_title: "No Products Found",
-        no_prod_sub: "Try adjusting your brand or category filters.",
-        best_seller_badge: "Best Seller"
+        no_prod_title: "No Essences Found",
+        no_prod_sub: "Try adjusting your olfactive filters.",
+        best_seller_badge: "Iconic Scent",
+        
+        // Pagination
+        prev: "Prev",
+        next: "Next",
+        page_of: "Page {0} of {1}",
+
+        // Guide Section
+        guide_title_1: "According to Occasion & Setting",
+        guide_1_t1: "Work / Daily",
+        guide_1_d1: "Fresh, citrus, soft floral, or light woody scents are recommended. Eau de Toilette is ideal for being less intense.",
+        guide_1_t2: "Dates / Night",
+        guide_1_d2: "Intense, sweet, spicy, or seductive scents (vanilla, amber, strong woods) are preferred.",
+        guide_1_t3: "Gym / Sports",
+        guide_1_d3: "Fresh, citrus, or aquatic fragrances that are not overwhelming when sweating.",
+        guide_1_t4: "Formal Events",
+        guide_1_d4: "Perfumes with greater longevity and character, often classified as Eau de Parfum.",
+        
+        guide_title_2: "According to Climate & Temperature",
+        guide_2_t1: "Warm / Summer",
+        guide_2_d1: "Fresh, light, and citrus scents that refresh and do not overwhelm the senses.",
+        guide_2_t2: "Cold / Winter",
+        guide_2_d2: "Warm, intense, woody, or sweet (oriental) fragrances that project better in cold air."
       },
       ES: {
-        splash_title: "Bienvenido a MyStore",
+        splash_title: "Bienvenido a MyStore Elite",
         splash_subtitle: "Por favor, seleccione su destino de envío",
         splash_note: "<strong>Importante:</strong> La disponibilidad depende de su región. <br>Los compradores de Canadá pueden usar los enlaces de Estados Unidos, pero los precios están en USD.",
-        hero_title: "Colección de Lujo",
-        hero_sub: "Descubra nuestra selección de fragancias premium y productos elegantes.",
-        top5_title: "Top 5 Más Recomendados",
+        hero_title: "La Fragancia como Segunda Piel.",
+        hero_sub: "Descubra nuestra selección de esencias raras, destiladas para el individuo exigente.",
+        top5_title: "La Colección de Autor",
         top5_sub: "Nuestras fragancias más valoradas por clientes de todo el mundo",
-        filter_brand: "Filtrar por Casa de Diseño",
+        filter_brand: "Casas Olfativas",
+        search_brands: "Buscar marcas...",
         sort_by: "Ordenar por:",
-        sort_default: "Colección Destacada",
-        sort_low: "Precio: Menor a Mayor",
-        sort_high: "Precio: Mayor a Menor",
-        sort_reviews: "Más Reseñas",
-        shop_now: "Comprar Ahora",
+        sort_default: "El Archivo (Destacado)",
+        sort_low: "Precio: Accesible a Raro",
+        sort_high: "Precio: Raro a Accesible",
+        sort_reviews: "Más Celebrados",
+        shop_now: "Adquirir",
         coming_soon: "Próximamente",
         change_region: "Cambiar Destino de Envío",
         footer_text: "Como Afiliado de Amazon, obtenemos ingresos por compras adscritas.",
-        web_design: "Diseño Web por",
-        cat_all: "Todos",
-        cat_men: "Para Hombre",
-        cat_women: "Para Mujer",
-        cat_unisex: "UNISEX",
-        all_brands: "Todas las Marcas",
+        web_design: "Comisariado y Diseñado por",
+        cat_all: "El Archivo Completo",
+        cat_men: "Pour Homme",
+        cat_women: "Pour Femme",
+        cat_unisex: "Aroma Universal",
+        all_brands: "Todas las Maisons",
         ca_banner: "<strong>Compradores en Canadá:</strong> Los enlaces redirigen a la tienda de Estados Unidos. Todos los precios están en USD.",
         eu_banner: "<strong>Compradores en Europa:</strong> Nuestro catálogo localizado estará disponible pronto.",
         eu_no_prod_title: "Colección Próximamente",
         eu_no_prod_sub: "Estamos seleccionando las mejores fragancias en su tienda local de Amazon. Vuelva pronto.",
-        no_prod_title: "No Se Encontraron Productos",
-        no_prod_sub: "Intente ajustar sus filtros de marca o categoría.",
-        best_seller_badge: "Más Vendido"
+        no_prod_title: "No Se Encontraron Esencias",
+        no_prod_sub: "Intente ajustar sus filtros olfativos.",
+        best_seller_badge: "Aroma Icónico",
+
+        prev: "Atrás",
+        next: "Sig.",
+        page_of: "Página {0} de {1}",
+
+        guide_title_1: "Según la Ocasión y Entorno",
+        guide_1_t1: "Trabajo / Diario",
+        guide_1_d1: "Se recomiendan aromas frescos, cítricos, florales suaves o amaderados ligeros. Los Eau de Toilette son ideales por ser menos intensos.",
+        guide_1_t2: "Citas / Noche",
+        guide_1_d2: "Se prefieren aromas intensos, dulces, especiados o seductores (vainilla, ámbar, maderas fuertes).",
+        guide_1_t3: "Gimnasio / Deporte",
+        guide_1_d3: "Fragancias frescas, cítricas o acuáticas que no resulten abrumadoras con el sudor.",
+        guide_1_t4: "Eventos Formales",
+        guide_1_d4: "Perfumes con mayor fijación y carácter, a menudo clasificados como Eau de Parfum.",
+        
+        guide_title_2: "Según el Clima y la Temperatura",
+        guide_2_t1: "Clima Cálido / Verano",
+        guide_2_d1: "Aromas frescos, ligeros y cítricos que refrescan y no agobian.",
+        guide_2_t2: "Clima Frío / Invierno",
+        guide_2_d2: "Fragancias cálidas, intensas, amaderadas o dulces (orientales) que proyectan mejor en el aire frío."
       },
       FR: {
-        splash_title: "Bienvenue sur MyStore",
+        splash_title: "Bienvenue sur MyStore Elite",
         splash_subtitle: "Veuillez sélectionner votre destination de livraison",
         splash_note: "<strong>Important :</strong> La disponibilité dépend de votre région. <br>Les acheteurs canadiens peuvent utiliser les liens américains, mais les prix sont en USD.",
-        hero_title: "Collection de Luxe",
-        hero_sub: "Découvrez notre sélection de parfums premium et de produits élégants.",
-        top5_title: "Top 5 des Recommandations",
+        hero_title: "Le Parfum comme Seconde Peau.",
+        hero_sub: "Découvrez notre sélection d'essences rares, distillées pour les plus exigeants.",
+        top5_title: "La Collection Signature",
         top5_sub: "Nos parfums les plus appréciés par les clients du monde entier",
-        filter_brand: "Filtrer par Maison",
+        filter_brand: "Maisons Olfactives",
+        search_brands: "Rechercher des marques...",
         sort_by: "Trier par :",
-        sort_default: "Collection Sélectionnée",
-        sort_low: "Prix : Croissant",
-        sort_high: "Prix : Décroissant",
-        sort_reviews: "Les Plus Évalués",
-        shop_now: "Acheter",
+        sort_default: "L'Archive (Sélection)",
+        sort_low: "Prix : Accessible à Rare",
+        sort_high: "Prix : Rare à Accessible",
+        sort_reviews: "Les Plus Célèbres",
+        shop_now: "Acquérir",
         coming_soon: "Bientôt Disponible",
         change_region: "Changer la Destination",
-        footer_text: "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats éligibles.",
-        web_design: "Création Web par",
-        cat_all: "Tous",
+        footer_text: "En tant que Partenaire Amazon, nous réalisations un bénéfice sur les achats éligibles.",
+        web_design: "Organisé et Conçu par",
+        cat_all: "L'Archive Complète",
         cat_men: "Pour Homme",
         cat_women: "Pour Femme",
-        cat_unisex: "UNISEXE",
-        all_brands: "Toutes les Marques",
+        cat_unisex: "Parfum Universel",
+        all_brands: "Toutes les Maisons",
         ca_banner: "<strong>Acheteurs Canadiens :</strong> Les liens redirigent vers la boutique américaine. Tous les prix sont en USD.",
         eu_banner: "<strong>Acheteurs Européens :</strong> Notre catalogue localisé arrive bientôt.",
         eu_no_prod_title: "Collection Bientôt Disponible",
         eu_no_prod_sub: "Nous sélectionnons les meilleurs parfums pour votre boutique Amazon locale. Revenez bientôt !",
-        no_prod_title: "Aucun Produit Trouvé",
-        no_prod_sub: "Essayez d'ajuster vos filtres de marque ou de catégorie.",
-        best_seller_badge: "Meilleure Vente"
+        no_prod_title: "Aucune Essence Trouvée",
+        no_prod_sub: "Essayez d'ajuster vos filtres olfactifs.",
+        best_seller_badge: "Parfum Iconique",
+
+        prev: "Préc",
+        next: "Suiv",
+        page_of: "Page {0} sur {1}",
+
+        guide_title_1: "Selon l'Occasion et l'Environnement",
+        guide_1_t1: "Travail / Quotidien",
+        guide_1_d1: "Des parfums frais, d'agrumes, ou légèrement boisés. L'Eau de Toilette est idéale pour être moins intense.",
+        guide_1_t2: "Rendez-vous / Soirée",
+        guide_1_d2: "Privilégiez les arômes intenses, doux, épicés ou séduisants (vanille, ambre, bois forts).",
+        guide_1_t3: "Gym / Sport",
+        guide_1_d3: "Fragrances fraîches ou aquatiques qui ne sont pas écrasantes avec la sueur.",
+        guide_1_t4: "Événements Formels",
+        guide_1_d4: "Parfums avec une plus grande longévité et de caractère, souvent classés comme Eau de Parfum.",
+        
+        guide_title_2: "Selon le Climat et la Température",
+        guide_2_t1: "Clima Chaud / Été",
+        guide_2_d1: "Arômes frais, légers et d'agrumes qui rafraîchissent et ne submergent pas.",
+        guide_2_t2: "Climat Froid / Hiver",
+        guide_2_d2: "Parfums chauds, intenses, boisés ou doux qui se projettent mieux dans l'air froid."
       },
       IT: {
-        splash_title: "Benvenuto su MyStore",
+        splash_title: "Benvenuto su MyStore Elite",
         splash_subtitle: "Seleziona la tua destinazione di spedizione",
         splash_note: "<strong>Importante:</strong> La disponibilità dipende dalla tua regione. <br>Gli acquirenti canadesi possono utilizzare i link USA, ma i prezzi sono in USD.",
-        hero_title: "Collezione di Lusso",
-        hero_sub: "Scopri la nostra selezione di profumi premium e prodotti eleganti.",
-        top5_title: "Top 5 Più Raccomandati",
+        hero_title: "Il Profumo come Seconda Pelle.",
+        hero_sub: "Scopri la nostra selezione di essenze rare, distillate per i più esigenti.",
+        top5_title: "La Collezione d'Autore",
         top5_sub: "I nostri profumi più amati e recensiti dai clienti di tutto il mondo",
-        filter_brand: "Filtra per Casa",
+        filter_brand: "Case Olfattive",
+        search_brands: "Cerca marche...",
         sort_by: "Ordina per:",
-        sort_default: "In Evidenza",
-        sort_low: "Prezzo: Crescente",
-        sort_high: "Prezzo: Decrescente",
-        sort_reviews: "Più Recensiti",
-        shop_now: "Acquista Ora",
+        sort_default: "L'Archivio (In Evidenza)",
+        sort_low: "Prezzo: Accessibile a Raro",
+        sort_high: "Prezzo: Raro a Accessibile",
+        sort_reviews: "I Più Celebrati",
+        shop_now: "Acquista",
         coming_soon: "Prossimamente",
         change_region: "Cambia Destinazione",
         footer_text: "In qualità di Affiliato Amazon, riceviamo un guadagno dagli acquisti idonei.",
-        web_design: "Web Design di",
-        cat_all: "Tutti",
-        cat_men: "Per Uomo",
-        cat_women: "Per Donna",
-        cat_unisex: "UNISEX",
-        all_brands: "Tutte le Marche",
+        web_design: "Curato e Disegnato da",
+        cat_all: "L'Archivio Completo",
+        cat_men: "Pour Homme",
+        cat_women: "Pour Femme",
+        cat_unisex: "Aroma Universale",
+        all_brands: "Tutte le Maison",
         ca_banner: "<strong>Acquirenti Canadesi:</strong> I link reindirizzano al negozio USA. Tutti i prezzi sono in USD.",
         eu_banner: "<strong>Acquirenti Europei:</strong> Il nostro catalogo localizzato arriverà presto.",
         eu_no_prod_title: "Collezione Prossimamente",
         eu_no_prod_sub: "Stiamo selezionando i migliori profumi per il tuo negozio Amazon locale. Torna presto!",
-        no_prod_title: "Nessun Prodotto Trovato",
-        no_prod_sub: "Prova a modificare i filtri della marca o della categoria.",
-        best_seller_badge: "Bestseller"
+        no_prod_title: "Nessuna Essenza Trovata",
+        no_prod_sub: "Prova a modificare i tuoi filtri olfattivi.",
+        best_seller_badge: "Aroma Iconico",
+
+        prev: "Prec",
+        next: "Succ",
+        page_of: "Pagina {0} di {1}",
+
+        guide_title_1: "In base all'Occasione e all'Ambiente",
+        guide_1_t1: "Lavoro / Quotidiano",
+        guide_1_d1: "Si consigliano profumi freschi, agrumati o leggermente legnosi. L'Eau de Toilette è l'ideale.",
+        guide_1_t2: "Appuntamenti / Sera",
+        guide_1_d2: "Sono preferiti profumi intensi, dolci, speziati o seducenti (vaniglia, ambra, legni forti).",
+        guide_1_t3: "Palestra / Sport",
+        guide_1_d3: "Fragranze fresche, agrumate o acquatiche che non opprimono con il sudore.",
+        guide_1_t4: "Eventi Formali",
+        guide_1_d4: "Profumi con maggiore persistenza e carattere, spesso classificati come Eau de Parfum.",
+        
+        guide_title_2: "In base al Clima e alla Temperatura",
+        guide_2_t1: "Clima Caldo / Estate",
+        guide_2_d1: "Profumi freschi, leggeri e agrumati che rinfrescano e non opprimono.",
+        guide_2_t2: "Clima Freddo / Inverno",
+        guide_2_d2: "Fragranze calde, intense, legnose o dolci (orientali) che proiettano meglio nell'aria fredda."
       }
     };
 
@@ -1059,48 +1621,111 @@
       return translations[currentLang][key] || translations['EN'][key];
     }
 
-    // This function simulates a page refresh for the user without reloading the document or 
-    // losing the region state (which would otherwise re-trigger the splash screen).
+    // ═══════════════════════════════════════════════════════════════
+    //  SIDEBAR LOGIC
+    // ═══════════════════════════════════════════════════════════════
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function toggleSidebar() {
+      if (sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      } else {
+        sidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function openRegionFromSidebar() {
+      toggleSidebar();
+      setTimeout(() => {
+        showSplashScreen();
+      }, 400); 
+    }
+
+    function filterBrandsInSidebar() {
+      const input = document.getElementById('brandSearch').value.toLowerCase();
+      const buttons = document.querySelectorAll('.sidebar-brand-btn');
+      buttons.forEach(btn => {
+        const text = btn.innerText.toLowerCase();
+        if (text.includes(input)) {
+          btn.style.display = 'block';
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+    }
+
     function resetStore(event) {
       event.preventDefault();
-      
-      // Reset all filters to default
       activeCategory = 'All';
       activeBrand = 'All';
       activeSort = 'default';
+      currentPage = 1;
       
       const sortSelect = document.getElementById('sortSelect');
       if (sortSelect) sortSelect.value = 'default';
       
-      // Re-render UI
+      document.getElementById('heroSection').style.display = 'flex';
+      document.getElementById('fragranceGuide').style.display = 'block';
+      document.getElementById('brandHeader').style.display = 'none';
+      if (!['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+        document.getElementById('bestSellersSection').style.display = 'block';
+      }
+
       renderCategories();
       renderBrands();
       
       if (!['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
         renderProducts();
+        renderGuideCarousels();
       }
       
-      // Scroll to the top of the page
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchOccasion(tabId) {
+      const ids = ['work', 'night', 'gym', 'formal'];
+      ids.forEach(id => {
+        document.getElementById('btn-' + id).classList.remove('active');
+        document.getElementById('sec-' + id).classList.remove('active');
+      });
+      document.getElementById('btn-' + tabId).classList.add('active');
+      document.getElementById('sec-' + tabId).classList.add('active');
+    }
+
+    function switchClimate(tabId) {
+      const ids = ['warm', 'cold'];
+      ids.forEach(id => {
+        document.getElementById('btn-' + id).classList.remove('active');
+        document.getElementById('sec-' + id).classList.remove('active');
+      });
+      document.getElementById('btn-' + tabId).classList.add('active');
+      document.getElementById('sec-' + tabId).classList.add('active');
     }
 
     function changeLanguage(lang) {
       currentLang = lang;
       
-      // Update basic static text
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         el.innerHTML = t(key);
       });
 
-      // Update Sort Select labels
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = t(key);
+      });
+
       const sortSelect = document.getElementById('sortSelect');
       sortSelect.options[0].text = t('sort_default');
       sortSelect.options[1].text = t('sort_low');
       sortSelect.options[2].text = t('sort_high');
       sortSelect.options[3].text = t('sort_reviews');
 
-      // Update Banner (if active)
       const banner = document.getElementById('regionBanner');
       if (userRegion === 'CA') {
         banner.innerHTML = t('ca_banner');
@@ -1108,13 +1733,13 @@
         banner.innerHTML = t('eu_banner');
       }
 
-      // Re-render dynamic elements
       renderCategories();
       renderBrands();
       if (['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
         showEuEmptyState();
       } else {
         renderBestSellers();
+        renderGuideCarousels();
         renderProducts();
       }
     }
@@ -1134,7 +1759,6 @@
       langFlags.innerHTML = ''; 
       
       if (region === 'UK') {
-        // Just load English (UK) by default and optionally hide flags since it's only 1
         langFlags.style.display = 'flex';
         currentLang = 'EN';
         const btn = document.createElement('button');
@@ -1145,27 +1769,23 @@
         langFlags.style.display = 'flex';
         
         const options = [];
-        
-        // Push regions & corresponding flags. 
-        // Logic: USA store gets American flag, Europe gets UK flag. Spanish uses Spain flag everywhere.
         if (region === 'US') {
           options.push({val: 'EN', flag: 'us'});
           options.push({val: 'ES', flag: 'es'});
         } else if (region === 'CA') {
-          options.push({val: 'EN', flag: 'ca'}); // English logic for Canada
+          options.push({val: 'EN', flag: 'ca'});
           options.push({val: 'FR', flag: 'fr'});
         } else if (region === 'FR') {
           options.push({val: 'FR', flag: 'fr'});
-          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+          options.push({val: 'EN', flag: 'gb'}); 
         } else if (region === 'IT') {
           options.push({val: 'IT', flag: 'it'});
-          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+          options.push({val: 'EN', flag: 'gb'}); 
         } else if (region === 'ES') {
-          options.push({val: 'ES', flag: 'es'}); // Spanish logic for Europe
-          options.push({val: 'EN', flag: 'gb'}); // UK flag for English in Europe
+          options.push({val: 'ES', flag: 'es'}); 
+          options.push({val: 'EN', flag: 'gb'}); 
         }
 
-        // Make sure currentLang matches available options, else reset
         if (!options.find(o => o.val === currentLang)) {
             currentLang = options[0].val;
         }
@@ -1174,9 +1794,7 @@
           const btn = document.createElement('button');
           btn.className = `flag-btn ${opt.val === currentLang ? 'active' : ''}`;
           btn.onclick = () => {
-            // Un-active all
             document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
-            // Active current
             btn.classList.add('active');
             changeLanguage(opt.val);
           };
@@ -1190,7 +1808,13 @@
 
     function showEuEmptyState() {
       const noResults = document.getElementById('noResults');
+      const pagControls = document.getElementById('paginationControls');
       document.getElementById('productsGrid').innerHTML = ''; 
+      document.getElementById('heroSection').style.display = 'none';
+      document.getElementById('fragranceGuide').style.display = 'none';
+      document.getElementById('brandHeader').style.display = 'none';
+      pagControls.style.display = 'none';
+
       noResults.style.display = 'block';
       noResults.innerHTML = `
         <h3>${t('eu_no_prod_title')}</h3>
@@ -1200,7 +1824,6 @@
 
     function enterStore(region) {
       userRegion = region;
-      
       setupLanguageOptions(region);
       
       const splash = document.getElementById('splashScreen');
@@ -1208,28 +1831,39 @@
       setTimeout(() => {
         splash.style.visibility = 'hidden';
         document.body.style.overflow = 'auto'; 
-      }, 500);
+      }, 600);
 
       const banner = document.getElementById('regionBanner');
       const bestSellersSection = document.getElementById('bestSellersSection');
       const controlsContainer = document.getElementById('controlsContainer');
       const noResults = document.getElementById('noResults');
+      const hero = document.getElementById('heroSection');
+      const guide = document.getElementById('fragranceGuide');
+
+      activeBrand = 'All'; 
+      document.getElementById('brandHeader').style.display = 'none';
 
       if (region === 'CA') {
         banner.style.display = 'block';
         bestSellersSection.style.display = 'block';
         controlsContainer.style.display = 'block';
+        hero.style.display = 'flex';
+        guide.style.display = 'block';
         noResults.style.display = 'none';
       } 
       else if (['UK', 'ES', 'IT', 'FR'].includes(region)) {
         banner.style.display = 'block';
         bestSellersSection.style.display = 'none';
         controlsContainer.style.display = 'none';
+        hero.style.display = 'none';
+        guide.style.display = 'none';
       } 
       else {
         banner.style.display = 'none';
         bestSellersSection.style.display = 'block';
         controlsContainer.style.display = 'block';
+        hero.style.display = 'flex';
+        guide.style.display = 'block';
         noResults.style.display = 'none';
       }
     }
@@ -1749,7 +2383,6 @@
         badgeHtml = `<span class="badge gold">#${i + 1} ${t('best_seller_badge')}</span>`;
       }
 
-      const oldPriceHtml = p.oldPrice ? `<span class="old">${p.oldPrice}</span>` : '';
       const reviewText = typeof p.reviews === 'number' ? p.reviews.toLocaleString() : p.reviews;
       const reviewsHtml = (p.reviews && p.reviews !== "-") ? `<span class="rating-count">(${reviewText})</span>` : '';
 
@@ -1762,7 +2395,7 @@
           <div class="product-info">
             <div class="product-category">${p.brand}</div>
             <div class="product-title">${p.title}</div>
-            <div class="product-price">${p.price} ${oldPriceHtml}</div>
+            <div class="product-price">${p.price}</div>
             <div class="product-rating">
               <span class="stars">${renderStars(p.rating)}</span>
               ${reviewsHtml}
@@ -1775,9 +2408,9 @@
       `;
     }
 
-    function scrollCarousel(direction) {
-      const track = document.getElementById('bestSellersTrack');
-      const scrollAmount = 320; 
+    function scrollCarousel(trackId, direction) {
+      const track = document.getElementById(trackId);
+      const scrollAmount = 340; 
       if (direction === 'left') {
         track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       } else {
@@ -1788,10 +2421,21 @@
     function renderBestSellers() {
       const bestSellersGrid = document.getElementById('bestSellersTrack');
       const sortedByReviews =[...products].sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
-      
-      // Top 5 configuration
       const topProducts = sortedByReviews.slice(0, 5); 
       bestSellersGrid.innerHTML = topProducts.map((p, i) => createProductCard(p, i, true)).join('');
+    }
+
+    function renderGuideCarousels() {
+      Object.keys(guideLists).forEach(key => {
+        const track = document.getElementById('track-' + key);
+        if(!track) return;
+        
+        const listItems = guideLists[key].map(title => {
+          return products.find(p => p.title === title);
+        }).filter(Boolean);
+        
+        track.innerHTML = listItems.map((p, i) => createProductCard(p, i, false)).join('');
+      });
     }
 
     function renderCategories() {
@@ -1802,54 +2446,88 @@
     }
 
     function renderBrands() {
-      const brandContainer = document.getElementById('brandPills');
+      const sidebarBrandsContainer = document.getElementById('sidebarBrands');
       const uniqueBrands =['All Brands', ...new Set(products.map(p => p.brand).filter(Boolean))].sort();
       
-      brandContainer.innerHTML = uniqueBrands.map(brand => {
+      sidebarBrandsContainer.innerHTML = uniqueBrands.map(brand => {
         const val = brand === 'All Brands' ? 'All' : brand;
         const displayText = brand === 'All Brands' ? t('all_brands') : brand;
         const isActive = activeBrand === val ? 'active' : '';
-        return `<button class="brand-pill ${isActive}" onclick="filterBrand('${val}')">${displayText}</button>`;
+        return `<button class="sidebar-brand-btn ${isActive}" onclick="filterBrand('${val}')">${displayText}</button>`;
       }).join('');
     }
 
     function filterCategory(cat) {
       activeCategory = cat;
+      currentPage = 1;
       renderCategories();
       renderProducts();
     }
 
     function filterBrand(brand) {
       activeBrand = brand;
+      currentPage = 1;
+      
+      const hero = document.getElementById('heroSection');
+      const bestSellers = document.getElementById('bestSellersSection');
+      const guide = document.getElementById('fragranceGuide');
+      const brandHeader = document.getElementById('brandHeader');
+
+      if (brand === 'All') {
+        hero.style.display = 'flex';
+        guide.style.display = 'block';
+        brandHeader.style.display = 'none';
+        if (!['UK', 'ES', 'IT', 'FR'].includes(userRegion)) {
+          bestSellers.style.display = 'block';
+        }
+      } else {
+        hero.style.display = 'none';
+        bestSellers.style.display = 'none';
+        guide.style.display = 'none';
+        brandHeader.style.display = 'block';
+        
+        const info = brandInfo[brand] || { year: "N/A", origin: "Exclusive" };
+        document.getElementById('bhName').innerText = brand;
+        document.getElementById('bhDetails').innerText = `Est. ${info.year} — ${info.origin}`;
+      }
+
       renderBrands();
       renderProducts();
+      
+      if(sidebar.classList.contains('active')) {
+          toggleSidebar();
+      }
+      window.scrollTo({ top: document.getElementById('controlsContainer').offsetTop - 100, behavior: 'smooth' });
     }
 
     document.getElementById('sortSelect').addEventListener('change', (e) => {
       activeSort = e.target.value;
+      currentPage = 1;
       renderProducts();
     });
 
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const noResults = document.getElementById('noResults');
+      const pagControls = document.getElementById('paginationControls');
 
-      let filtered = products.filter(p => {
+      filteredProducts = products.filter(p => {
         const matchCat = activeCategory === 'All' || p.category === activeCategory;
         const matchBrand = activeBrand === 'All' || p.brand === activeBrand;
         return matchCat && matchBrand;
       });
 
       if (activeSort === 'price-low') {
-        filtered.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+        filteredProducts.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
       } else if (activeSort === 'price-high') {
-        filtered.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+        filteredProducts.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
       } else if (activeSort === 'reviews') {
-        filtered.sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
+        filteredProducts.sort((a, b) => parseReviews(b.reviews) - parseReviews(a.reviews));
       }
 
-      if (filtered.length === 0) {
+      if (filteredProducts.length === 0) {
         grid.innerHTML = '';
+        pagControls.style.display = 'none';
         noResults.style.display = 'block';
         noResults.innerHTML = `
           <h3>${t('no_prod_title')}</h3>
@@ -1859,7 +2537,43 @@
       }
 
       noResults.style.display = 'none';
-      grid.innerHTML = filtered.map((p, i) => createProductCard(p, i, false)).join('');
+      
+      // Paginación (6 items por página)
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const paginatedItems = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+      
+      grid.innerHTML = paginatedItems.map((p, i) => createProductCard(p, i, false)).join('');
+
+      if (totalPages > 1) {
+        pagControls.style.display = 'flex';
+        let pageStr = t('page_of').replace('{0}', currentPage).replace('{1}', totalPages);
+        document.getElementById('pageInfo').innerText = pageStr;
+        document.getElementById('prevPageBtn').disabled = currentPage === 1;
+        document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
+      } else {
+        pagControls.style.display = 'none';
+      }
+    }
+
+    function nextPage() {
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts();
+        window.scrollTo({ top: document.getElementById('controlsContainer').offsetTop, behavior: 'smooth' });
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts();
+        window.scrollTo({ top: document.getElementById('controlsContainer').offsetTop, behavior: 'smooth' });
+      }
     }
   </script>
 
